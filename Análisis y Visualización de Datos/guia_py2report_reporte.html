@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUIA: Como usar py2report.py</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.7;
+    color: #1a1a2e;
+    background: #f0f2f5;
+    padding: 2rem;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* --- Titulos --- */
+  h1 {
+    font-size: 1.8rem;
+    color: #16213e;
+    border-bottom: 3px solid #0f3460;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+    color: #0f3460;
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 1rem;
+    background: #16213e;
+    color: white;
+    border-radius: 6px;
+  }
+  h3 {
+    font-size: 1.15rem;
+    color: #533483;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    border-left: 3px solid #533483;
+  }
+
+  /* --- Texto explicativo (comentarios normales) --- */
+  .explanation {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin: 0.8rem 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .explanation p { margin-bottom: 0.4rem; }
+  .explanation ul {
+    padding-left: 1.5rem;
+    margin: 0.4rem 0;
+  }
+  .explanation li { margin-bottom: 0.2rem; }
+
+  /* --- Conceptos destacados --- */
+  .concept {
+    background: #fff8e1;
+    border-left: 4px solid #ff8f00;
+    padding: 1rem 1.5rem;
+    border-radius: 0 8px 8px 0;
+    margin: 0.8rem 0;
+  }
+  .concept strong { color: #e65100; }
+  .concept p { margin-bottom: 0.4rem; }
+
+  /* --- Bloques de codigo --- */
+  pre {
+    margin: 0.8rem 0;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  pre code {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* --- Graficos --- */
+  .chart {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  .chart img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
+
+  .missing-img {
+    color: #c62828;
+    background: #ffebee;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+  }
+
+  /* --- Footer --- */
+  footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+    color: #666;
+    font-size: 0.85rem;
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 768px) {
+    body { padding: 1rem; }
+    h2 { font-size: 1.2rem; }
+  }
+
+  /* --- Print --- */
+  @media print {
+    body { background: white; padding: 0; }
+    .container { max-width: 100%; }
+    pre { page-break-inside: avoid; }
+    .chart { page-break-inside: avoid; }
+    h2 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>GUIA: Como usar py2report.py</h1>
+<p style="color:#666; margin-bottom:2rem;">
+  Generado desde <code>guia_py2report.py</code> con py2report
+</p>
+
+<div class="explanation"><p>GUIA: Como usar py2report.py</p></div>
+<div class="explanation"><p>py2report convierte cualquier archivo .py comentado en un reporte HTML. Los comentarios se vuelven texto, el codigo se muestra con syntax highlighting, y los graficos (plt.savefig) se embeben automaticamente.</p></div>
+<h2>PASO 1: Instalacion</h2>
+<div class="explanation"><p>No hay nada que instalar. py2report.py es un script standalone de Python. Solo necesitas Python 3.10+ (usa type hints modernas).</p><p>Copialo a cualquier proyecto y listo.</p></div>
+<h2>PASO 2: Uso basico</h2>
+<div class="explanation"><p>Desde la terminal:</p><p>python py2report.py mi_archivo.py</p><p>Esto genera mi_archivo_reporte.html en la misma carpeta.</p><p>Con opciones:</p><p>python py2report.py mi_archivo.py -o reporte.html -t "Mi Titulo"</p><p>-o / --output: nombre del archivo HTML de salida -t / --title: titulo que aparece en el reporte</p></div>
+<h2>PASO 3: Las convenciones de formato</h2>
+<div class="explanation"><p>py2report lee tu .py linea por linea y clasifica cada linea en uno de estos tipos:</p></div>
+<h3>3a: Headers (titulos de seccion)</h3>
+<div class="explanation"><p>Se generan con bloques de separadores y texto en mayusculas:</p><p># =============================================================</p></div>
+<h2># TITULO DE MI SECCION</h2>
+<div class="explanation"><p># =============================================================</p><p>El separador (===) se ignora, el texto se convierte en un <h2> con fondo azul oscuro. Tambien se detectan lineas que empiezan con PASO, OPCION, EJERCICIO, SECCION seguido de un numero.</p></div>
+<h3>3b: Subheaders (subtitulos)</h3>
+<div class="explanation"><p>Se generan con guiones triples:</p><p># --- Mi subtitulo ---</p><p>Se convierte en un <h3> con borde lateral violeta.</p></div>
+<h3>3c: Texto explicativo (comentarios normales)</h3>
+<div class="explanation"><p>Cualquier linea que empiece con # se convierte en texto:</p><p># Este es un parrafo de explicacion. # Puede ocupar varias lineas seguidas. # # Una linea vacia entre comentarios genera un parrafo nuevo.</p><p>Se muestra en una caja blanca con sombra suave. Tambien detecta listas:</p><p># - Primer item # - Segundo item # 1. Item numerado</p></div>
+<h3>3d: Conceptos destacados</h3>
+<div class="concept"><p>Cuando un comentario empieza con "CONCEPTO:" se convierte en una caja amarilla con borde naranja. Ideal para definiciones y teoria importante que queres que resalte.</p><p>Todo lo que siga en lineas de comentario consecutivas se agrupa dentro de la misma caja amarilla. Util para explicaciones largas.</p></div>
+<h3>3e: Bloques de codigo</h3>
+<div class="explanation"><p>Todo lo que NO es comentario se muestra como codigo Python con syntax highlighting (colores) usando Prism.js.</p><p>Por ejemplo, este bloque se mostraria como codigo:</p></div>
+<pre><code class="language-python">x = 42
+nombre = "py2report"
+print(f"{nombre} convierte {x} tipos de bloques")</code></pre>
+<h3>3f: Imagenes embebidas</h3>
+<div class="explanation"><p>Si tu codigo tiene plt.savefig("algo.png"), py2report busca ese archivo PNG y lo embebe en el HTML como base64. Esto significa que el HTML es UN SOLO ARCHIVO — no necesita los PNGs por separado.</p><p>IMPORTANTE: el .py tiene que haberse ejecutado ANTES para que los PNGs existan. py2report NO ejecuta tu codigo, solo lo lee.</p></div>
+<h2>PASO 4: Flujo de trabajo recomendado</h2>
+<div class="explanation"><ul><li>Escribi tu analisis en un archivo .py</li><li>Usa los comentarios con las convenciones de arriba</li><li>Pone plt.savefig("img/grafico.png") para cada grafico</li></ul><ul><li>Ejecuta tu .py para generar los graficos:</li></ul><p>python mi_analisis.py</p><ul><li>Genera el reporte:</li></ul><p>python py2report.py mi_analisis.py</p><ul><li>Abri el HTML en el browser:</li></ul><p>xdg-open mi_analisis_reporte.html</p><ul><li>Para exportar a PDF: Ctrl+P en el browser → "Guardar como PDF"</li></ul></div>
+<h2>PASO 5: Ejemplo completo minimo</h2>
+<div class="explanation"><p>Imaginate que tenes este archivo "demo.py":</p></div>
+<h3>Ejemplo: demo.py</h3>
+<div class="explanation"><p># ============================================</p></div>
+<h2># MI ANALISIS DE DATOS</h2>
+<div class="explanation"><p># ============================================ # Este es un analisis de ejemplo. # # CONCEPTO: La media es el promedio de los datos. # Se calcula sumando todos los valores y dividiendo # por la cantidad.</p><p>import numpy as np datos = [1, 2, 3, 4, 5] print(f"Media: {np.mean(datos)}")</p><p># --- Visualizacion --- import matplotlib.pyplot as plt plt.plot(datos) plt.savefig("img/demo.png") plt.close()</p></div>
+<h3>Fin del ejemplo</h3>
+<div class="explanation"><p>Al correr: python py2report.py demo.py Genera un HTML con:</p><ul><li>Titulo "MI ANALISIS DE DATOS" (h2 azul)</li><li>Parrafo "Este es un analisis de ejemplo." (caja blanca)</li><li>Concepto sobre la media (caja amarilla)</li><li>Bloque de codigo con los imports y el print (syntax highlight)</li><li>Subtitulo "Visualizacion" (h3 violeta)</li><li>Bloque de codigo del plot</li><li>La imagen demo.png embebida</li></ul></div>
+<h2>PASO 6: Tips</h2>
+<div class="explanation"><ul><li>Separa secciones con bloques de ====. Hace el .py mas legible</li></ul><p>Y el reporte queda con secciones claras.</p><ul><li>Usa CONCEPTO: para todo lo que quieras estudiar despues.</li></ul><p>En el HTML resalta en amarillo, facil de encontrar.</p><ul><li>Los comentarios inline (al final de una linea de codigo)</li></ul><p>NO se separan. Se muestran como parte del bloque de codigo. Ejemplo: x = 42  # esto se ve como codigo, no como texto</p><ul><li>Lineas en blanco entre comentarios generan parrafos nuevos.</li></ul><p>Usalo para separar ideas.</p><ul><li>El HTML tiene estilos para imprimir (Ctrl+P).</li></ul><p>Los bloques de codigo y graficos no se cortan entre paginas.</p><ul><li>Prism.js se carga desde CDN. Necesitas internet la primera vez</li></ul><p>que abras el HTML (despues queda en cache del browser).</p></div>
+<h2>PASO 7: Arquitectura interna (para curiosos)</h2>
+<div class="concept"><p>py2report funciona en 3 fases, como un compilador simple:</p><p>FASE 1 — CLASIFICACION (classify_line): Lee cada linea y le asigna un tipo: HEADER, SUBHEADER, COMMENT, CONCEPT, CODE, IMAGE o BLANK. Usa regex para detectar patrones (separadores, listas, savefig).</p><p>FASE 2 — AGRUPACION (parse_blocks): Junta lineas consecutivas del mismo tipo en "bloques". Por ejemplo, 5 lineas de comentario seguidas = 1 bloque COMMENT. Los headers y las imagenes siempre son bloques de 1 linea.</p><p>FASE 3 — RENDERIZADO (block_to_html): Convierte cada bloque en HTML: - HEADER → <h2> - SUBHEADER → <h3> - COMMENT → <div class="explanation"><p>...</p></div> - CONCEPT → <div class="concept"><p>...</p></div> - CODE → <pre><code class="language-python">...</code></pre> - IMAGE → <img src="data:image/png;base64,..."></p><p>Finalmente, envuelve todo en un HTML con CSS y Prism.js. El CSS tiene media queries para responsive y para impresion.</p></div>
+
+<footer>
+  Generado con <strong>py2report.py</strong> — convierte archivos .py comentados en reportes HTML.
+</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
