@@ -1,0 +1,13 @@
+services:
+  avd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: diplomdatos-avd
+    working_dir: /workspace/Análisis y Visualización de Datos
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/workspace
+    stdin_open: true
+    tty: true

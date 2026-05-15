@@ -30,6 +30,52 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Opción recomendada: Docker
+
+Para no instalar dependencias en la máquina local, el repo incluye una configuración Docker reutilizable para **TP1** y **TP2**.
+
+### Levantar Jupyter Lab
+
+```bash
+docker compose up --build
+```
+
+Luego abrir en el navegador:
+
+```text
+http://localhost:8888/lab
+```
+
+El proyecto se monta como volumen dentro del contenedor en `/workspace`, así que cualquier cambio en notebooks o scripts queda reflejado en tu carpeta local.
+
+### Ejecutar scripts dentro del contenedor
+
+Con el contenedor levantado, en otra terminal:
+
+```bash
+docker compose exec avd bash
+```
+
+Dentro del contenedor podés correr, por ejemplo:
+
+```bash
+cd "/workspace/Análisis y Visualización de Datos/TP1"
+python ejercicio1.py
+```
+
+o:
+
+```bash
+cd "/workspace/Análisis y Visualización de Datos/TP2"
+python tp2_inferencia.py
+```
+
+### Apagar el entorno
+
+```bash
+docker compose down
+```
+
 ## Cómo ejecutar
 
 ### 1. Generar gráficos desde el análisis
@@ -67,3 +113,4 @@ python py2report.py "TP1/ejercicio1.py" --output ejercicio1_reporte.html --title
 - El dataset se descarga desde una URL pública de GitHub al ejecutar el análisis.
 - La carpeta `_descarte_pre_gh/` contiene archivos apartados antes de publicar y está ignorada por Git.
 - El entorno virtual local no está incluido en el repositorio.
+- El entorno Docker instala dependencias comunes de TP1 y TP2 junto con Jupyter Lab.

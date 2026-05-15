@@ -1,0 +1,9 @@
+.git
+**/.venv
+**/__pycache__
+**/.ipynb_checkpoints
+_descarte_pre_gh
+*.pyc
+*.pyo
+*.pyd
+*.log
