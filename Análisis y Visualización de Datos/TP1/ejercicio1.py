@@ -369,7 +369,9 @@ sns.boxplot(
     x="salary_monthly_NETO",
     y="language",
     order=median_order,
+    hue="language",
     palette="viridis",
+    legend=False,
     ax=ax,
 )
 ax.set_title("Distribución de salario neto por lenguaje (Boxplot)")
@@ -389,9 +391,11 @@ sns.violinplot(
     x="salary_monthly_NETO",
     y="language",
     order=median_order,
+    hue="language",
     palette="viridis",
     density_norm="width",  # normaliza el ancho para que todos los violines sean comparables
     inner="quartile",      # muestra las lineas de Q1, mediana, Q3 dentro del violin
+    legend=False,
     ax=ax,
 )
 ax.set_title("Distribución de salario neto por lenguaje (Violinplot)")
@@ -492,9 +496,11 @@ sns.barplot(
     x="salary_monthly_NETO",
     y="language",
     order=median_order,
+    hue="language",
     estimator=np.median,
     errorbar=("ci", 95),
     palette="viridis",
+    legend=False,
     ax=ax,
 )
 ax.set_title("Mediana de salario neto por lenguaje (con IC 95%)")

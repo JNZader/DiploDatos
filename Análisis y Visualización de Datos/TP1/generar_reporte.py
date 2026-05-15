@@ -17,9 +17,9 @@ DIR = Path(__file__).parent
 
 def img_to_base64(filename: str) -> str:
     """Convierte un PNG a base64 para embeber en HTML."""
-    path = DIR / filename
+    path = DIR / "img" / filename
     if not path.exists():
-        return f'<p style="color:red;">Imagen no encontrada: {filename}</p>'
+        return f'<p style="color:red;">Imagen no encontrada: img/{filename}</p>'
     data = path.read_bytes()
     b64 = base64.b64encode(data).decode()
     return f'<img src="data:image/png;base64,{b64}" style="max-width:100%; border-radius:8px; margin:1rem 0;">'
