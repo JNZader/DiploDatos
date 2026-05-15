@@ -1,7 +1,18 @@
 **/.venv/
+**/venv/
+**/venv-jupyter/
 **/__pycache__/
 **/.ipynb_checkpoints/
 *.pyc
 .claude/
 .codex
 _descarte_pre_gh/
+
+# AVD — material propietario de cátedra + outputs build
+Análisis y Visualización de Datos/_material_clase_privado/
+Análisis y Visualización de Datos/estudio/build/
+Análisis y Visualización de Datos/clases/
+
+# EyCD — mismo criterio que AVD
+Análisis Exploratorio y Curación de Datos/clases/
+Análisis Exploratorio y Curación de Datos/estudio/build/
