@@ -1,0 +1,23 @@
+# =====================================================================
+# DiploDatos 2026 — Extras OPCIONALES (solo EyCD TP2 — Ejercicio 4 bonus)
+# =====================================================================
+# Estas dependencias NO van en la imagen base porque son pesadas y solo
+# se usan en los ejercicios OPCIONALES del TP2 de EyCD.
+#
+# Para instalarlas dentro del contenedor (ya levantado):
+#   docker compose exec jupyter pip install -r requirements-extras.txt
+#
+# O localmente en tu venv:
+#   pip install -r requirements-extras.txt
+# =====================================================================
+
+# --- 4.3 Embeddings y búsqueda semántica (trae torch, ~2 GB) ---
+sentence-transformers==3.2.1
+
+# --- 4.4 Curación asistida por LLM (requiere ANTHROPIC_API_KEY) ---
+anthropic==0.39.0
+
+# --- 4.1/4.2 Orquestación ETL con Apache Airflow ---
+# Nota: el notebook solo GENERA el archivo .py del DAG; no ejecuta Airflow.
+# Instalá esto solo si querés levantar Airflow de verdad para correr el DAG.
+apache-airflow==2.10.3

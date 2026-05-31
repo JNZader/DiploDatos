@@ -1,5 +1,7 @@
 .git
 **/.venv
+**/venv
+**/venv-jupyter
 **/__pycache__
 **/.ipynb_checkpoints
 _descarte_pre_gh
@@ -7,3 +9,5 @@ _descarte_pre_gh
 *.pyo
 *.pyd
 *.log
+# Artefactos generados por los notebooks (no van al build context)
+**/*.sqlite3

@@ -1,0 +1,39 @@
+# =====================================================================
+# DiploDatos 2026 — Entorno base reproducible (TODOS los TPs)
+# =====================================================================
+# Dependencias OBLIGATORIAS de las tres materias:
+#   - AVD  (Análisis y Visualización de Datos)
+#   - EyCD (Análisis Exploratorio y Curación de Datos)
+#   - IAA  (Introducción al Aprendizaje Automático)
+#
+# Versiones PINNEADAS a propósito: reproducibilidad real. Si a vos te
+# funciona, a tu compañero también — misma versión exacta.
+#
+# Los opcionales pesados (embeddings, airflow) están en
+# requirements-extras.txt para no inflar la imagen base.
+# =====================================================================
+
+# --- Core numérico / datos ---
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.13.1
+
+# --- Visualización ---
+matplotlib==3.9.2
+seaborn==0.13.2
+plotly==5.24.1
+
+# --- Estadística / ML ---
+statsmodels==0.14.4          # AVD TP2 (inferencia)
+scikit-learn==1.5.2          # EyCD, IAA
+
+# --- Curación / EDA ---
+missingno==0.5.2             # EyCD TP1 (matriz de faltantes)
+
+# --- Bases de datos ---
+SQLAlchemy==2.0.36           # EyCD TP2 (SQLite + ORM core)
+
+# --- Entorno de notebooks ---
+jupyterlab==4.2.5
+nbconvert==7.16.4
+ipykernel==6.29.5

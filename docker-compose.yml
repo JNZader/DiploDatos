@@ -1,10 +1,18 @@
+# =====================================================================
+# DiploDatos 2026 — Entorno Jupyter reutilizable para TODOS los TPs
+# =====================================================================
+# Levantar:   docker compose up
+# Abrir:      http://localhost:8888/lab
+# Desde Jupyter navegás a cualquier materia/TP (working dir = raíz).
+# =====================================================================
 services:
-  avd:
+  jupyter:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: diplomdatos-avd
-    working_dir: /workspace/Análisis y Visualización de Datos
+    image: diplodatos:2026
+    container_name: diplodatos-jupyter
+    working_dir: /workspace
     ports:
       - "8888:8888"
     volumes:
