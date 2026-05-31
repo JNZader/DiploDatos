@@ -20,3 +20,9 @@ Análisis Exploratorio y Curación de Datos/estudio/build/
 # IAA — mismo criterio que AVD y EyCD
 Introduccion al Aprendizaje Automatico/clases/
 Introduccion al Aprendizaje Automatico/estudio/build/
+
+# Datos generados por los notebooks (regenerables al ejecutar; pesados)
+# El notebook con outputs embebidos es la fuente de verdad.
+**/*.sqlite3
+Análisis Exploratorio y Curación de Datos/TP2/melb_data_enriquecido.csv
+Análisis Exploratorio y Curación de Datos/TP2/airbnb_price_by_zipcode.csv
