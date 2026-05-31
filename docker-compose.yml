@@ -2,6 +2,8 @@
 # DiploDatos 2026 — Entorno Jupyter reutilizable para TODOS los TPs
 # =====================================================================
 # Levantar:   docker compose up
+#   (en Linux, para que los archivos generados queden con TU usuario:)
+#   UID=$(id -u) GID=$(id -g) docker compose up
 # Abrir:      http://localhost:8888/lab
 # Desde Jupyter navegás a cualquier materia/TP (working dir = raíz).
 # =====================================================================
@@ -13,6 +15,16 @@ services:
     image: diplodatos:2026
     container_name: diplodatos-jupyter
     working_dir: /workspace
+    # Corre con el UID/GID del host (default 1000, el primer usuario en Linux).
+    # Así los archivos que generan los notebooks NO quedan como root.
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      # El UID del host no existe en /etc/passwd del contenedor → HOME debe
+      # apuntar a un dir escribible, si no Jupyter no arranca.
+      HOME: /tmp
+      JUPYTER_CONFIG_DIR: /tmp/.jupyter
+      JUPYTER_RUNTIME_DIR: /tmp/.jupyter/runtime
+      HF_HOME: /tmp/.cache/huggingface   # cache de modelos (bonus embeddings)
     ports:
       - "8888:8888"
     volumes:

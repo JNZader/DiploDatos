@@ -35,6 +35,15 @@ materias ya instaladas (Python 3.11, versiones pinneadas):
 docker compose up --build
 ```
 
+> **Linux**: para que los archivos que generan los notebooks queden con tu
+> usuario (y no como `root`), pasá tu UID/GID:
+>
+> ```bash
+> UID=$(id -u) GID=$(id -g) docker compose up --build
+> ```
+>
+> En Mac/Windows no hace falta. El default es `1000:1000` (el primer usuario).
+
 Abrir [http://localhost:8888/lab](http://localhost:8888/lab). El repo se monta
 en `/workspace` — navegás a cualquier materia/TP y los cambios se reflejan en
 el host.
