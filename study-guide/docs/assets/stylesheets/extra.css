@@ -1,0 +1,229 @@
+/* Cuaderno técnico jurídico: papel frío, tinta y un riel de evidencia. */
+:root {
+  --reader-paper: #edf3f5;
+  --reader-paper-raised: #f8fbfc;
+  --reader-ink: #17324a;
+  --reader-ink-soft: #415b6d;
+  --reader-teal: #087f78;
+  --reader-teal-soft: #d7ecea;
+  --reader-amber: #c3841d;
+  --reader-border: #c8d5db;
+  --reader-body-font: "Charter", "Bitstream Charter", "Iowan Old Style", "Sitka Text", "Noto Serif", Georgia, serif;
+  --reader-ui-font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --reader-code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  --md-primary-fg-color: var(--reader-ink);
+  --md-primary-fg-color--light: #2c506c;
+  --md-primary-fg-color--dark: #0e2639;
+  --md-accent-fg-color: var(--reader-teal);
+  --md-text-font: var(--reader-ui-font);
+  --md-code-font: var(--reader-code-font);
+}
+
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--reader-paper);
+  --md-default-fg-color: #243b4a;
+  --md-default-fg-color--light: #516876;
+  --md-typeset-a-color: #006e68;
+  --md-code-bg-color: #e2ebee;
+  --md-code-fg-color: #193548;
+}
+
+[data-md-color-scheme="slate"] {
+  --reader-paper: #111d26;
+  --reader-paper-raised: #182833;
+  --reader-ink: #d5e6ec;
+  --reader-ink-soft: #a9bdc7;
+  --reader-teal: #5bc2b8;
+  --reader-teal-soft: #173d3c;
+  --reader-amber: #e0a84c;
+  --reader-border: #36505e;
+
+  --md-primary-fg-color: #172a38;
+  --md-primary-fg-color--light: #274455;
+  --md-primary-fg-color--dark: #0d1921;
+  --md-accent-fg-color: var(--reader-teal);
+  --md-default-bg-color: var(--reader-paper);
+  --md-default-fg-color: #d4e1e6;
+  --md-default-fg-color--light: #a9bdc7;
+  --md-typeset-a-color: #67c8bf;
+  --md-code-bg-color: #1a2b36;
+  --md-code-fg-color: #dbe8ec;
+}
+
+body,
+input {
+  font-family: var(--reader-ui-font);
+}
+
+.md-grid {
+  max-width: 92rem;
+}
+
+.md-main__inner {
+  margin-top: 1.25rem;
+}
+
+.md-content__inner {
+  max-width: 60rem;
+  margin-inline: auto;
+  padding-bottom: 4rem;
+}
+
+.md-typeset {
+  color: var(--md-default-fg-color);
+  font-family: var(--reader-body-font);
+  font-size: clamp(0.86rem, 0.82rem + 0.15vw, 0.98rem);
+  line-height: 1.78;
+  text-rendering: optimizeLegibility;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  color: var(--reader-ink);
+  font-family: var(--reader-ui-font);
+  font-weight: 680;
+  letter-spacing: -0.018em;
+  line-height: 1.24;
+  scroll-margin-top: 5rem;
+}
+
+.md-typeset h1 {
+  max-width: 25ch;
+  margin-bottom: 1.8rem;
+  font-size: clamp(2rem, 1.5rem + 1.45vw, 3.15rem);
+  letter-spacing: -0.035em;
+}
+
+/* Signature: one quiet rail marks evidence-bearing sections. */
+.md-typeset h2 {
+  margin-top: 2.8rem;
+  padding-left: 0.9rem;
+  border-left: 0.2rem solid var(--reader-teal);
+}
+
+.md-typeset blockquote {
+  margin-inline: 0;
+  padding: 0.2rem 1.15rem;
+  border-left: 0.2rem solid var(--reader-amber);
+  color: var(--reader-ink-soft);
+  background: color-mix(in srgb, var(--reader-paper-raised) 78%, transparent);
+}
+
+.md-typeset p,
+.md-typeset li {
+  hanging-punctuation: first last;
+}
+
+.md-typeset a {
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.17em;
+}
+
+.md-typeset hr {
+  border-bottom-color: var(--reader-border);
+}
+
+.md-typeset code,
+.md-typeset pre,
+.md-typeset kbd {
+  font-family: var(--reader-code-font);
+}
+
+.md-typeset pre > code {
+  line-height: 1.55;
+}
+
+.md-typeset__table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--reader-border);
+  border-radius: 0.25rem;
+  background: var(--reader-paper-raised);
+}
+
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border: 0;
+}
+
+.md-typeset table:not([class]) th {
+  color: var(--reader-ink);
+  font-family: var(--reader-ui-font);
+  background: var(--reader-teal-soft);
+}
+
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  border-color: var(--reader-border);
+  vertical-align: top;
+}
+
+.md-header,
+.md-tabs,
+.md-nav,
+.md-footer,
+.md-search,
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-family: var(--reader-ui-font);
+}
+
+.md-nav__link--active,
+.md-nav__link:is(:focus, :hover) {
+  color: var(--reader-teal);
+}
+
+:where(a, button, input, summary, [tabindex]):focus-visible {
+  outline: 0.18rem solid var(--reader-amber);
+  outline-offset: 0.18rem;
+  border-radius: 0.12rem;
+}
+
+@media (max-width: 44.984375em) {
+  .md-main__inner {
+    margin-top: 0.5rem;
+  }
+
+  .md-content__inner {
+    padding-inline: 0.15rem;
+  }
+
+  .md-typeset {
+    font-size: 0.88rem;
+    line-height: 1.72;
+  }
+
+  .md-typeset h1 {
+    font-size: 2rem;
+  }
+
+  .md-typeset h2 {
+    padding-left: 0.65rem;
+  }
+
+  .md-typeset pre,
+  .md-typeset__table {
+    max-width: calc(100vw - 1.6rem);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

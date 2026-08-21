@@ -1,0 +1,85 @@
+{
+  "generated_pages": [
+    {
+      "boundary": null,
+      "bytes": 4196,
+      "end_line": 42,
+      "path": "index.md",
+      "sha256": "839c110261b3f03fabb6d4e88ac6c24d09babca2bdfdbebc80dc8e4074610a0a",
+      "start_line": 1
+    },
+    {
+      "boundary": "# Materia 1 — Análisis y Visualización de Datos",
+      "bytes": 92689,
+      "end_line": 2438,
+      "path": "materias/01-analisis-visualizacion.md",
+      "sha256": "247f2493622fad52677905bab7b2bb5447c8dd0d1eb1fed56e92a12113d6e465",
+      "start_line": 43
+    },
+    {
+      "boundary": "# Materia 2 — Análisis Exploratorio y Curación de Datos",
+      "bytes": 93640,
+      "end_line": 4575,
+      "path": "materias/02-exploracion-curacion.md",
+      "sha256": "65cc3b8d6441481329ee0edca069bc4ec460e0c0d2e2a226e5c781a3748ef92f",
+      "start_line": 2439
+    },
+    {
+      "boundary": "# Materia 3 — Introducción al Aprendizaje Automático",
+      "bytes": 86144,
+      "end_line": 6505,
+      "path": "materias/03-introduccion-aprendizaje.md",
+      "sha256": "b2339301b27fe3ef49c1027fd697ccb7c582f7da0c4ded1275c29306b5eceded",
+      "start_line": 4576
+    },
+    {
+      "boundary": "# Materia 4 — Aprendizaje Supervisado",
+      "bytes": 103910,
+      "end_line": 8468,
+      "path": "materias/04-aprendizaje-supervisado.md",
+      "sha256": "ac80149364a5f2586f15bf0cd9272f06289ee9efc58f51ed6138b50b58c4acc5",
+      "start_line": 6506
+    },
+    {
+      "boundary": "# Materia 5 — Aprendizaje No Supervisado",
+      "bytes": 89392,
+      "end_line": 10366,
+      "path": "materias/05-aprendizaje-no-supervisado.md",
+      "sha256": "3793809a8da829729f29dc00391f5af61ad3ba5e71dd97ac8b7f8fa11ab8ed48",
+      "start_line": 8469
+    },
+    {
+      "boundary": "# Materia 6 — Ética Práctica en Ciencia de Datos",
+      "bytes": 101969,
+      "end_line": 12251,
+      "path": "materias/06-etica-practica.md",
+      "sha256": "6ba8f2443460c634c5b63f57beaebf461ea7a9402574d8e17e90bdef9ef91baa",
+      "start_line": 10367
+    },
+    {
+      "boundary": "# Proyecto integrador — búsqueda semántica y RAG",
+      "bytes": 1938,
+      "end_line": 12298,
+      "path": "proyecto-integrador.md",
+      "sha256": "7d55146599630495be18e064083f59598a9acf5c231e75bba2cc92f0f18f624b",
+      "start_line": 12252
+    },
+    {
+      "boundary": "# Apéndice opcional — Trazabilidad de materiales",
+      "bytes": 6383,
+      "end_line": 12349,
+      "path": "apendice.md",
+      "sha256": "b6fbc6594ac2f53ac704b40d0d63a14023c419fd0a78aefe706698dcc096539c",
+      "start_line": 12299
+    }
+  ],
+  "reconstruction_match": true,
+  "source": {
+    "bytes": 580261,
+    "filename": "GUIA_ESTUDIO_DIPLO_MENTORIA_SAIJ.md",
+    "headings": 1201,
+    "lines": 12349,
+    "sha256": "6117a7f38316943c701529ce2c2195a9e439a76ab370c124c0701d1dc28ac04c",
+    "words": 85050
+  }
+}
