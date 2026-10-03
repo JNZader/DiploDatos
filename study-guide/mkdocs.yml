@@ -75,4 +75,5 @@ extra_css:
 
 extra_javascript:
   - assets/javascripts/mathjax.js
+  - assets/javascripts/a11y.js
   - assets/vendor/mathjax/es5/tex-mml-chtml.js

@@ -27,6 +27,8 @@
   --md-typeset-a-color: #006e68;
   --md-code-bg-color: #e2ebee;
   --md-code-fg-color: #193548;
+  /* Contraste del copyright del footer: #ffffff73 daba 4.49:1 sobre el fondo. */
+  --md-footer-fg-color--lighter: #ffffff80;
 }
 
 [data-md-color-scheme="slate"] {
