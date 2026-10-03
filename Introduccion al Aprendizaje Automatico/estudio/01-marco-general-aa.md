@@ -39,7 +39,7 @@ Karpathy lo dice así: *"In Software 2.0 most often the source code comprises 1)
 |-----|-------------|--------------|
 | **Input al desarrollador** | Especificación + datos | Dataset etiquetado |
 | **Output del desarrollador** | Código (reglas) | Modelo (pesos) |
-| **Quién escribe la lógica** | Humano | Optimizador |
+| **Quién escribe la lógica** | Humano | — |
 | **Cómo se "compila"** | Compilador / intérprete | Algoritmo de entrenamiento (SGD, etc.) |
 | **Cómo se itera** | Editar código | Agregar/limpiar datos, ajustar arquitectura |
 | **Debugging** | Stack trace, logs | Curva de pérdida, matriz de confusión, inspección de pesos |

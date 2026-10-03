@@ -93,7 +93,7 @@ La cátedra muestra explícitamente cómo cambian los errores con $M$ sobre dato
 | 0 | Underfitting total | 0.762 | 0.568 |
 | 1 | Underfitting | 0.533 | 0.433 |
 | 3 | **Buen ajuste** | **0.216** | **0.263** |
-| 9 | Overfitting | 0.131 | 0.282 |
+| 9 | — | 0.131 | 0.282 |
 
 > Definición de RMSE de la cátedra (PDF p.21): $E_{\text{RMS}} = \sqrt{2 E(\mathbf{w}^*) / N}$. El factor 2 aparece porque el costo $E$ ya lleva el $\tfrac{1}{2}$.
 

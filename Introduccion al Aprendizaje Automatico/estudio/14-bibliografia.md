@@ -146,7 +146,7 @@
 **Disponibilidad:**
 - Sitio oficial: `cs229.stanford.edu/`
 - Lecture notes (Ng + Ma, junio 2023): `cs229.stanford.edu/main_notes.pdf`
-- Videos: Stanford Online (la versión 2018 con Ng está en YouTube).
+- Videos: Stanford Online (la versión 2018 con Ng está en la grabación).
 
 **Cuándo abrirlo:** cuando una clase de la cátedra te quede corta. La **notación `θ` y `h_θ(x)`** del PDF DiploDatos viene directamente de Ng — es **el curso espiritualmente más cercano** a las clases 1-2.
 
@@ -164,7 +164,7 @@
 
 **Cuándo abrirlo:** **después** del módulo, si te gustó la parte de notebooks y querés algo más práctico-aplicado.
 
-### C.3 — StatQuest (Josh Starmer), YouTube
+### C.3 — StatQuest (Josh Starmer), la grabación
 
 **Qué cubre:** videos cortos (10-30 min) explicando intuitivamente cada algoritmo de ML/estadística. Estilo "dibujado a mano".
 
@@ -178,7 +178,7 @@
 
 **Nivel:** intro. **Ideal para una primera pasada** o repaso visual rápido.
 
-**Disponibilidad:** gratis en YouTube, canal "StatQuest with Josh Starmer".
+**Disponibilidad:** gratis en la grabación, canal "StatQuest with Josh Starmer".
 
 **Cuándo abrirlo:** antes o después de leer la teoría, para tener una **intuición visual**. Especialmente útil si la matemática del PDF te frena.
 
@@ -326,7 +326,7 @@ Material **explícitamente referenciado** dentro de los notebooks (recomendados 
 | VanderPlas PDSH | Libro | Intro | Sí (jakevdp.github.io) | TPs y pre-requisitos |
 | Ng CS229 | Curso | Int | Sí (cs229.stanford.edu) | Caps. 02, 06, 08 |
 | fast.ai | Curso | Int | Sí (course.fast.ai) | Práctica post-módulo |
-| StatQuest | Videos | Intro | Sí (YouTube) | Intuición visual |
+| StatQuest | Videos | Intro | Sí (la grabación) | Intuición visual |
 | sklearn user guide | Docs | Intro-Int | Sí (scikit-learn.org) | Implementación |
 | Domingos & Pazzani 1997 | Paper | Avan | Sí (gwern.net mirror) | Cap. 08 (NB profundo) |
 | Material UNC (F.1) | Apuntes | Intro-Int | Acceso curso | **Material principal** |

@@ -224,7 +224,7 @@ Error
 | 0 | Underfitting total | 0.762 | 0.568 |
 | 1 | Underfitting | 0.533 | 0.433 |
 | 3 | Buen ajuste | 0.216 | 0.263 |
-| 9 | Overfitting | 0.131 | **0.282** |
+| 9 | — | 0.131 | **0.282** |
 
 Notá: train SIEMPRE baja con M. Val baja, llega a un mínimo, y sube. El mínimo del val define el M óptimo.
 

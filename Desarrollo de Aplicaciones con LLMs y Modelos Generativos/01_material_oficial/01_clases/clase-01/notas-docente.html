@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎙️ Notas Docente · Clase 1 (UNC)</title>
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="notas-docente_files/3.4_jrix.17"></script>
-  
+
   <!-- Mermaid.js CDN -->
   <script src="notas-docente_files/mermaid.min_jrix.js"></script>
 
@@ -60,7 +60,7 @@
     :root {
       --scale-multiplier: 1;
     }
-    
+
     html {
       font-size: calc(clamp(15px, 0.8vw + 0.4vh + 5px, 21.5px) * var(--scale-multiplier));
       transition: font-size 0.2s ease-out;
@@ -130,7 +130,7 @@
 
   <header class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 px-4 py-2.5 transition-colors">
     <div class="max-w-[96rem] w-full mx-auto flex flex-wrap items-center justify-between gap-3">
-      
+
       <!-- Academic Brand & Block Badge -->
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-unc-blue to-unc-indigo flex items-center justify-center text-white font-bold text-xs sm:text-sm shadow-md">
@@ -247,7 +247,7 @@
         </div>
       </div>
       <div class="flex-1 p-4 sm:p-6 overflow-y-auto space-y-4">
-        
+
         <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-1">
           <div class="text-2xs uppercase font-bold text-slate-400 tracking-wider">Objetivo:</div>
           <p id="prompter-cognitive-goal" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Presentar el encuadre del curso 'Desarrollo de aplicaciones con LLMs y modelos generativos' en DiploDatos UNC: decisiones de arquitectura, gobernanza y costos reales.</p>
@@ -282,7 +282,7 @@
 
   <footer class="bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800 py-2.5 px-4 sticky bottom-0 z-40">
     <div class="max-w-[96rem] w-full mx-auto flex items-center justify-between gap-4">
-      
+
       <button id="btn-prev" onclick="prevSlide()" class="px-3.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium text-xs sm:text-sm flex items-center gap-1 transition-all disabled:opacity-40 disabled:cursor-not-allowed" disabled="disabled">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         <span>Anterior</span>
@@ -673,7 +673,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Tokenización Subword y Espacio Semántico de Embeddings</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700">
                 <div class="text-xs sm:text-sm font-bold text-unc-lightBlue mb-2">1. Tokenización en Subwords</div>
@@ -698,7 +698,7 @@
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
                   Un embedding es un <strong>vector numérico continuo</strong> (2.048 a 4.096 números). Su utilidad es ubicar conceptos en un hiperespacio donde la <strong>cercanía matemática representa afinidad semántica</strong>.
                 </p>
-                
+
                 <div class="p-3 bg-white dark:bg-slate-900 rounded-lg border font-mono text-xs space-y-2">
                   <div class="text-slate-400 text-2xs">// Palabra ➔ Token ID ➔ Vector de Embedding</div>
                   <div class="flex items-center justify-between">
@@ -1139,7 +1139,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Las Dos Fases Físicas de la Inferencia</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/90 border-t-4 border-unc-lightBlue border-slate-200 dark:border-slate-700">
                 <div class="flex justify-between items-center mb-2">
@@ -1201,7 +1201,7 @@
               <span class="text-xs uppercase font-bold text-unc-lightBlue tracking-wider">Muestreo y Probabilidades</span>
               <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">De Logits a Palabras: Temperatura, Top-P y Alucinaciones</h2>
             </div>
-            
+
             <!-- 4-Card layout with Top-P explicitly detailed -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <!-- 1. Logits -->
@@ -1294,7 +1294,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Taxonomía del Ecosistema: Más allá del 'Open Source'</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700">
                 <div class="flex items-center justify-between mb-2">
@@ -1348,7 +1348,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Ecuación Económica: Gastos de Operación vs. Inversiones de Capital</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700">
                 <div class="text-xs sm:text-sm font-bold text-unc-lightBlue mb-1">Gasto de Operación Puro (APIs Cloud)</div>
@@ -1410,7 +1410,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">¿Cómo entra un modelo en una GPU? La Regla de los Bytes</h2>
-            
+
             <div class="p-4 rounded-xl bg-slate-900 text-slate-100 border border-slate-800">
               <div class="text-xs text-unc-lightBlue font-mono uppercase mb-1">Regla de Oro de Memoria para Pesos:</div>
               <div class="text-sm sm:text-base font-mono font-bold text-white mb-2">
@@ -1485,7 +1485,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">La Trampa Invisible de la VRAM: Memoria de KV Cache</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700">
                 <div class="text-xs sm:text-sm font-bold text-unc-lightBlue mb-1">¿Qué es el KV Cache?</div>
@@ -1536,7 +1536,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">El Patrón Router: Lo Mejor de Ambos Mundos</h2>
-            
+
             <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
               <pre class="mermaid text-xs">
                 graph LR
@@ -1589,7 +1589,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Dictamen Final de Arquitectura: FinNova</h2>
-            
+
             <div class="overflow-x-auto">
               <table class="w-full text-xs sm:text-sm text-left border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
                 <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono">
@@ -1654,7 +1654,7 @@
         screenHTML: `
           <div class="max-w-4xl mx-auto space-y-4">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Cierre: Lo que nos llevamos de la Clase 1</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div class="p-4 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700">
                 <div class="text-xs sm:text-sm font-bold text-unc-lightBlue mb-1">1. Dominio Arquitectónico</div>
@@ -1812,7 +1812,7 @@
     function handleNotesClick() {
       const cleanUrl = window.location.href.split('?')[0];
       const targetUrl = `${cleanUrl}?role=teleprompter&slide=${currentSlideIndex + 1}`;
-      
+
       let presenterWin = null;
       try {
         presenterWin = window.open(
@@ -1893,7 +1893,7 @@
       safeSetText('prompter-slide-title', slide.title || '');
       safeSetText('prompter-cognitive-goal', slide.purpose || '');
       safeSetHTML('prompter-verbatim-text', slide.verbatimScript || '');
-      
+
       if (slide.verbatimScript) {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = slide.verbatimScript;

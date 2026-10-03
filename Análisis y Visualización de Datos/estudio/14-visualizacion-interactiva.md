@@ -430,11 +430,11 @@ La primera vez que alguien abre la app, `cargar_datos()` se ejecuta y el resulta
 ### Errores comunes específicos de Streamlit
 
 1. **Olvidar que el script se reejecuta entero en cada interacción**
-   
+
    Si tenés una celda que tarda 5 minutos (ej. un modelo de ML pesado), cada vez que el usuario mueve un slider va a tardar 5 minutos. **Solución:** `@st.cache_data` o `@st.cache_resource`.
 
 2. **Modificar el dataframe sin copiarlo**
-   
+
    Como el script se reejecuta, las modificaciones in-place se acumulan o se pierden de formas impredecibles. **Solución:** usá `.copy()` siempre que transformes datos:
    ```python
    df_procesado = df_original.copy()
@@ -442,7 +442,7 @@ La primera vez que alguien abre la app, `cargar_datos()` se ejecuta y el resulta
    ```
 
 3. **Usar `st.write()` para todo**
-   
+
    `st.write()` es el comodín, pero hay herramientas específicas que dan mejor UX:
    - KPIs → `st.metric()`
    - Tablas grandes → `st.dataframe()` (con scroll y sorting)
@@ -450,7 +450,7 @@ La primera vez que alguien abre la app, `cargar_datos()` se ejecuta y el resulta
    - JSON/diccionarios → `st.json()`
 
 4. **No usar `st.sidebar`**
-   
+
    Si ponés todos los widgets en el cuerpo principal, ocupan espacio que debería ser para el contenido. **Solución:** agrupá los controles en `st.sidebar` o usá `st.expander()` para colapsarlos.
 
 ### Conexión con los TPs

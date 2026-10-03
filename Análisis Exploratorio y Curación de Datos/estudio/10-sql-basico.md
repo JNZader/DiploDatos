@@ -650,7 +650,7 @@ SELECT * FROM A WHERE id NOT IN (
 - [ ] ¿Cuál es el orden lógico de ejecución de una query con `SELECT`, `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`, `LIMIT`?
 - [ ] Si tenés que combinar `melb_data` y `airbnb_by_zip` y querés conservar TODAS las propiedades aunque no tengan match en AirBnB, ¿qué tipo de JOIN usás?
 - [ ] La cátedra cubre `JOIN`, `GROUP BY`, `HAVING`, agregaciones. ¿Qué tres temas SQL importantes te quedan para estudiar por afuera y dónde estudiarlos?
-- [ ] Traducí esta query a pandas:  
+- [ ] Traducí esta query a pandas:
    `SELECT gender, AVG(salary) FROM survey WHERE province = 'CABA' GROUP BY gender HAVING COUNT(*) > 50 ORDER BY AVG(salary) DESC;`
 - [ ] ¿Por qué `SELECT *` es considerado mala práctica en queries productivas?
 - [ ] ¿Cuál es la diferencia entre `COUNT(*)` y `COUNT(col)`? Construí una query que te diga el porcentaje de completitud de `BuildingArea`.

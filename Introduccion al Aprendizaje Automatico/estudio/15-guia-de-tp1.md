@@ -72,7 +72,7 @@ El **mismo notebook completado**, con:
 
 ### Atributos (feature_names)
 
-| # | Nombre | Significado |
+| # | Nombre | — |
 |---|--------|------------|
 | 0 | `MedInc` | Ingreso mediano del block group (en decenas de miles de USD de 1990). |
 | 1 | `HouseAge` | Antigüedad mediana de las viviendas del block group (en años). |
