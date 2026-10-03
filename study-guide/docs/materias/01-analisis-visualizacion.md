@@ -61,6 +61,12 @@ No abras pandas durante la primera vuelta. Si no podés decidir qué representa 
 >
 > Antes de seguir, completá oralmente: “El TP1 no busca entrenar el modelo final. Busca entender ________, detectar ________ y establecer si ________”.
 
+### 0.4 Cursada 2026: Sysarmy, no el fuero
+
+**Contexto de aula.** Georgina Flesia (teoría) y Karim Nemer Pelliza (notebooks; **ella**, no “el ingeniero”). Dataset de clase: encuesta de sueldos Sysarmy. Entregables grupales + una visualización. Esta guía **no** sustituye ese TP: el hilo acá es SAIJ / mentoría.
+
+**No recites:** “60 mil programadores en Argentina” (el 60k se parece al *crecimiento* de empleo registrado del sector, no al total). “El 80% del tiempo se limpia” es un mito de encuestas distintas (CrowdFlower vs Anaconda); no es una constante de la física.
+
 ---
 
 ## 1. Mapa mental: de una pregunta a una conclusión
@@ -1791,6 +1797,31 @@ Ejemplos:
 - [ ] Incluye limitación de cobertura.
 - [ ] No presenta resultado del grupo como propio.
 - [ ] Indica qué se debería verificar o decidir.
+
+### 15.5 Test de hipótesis (cursada 2026, no es el TP1)
+
+**Contexto de clase.** La clase 4 trae contraste de hipótesis (también: prueba, dócima). Ejemplos del slide: “el clasificador A es mejor que B”, “es mejor que un mínimo”, “hay brecha salarial”. El PDF de 71 páginas **ya está** en el árbol de AVD (el download de hoy es el mismo texto).
+
+Esta guía **no** convierte AVD en un curso de inferencia: el TP1 sigue siendo descriptivo. El mapa mínimo, para no recitar p-valores al voleo:
+
+- Se contrasta una **H0** (ninguna diferencia / ningún efecto) contra una alternativa.
+- Un p-valor chico no es “la H0 es falsa al 95%” ni “el efecto es grande”.
+- Error tipo I: rechazar H0 cuando era razonable; tipo II: no rechazarla cuando había efecto.
+- Un test no arregla un gráfico mal planteado ni una muestra sesgada.
+
+**Error frecuente.** Usar “significativo” como sinónimo de “importante para SAIJ”.
+
+**Chequeos de cursada (no transcripto).**
+
+- Dos grupos independientes: Welch (`equal_var=False`) por defecto. Wilcoxon de rangos con signo = una muestra / apareadas; Mann–Whitney = dos independientes (en clase a veces queda al revés).
+- El IC del 95% es la **tasa de acierto del procedimiento**, no “hay 95% de probabilidad de que μ esté adentro”.
+- scipy usa **siempre** la t para el p del t-test; no hay un switch a normal “arriba de 100”. Tampoco hay un n mágico que vuelva normal cualquier media.
+- Tukey: 1,5 IQR leves, 3 IQR extremos — no “2,5 × Q3” de un notebook viejo.
+- Un ANOVA que rechaza pide post hoc (Tukey HSD), no t-tests sueltos. Friedman compara **rangos** de algoritmos, no “el de menor variabilidad”.
+- Brecha salarial: condicioná por seniority; el agregado miente si hay más mujeres junior.
+- Reportá tamaño de efecto + IC junto al p (ASA 2016), no solo “p &lt; 0,05”.
+
+**Transferencia.** En TP1 podés *formular* hipótesis (el vocabulario cambia por fuero). Probarlas con un test es el práctico de AVD sobre Sysarmy, no el de la mentoría.
 
 ---
 

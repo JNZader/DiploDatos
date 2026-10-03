@@ -26,3 +26,23 @@ Introduccion al Aprendizaje Automatico/estudio/build/
 **/*.sqlite3
 Análisis Exploratorio y Curación de Datos/TP2/melb_data_enriquecido.csv
 Análisis Exploratorio y Curación de Datos/TP2/airbnb_price_by_zipcode.csv
+# Material oficial FaMAF 2026 descargado localmente (no versionar)
+Aprendizaje Supervisado/clases/
+Aprendizaje No Supervisado/clases/
+Mentoria Jurisprudencia/materiales-oficiales/
+Mentoria Jurisprudencia/clases/
+Mentoria Jurisprudencia/datos/full-dataset/
+Mentoria Jurisprudencia/datos/work-sample-su-fa-50k.jsonl.gz
+# Ya existían/pueden existir:
+
+# Optativa 4 — clone de Bitbucket (symlink local; no subir ds/ ni Docker)
+Programacion Distribuida sobre Grandes Volumenes de Datos/catedra
+
+# Videos de clase: no versionar
+*.mp4
+*.mkv
+*.avi
+*.mov
+# Diapositivas oficiales pesadas y muestras de datos: no versionar
+Etica Practica en Ciencia de Datos/01_material_oficial/02_diapositivas_de_videos/
+Mentoria Jurisprudencia/datos/*.jsonl.gz

@@ -52,11 +52,24 @@ Una quinta marca será útil:
 
 ### 0.3 Alcance local y límite deliberado
 
-Los materiales locales verificados de Aprendizaje Supervisado organizan el núcleo alrededor de SVM y kernels, redes neuronales, random forest, boosting, sistemas de recomendación y buenas prácticas. Esta guía desarrolla especialmente las familias necesarias para construir una comparación defendible del futuro clasificador de fuero: modelos lineales, árboles, SVM y ensambles. Regresión logística y árboles se explican también como bases conceptuales indispensables para entender fronteras, probabilidades, regularización y ensambles.
+Los materiales de **2026** (Karim Nemer Pelliza y Diego González Dondo) organizan cuatro bloques: (1) SVM y kernels; (2) redes multicapa y CNN; (3) RNN, Transformers y ensambles; (4) recomendadores y prácticas.
+
+**Práctico (competencia, chequeo).** Train 1.884 filas / test 524. Clase **1 = ccb (con barbijo)**, **0 = csb (sin)**. Métrica: *balanced accuracy*. Baseline oficial: `DecisionTreeClassifier` + grilla, **no** un random forest. El “438” de clase es cantidad de **columnas** (id, clase, caja, RGB y ~433 features ResNet), no el tamaño del test. Train desbalanceado (~76% con barbijo): predecir siempre 1 da accuracy ~0,76 y balanced accuracy 0,50. La señal está en el vector ResNet, no en `bb_width`/`ch_RGB`. Escalá en un `Pipeline` ajustado **solo** en train. Confirmá cierre y envíos en el aula, no en un README viejo.
+
+Esta guía sigue desarrollando sobre todo las familias para una comparación defendible del futuro clasificador de fuero: modelos lineales, árboles, SVM y ensambles. Regresión logística y árboles se explican también como bases conceptuales indispensables para entender fronteras, probabilidades, regularización y ensambles.
 
 **k-NN no se desarrolla como familia central.** El inventario local disponible no lo presenta como eje de esta cursada y la instrucción de alcance pide incluirlo solo si está respaldado por las fuentes locales. No se rellena ese hueco con material externo. Esta omisión no implica que k-NN sea inútil; significa que el libro respeta el límite declarado. En particular, no vamos a introducir distancia, elección de (k), maldición de la dimensionalidad y limitaciones en texto como si hubieran sido parte del trayecto local verificado.
 
-Las redes neuronales y los recomendadores aparecen únicamente como frontera del programa, no como bloque central. Para el problema SAIJ primero interesa dominar controles simples, modelos lineales, SVM y ensambles clásicos. “Acotado” limita cuántas familias se estudian; no vuelve superficial la explicación de las elegidas.
+En **esta guía**, redes (MLP, CNN, RNN, Transformer) y recomendadores no se desarrollan al mismo detalle que SVM y ensambles: el clasificador de fuero primero necesita controles simples, lineales, SVM y árboles. Eso no niega la cursada: las clases 2–4 *sí* los dan. Hasta el resumen de videos, queda este mapa mínimo:
+
+- **CNN:** peso compartido en un parche espacial; el práctico te entrega el vector ya extraído — el TP es tabular sobre ese embedding, no “entrená ResNet”.
+- **RNN:** estado que recorre una secuencia (el orden importa). Limitación: memoria larga y paralelismo.
+- **Transformer:** atención entre posiciones de la secuencia; es el puente a la optativa 3, no un segundo curso de LLM.
+- **Recomendación:** colaborativo (quién se parece a quién) vs contenido (el ítem se parece al ítem) vs híbrido. Un fuero no es un rating de Netflix.
+
+**No recites en la oral (chequeo):** CNN no “son de 2017” (AlexNet 2012; 2017 es el Transformer). ChatGPT no es una RNN. Random forest es Breiman 2001, sorteo de features **en cada split**. XGBoost se hizo famoso ~2014–2016, no 2009; *out-of-core* es disco, no GPU. ImageNet de competencia ≈ 1,2 M / 1000 clases, no 100 mil. DeepFace ≈ 97,35% LFW, no 99,99 vs humano. Gender Shades (Buolamwini y Gebru), no “Stanford 98% vs 3%”. Keras 3: augmentación con capas `Random*`, no `ImageDataGenerator` en código nuevo. `transformers` no instala torch solo.
+
+“Acotado” limita cuántas familias se *profundizan* acá; no vuelve superficial SVM ni ensambles.
 
 ### 0.4 Método de lectura
 

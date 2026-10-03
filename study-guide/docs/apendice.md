@@ -39,12 +39,12 @@ No necesitás consultar estas fuentes para entender el capítulo. Sirven únicam
 - El proyecto de búsqueda semántica y RAG se presenta como integración posterior de la mentoría, no como materia formal de DiploDatos.
 
 
-### Materiales usados para construir la Materia 6
+### Materiales usados para construir la Optativa 1
 
 - Cuatro presentaciones oficiales actuales del curso, usadas como alcance primario para fundamentos, datos personales, Data Statements, sesgos, métricas de equidad y auditorías.
 - Cinco juegos de diapositivas complementarias de videos. Para los videos 01–03 también se usaron sus pistas VTT en español; los videos 04–05 no exponen VTT en español y se trabajó únicamente con sus diapositivas oficiales, sin inventar contenido de audio.
 - Plantilla DOCX del práctico de Data Statements, usada para conservar su estructura de metadatos, motivación, composición, recolección, datos de personas y usos. La fecha del 1 de octubre de 2026 se rotula como dato suministrado por el usuario.
-- Tres notebooks prácticos sobre equidad y sesgos en embeddings, leídos sin ejecutar. Sus outputs guardados son preexistentes y pendientes de reproducción; las dependencias y descargas necesarias quedaron explicadas en Materia 6.
+- Tres notebooks prácticos sobre equidad y sesgos en embeddings, leídos sin ejecutar. Sus outputs guardados son preexistentes y pendientes de reproducción; las dependencias y descargas necesarias quedaron explicadas en la Optativa 1.
 - Código de Ética de ACM, Data Statements for Natural Language Processing y Datasheets for Datasets, usados para responsabilidad profesional y documentación del ciclo de vida.
 - Los marcos legales y regulatorios mencionados en materiales locales se presentan solo como contexto de la cursada y deben verificarse en fuentes oficiales actuales antes de cualquier uso operativo o jurídico.
 

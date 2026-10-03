@@ -1,6 +1,6 @@
 # Proyecto integrador — búsqueda semántica y RAG
 
-> **Este proyecto integrador no es una materia formal de DiploDatos.** Es el próximo paso aplicado de la mentoría SAIJ y reutiliza las seis materias.
+> **Este proyecto integrador no es una materia formal de DiploDatos.** Es el próximo paso aplicado de la mentoría SAIJ y reutiliza las cinco troncales y la optativa de ética.
 
 La secuencia acumulada queda:
 
@@ -10,7 +10,7 @@ Materia 1: describir y comunicar
   → Materia 3: formular y evaluar aprendizaje
   → Materia 4: comparar familias supervisadas
   → Materia 5: representar, explorar y recuperar sin target directo
-  → Materia 6: evaluar propósito, daño, equidad, privacidad y responsabilidad
+  → Optativa 1: evaluar propósito, daño, equidad, privacidad y responsabilidad
   → Proyecto integrador: búsqueda semántica evaluada y luego RAG
 ```
 
@@ -34,7 +34,7 @@ Solo cuando retrieval alcance criterios definidos tiene sentido diseñar la etap
 
 ## 2. Qué queda deliberadamente fuera
 
-Materia 6 no desarrolló una arquitectura RAG completa, selección de generador, prompts, manejo de contexto, citación, verificación de afirmaciones, memoria conversacional, seguridad ni evaluación de respuestas. Esos son objetivos del proyecto integrador posterior.
+La optativa de ética no desarrolló una arquitectura RAG completa, selección de generador, prompts, manejo de contexto, citación, verificación de afirmaciones, memoria conversacional, seguridad ni evaluación de respuestas. Esos son objetivos del proyecto integrador posterior.
 
 ## 3. Pregunta de cierre del libro actual
 

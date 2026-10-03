@@ -12,10 +12,10 @@ from pathlib import Path
 from typing import Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SHA256 = "6117a7f38316943c701529ce2c2195a9e439a76ab370c124c0701d1dc28ac04c"
-EXPECTED_WORDS = 85_050
-EXPECTED_LINES = 12_349
-EXPECTED_HEADINGS = 1_201
+EXPECTED_SHA256 = "78d4ffca7237294b6a19e2a1612cd0780fa0f9b55f161edb0e2433bd98699836"
+EXPECTED_WORDS = 87_903
+EXPECTED_LINES = 12_548
+EXPECTED_HEADINGS = 1_216
 
 
 @dataclass(frozen=True)
@@ -31,7 +31,7 @@ PAGE_SPECS: tuple[PageSpec, ...] = (
     PageSpec("docs/materias/03-introduccion-aprendizaje.md", "# Materia 3 — Introducción al Aprendizaje Automático"),
     PageSpec("docs/materias/04-aprendizaje-supervisado.md", "# Materia 4 — Aprendizaje Supervisado"),
     PageSpec("docs/materias/05-aprendizaje-no-supervisado.md", "# Materia 5 — Aprendizaje No Supervisado"),
-    PageSpec("docs/materias/06-etica-practica.md", "# Materia 6 — Ética Práctica en Ciencia de Datos"),
+    PageSpec("docs/materias/06-etica-practica.md", "# Optativa 1 — Ética práctica en Ciencia de Datos"),
     PageSpec("docs/proyecto-integrador.md", "# Proyecto integrador — búsqueda semántica y RAG"),
     PageSpec("docs/apendice.md", "# Apéndice opcional — Trazabilidad de materiales"),
 )

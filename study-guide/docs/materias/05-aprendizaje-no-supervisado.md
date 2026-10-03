@@ -41,7 +41,7 @@ Los ejemplos con letras, vectores pequeños y documentos ficticios son **ilustra
 
 Los materiales locales inventariados sostienen como ejes explícitos la introducción al clustering, una continuación de métodos de clustering y embeddings. La materia desarrolla esos ejes y agrega los fundamentos necesarios para comprenderlos. **PCA** se incluye como complemento conceptual acotado porque el objetivo de esta guía exige conectar reducción dimensional con representación y exploración. No se afirma que el inventario local disponible demuestre una clase específica de PCA.
 
-**DBSCAN, t-SNE y UMAP no se desarrollan como métodos de la cursada** porque no aparecen identificados en los materiales locales actualmente disponibles. Más adelante se explica qué hueco deja cada omisión y qué advertencia debe conservarse si se estudian en el futuro. Esta decisión evita completar una lista de algoritmos con teoría no trazada. La profundidad se concentra en lo que sí se necesita para razonar: geometría, k-means, clustering jerárquico, evaluación, estabilidad, PCA como puente y embeddings.
+**Cursada 2026.** Las clases de Laura y Georgina *sí* recorren DBSCAN, t-SNE y UMAP (y FIFA como práctico). Esta guía **no** adopta los números de esas notebooks ni del apunte de verificación como resultados de Javier. Se actualiza el alcance: esos métodos existen en la materia; acá se enseñan como *advertencias de uso*, no como receta FIFA. La profundidad sigue en geometría, k-means, jerárquico, evaluación, estabilidad, PCA y embeddings.
 
 ### Checkpoint 0
 
@@ -247,6 +247,8 @@ z=(14.000-10.000)/2.000=2.
 Se interpreta como “dos desvíos por encima de la media”, no como “dos caracteres”.
 
 Estandarizar no vuelve automáticamente razonable una variable. Solo cambia la escala. Un identificador numérico estandarizado sigue siendo un identificador sin significado geométrico.
+
+**Chequeo sklearn.** `StandardScaler` / `MinMaxScaler` operan **por columna**. `Normalizer` lleva cada **fila** a norma 1 (cada jugador, cada documento). En clase a veces se oye “normalizar a norma uno” para *variables*: eso no es `Normalizer`.
 
 ### 3.3 Normalización por fila
 
@@ -547,6 +549,8 @@ El objetivo no es convexo respecto de asignaciones y centroides juntos. Diferent
 
 La práctica responsable es ejecutar múltiples semillas, comparar inercia y, más importante, estudiar estabilidad e interpretación. Reportar una sola corrida oculta incertidumbre algorítmica.
 
+**Chequeo sklearn.** `KMeans` **no** tiene parámetro de métrica: euclídea al cuadrado. Otras distancias → jerárquico, DBSCAN/HDBSCAN, k-medoids. Converge siempre, a un **mínimo local**. `MiniBatchKMeans` es por *velocidad*, no para “evitar mínimos locales”.
+
 ### 6.7 Elegir K
 
 No existe un (K) universal. Criterios posibles:
@@ -639,6 +643,8 @@ La media global resume, pero puede ocultar:
 - preferencia por formas compactas.
 
 Conviene mirar distribución por cluster, tamaños, casos extremos y estabilidad. No usar un decimal aislado como certificado.
+
+**Chequeo.** No hay regla sklearn de “silueta &lt; 0,4 = malo”. Un agrupamiento *trivial* (p. ej. arqueros vs el resto) puede tener silueta alta y ARI bajo contra las posiciones. La silueta premia compactación, no “el clustering correcto”.
 
 ### Transferencia a SAIJ
 
@@ -749,13 +755,13 @@ Si single linkage une dos conjuntos mediante pocos documentos puente, ¿la soluc
 
 ---
 
-## 9. DBSCAN: omisión deliberada por alcance local
+## 9. DBSCAN: densidad y ruido, con cautela
 
-DBSCAN suele presentarse porque agrupa por densidad, puede recuperar formas no convexas y marca puntos como ruido. Sin embargo, **no se desarrolla aquí**: el inventario local disponible no lo identifica como contenido verificable y la consigna exige que la cursada sea el alcance primario.
+**Cursada 2026.** Georgina lo enseña. Agrupa por densidad, admite formas no convexas, marca ruido. Lo mínimo: vecindad \(\varepsilon\), `min_samples`, núcleo / frontera / ruido, sensibilidad a escala y densidades distintas.
 
-La omisión deja una pregunta abierta: k-means y Ward favorecen compactación, mientras que single linkage puede encadenar. Un método de densidad ofrecería otro sesgo. Si en el futuro aparecen materiales locales de DBSCAN, habrá que estudiar al menos vecindad \(\varepsilon\), `min_samples`, puntos núcleo, frontera, ruido, sensibilidad a escala y dificultad con densidades variables. Este párrafo delimita el hueco; no reemplaza una enseñanza completa.
+No se desarrolla el laboratorio FIFA acá. **Interpretación para SAIJ:** llamar “ruido” a un fallo es especialmente riesgoso. Rareza geométrica \(\neq\) irrelevancia. Cualquier exclusión pide política humana.
 
-Para SAIJ, llamar “ruido” a un fallo sería especialmente riesgoso: rareza geométrica no implica irrelevancia ni error. Incluso con DBSCAN, cualquier caso excluido requeriría una política humana.
+**Error frecuente.** Usar DBSCAN “porque k-means no dio lindo” sin escalar y sin definir qué harás con el ruido.
 
 ---
 
@@ -781,6 +787,8 @@ A veces existen etiquetas que no se usaron para ajustar clusters. Se pueden comp
 Ejemplo: si hay una etiqueta administrativa de fuero, puede preguntarse cuánto se mezcla en cada cluster. Una fuerte alineación puede indicar señal útil o simplemente que la representación contiene una variable equivalente. Una baja alineación puede significar que los clusters capturan otra dimensión, no que estén “mal”.
 
 Las etiquetas son ayudas de auditoría cuando el objetivo no era reconstruirlas. Si el objetivo real es predecir fuero, el problema es supervisado y debe evaluarse como tal.
+
+**Chequeo de rangos.** ARI **no** vive en \([0,1]\): está acotado por debajo cerca de \(-0{,}5\); el azar da ~0; 1 es acuerdo perfecto. “Las métricas van de 0 a 1” es falso para ARI y para silueta (\(-1\) a \(1\)).
 
 ### 10.3 Evaluación cualitativa
 
@@ -1008,9 +1016,13 @@ El error de reconstrucción mide información lineal perdida. No recupera matice
 
 Puede reducir ruido y costo, pero también borrar grupos pequeños. El número de componentes debe evaluarse como hiperparámetro dentro del procedimiento, no elegirse mirando toda la colección. Clustering en componentes responde a la geometría comprimida, no a la original.
 
-### 12.10 t-SNE y UMAP: omisión y advertencia de visualización
+### 12.10 t-SNE y UMAP: visualización, no certificado de clusters
 
-No se enseñan como contenido local porque el inventario disponible no los identifica. Si se incorporan después, deben tratarse principalmente como herramientas de visualización no lineal con hiperparámetros, aleatoriedad y distorsiones. No basta un mapa con islas para demostrar clusters.
+**Cursada 2026.** Sí se ven. Siguen siendo sobre todo **mapas**, no un espacio donde agrupar a ciegas.
+
+- t-SNE (van der Maaten y Hinton, 2008): el paper lo presenta para *visualizar*. Distill (2016): tamaños de islas y distancias *entre* islas pueden no significar nada; el ruido con perplejidad baja *parece* agrupado. No uses t-SNE como input de k-means “porque se ve lindo”.
+- UMAP (2018, no “salió antes que t-SNE”). Puede *rasgar* un grupo real. Si alguien agrupa encima, la doc oficial pide `min_dist=0`, más vecinos, más de 2 componentes y un método de densidad — no k-means por default.
+- **Chequeo de costo:** PCA (SVD) es lo *barato*. En clase a veces se oye que PCA es lo lento y UMAP/t-SNE lo rápido: al revés en tiempos típicos de notebook.
 
 ### 12.11 Material complementario integrado 7 — Los mapas no prueban clusters reales
 
@@ -1415,15 +1427,27 @@ Corrección: conserva 90 % de varianza, no 90 % de significado jurídico.
 
 Corrección: valida una propiedad geométrica bajo una configuración.
 
-### 18.10 “La misma semilla basta para reproducibilidad”
+### 18.10 “La inercia más chica elige el K”
+
+Corrección: la inercia baja al subir K siempre. Mismo K, distintas semillas: sí. Entre K distintos: codo + silueta + estabilidad, no el mínimo crudo.
+
+### 18.11 “Normalizer escala las variables”
+
+Corrección: escala **filas**. Columnas: `StandardScaler` / `MinMaxScaler`.
+
+### 18.12 “K-means admite cualquier distancia en sklearn”
+
+Corrección: euclídea. Otras métricas, otro estimador.
+
+### 18.13 “La misma semilla basta para reproducibilidad”
 
 Corrección: también hay versiones de corpus, orden, implementación, modelo de embeddings y parámetros.
 
-### 18.11 “Un coseno alto es una probabilidad de relevancia”
+### 18.14 “Un coseno alto es una probabilidad de relevancia”
 
 Corrección: es un score de similitud, no calibrado como probabilidad salvo procedimiento explícito.
 
-### 18.12 “Primero hacemos RAG y después medimos retrieval”
+### 18.15 “Primero hacemos RAG y después medimos retrieval”
 
 Corrección: se evalúa recuperación primero para localizar fallas y evitar que la fluidez tape evidencia ausente.
 

@@ -1,4 +1,4 @@
-# Materia 6 — Ética Práctica en Ciencia de Datos
+# Optativa 1 — Ética práctica en Ciencia de Datos
 
 > **Idea rectora:** la ética no es una inspección que se agrega al final para autorizar un sistema ya decidido. Es una forma de definir el problema, justificar los datos, distribuir beneficios y cargas, elegir métricas, diseñar controles, escuchar a las personas afectadas y responder cuando algo sale mal.
 
@@ -58,7 +58,10 @@ Deberías poder:
 11. convertir un hallazgo de auditoría en remediación verificable;
 12. diseñar revisión humana, abstención y contestabilidad reales;
 13. analizar riesgos específicos de recuperación semántica y RAG;
-14. declarar límites, incertidumbre y ausencia de evidencia sin inventar seguridad.
+14. declarar límites, incertidumbre y ausencia de evidencia sin inventar seguridad;
+15. distinguir consentimiento, finalidad y minimización en el marco de la Ley 25.326 *como se presenta en el curso*, sin fingir asesoramiento jurídico;
+16. explicar por qué “la web es pública” no autoriza scraping indiscriminado;
+17. separar watermark, procedencia (C2PA) y clasificador heurístico, y decir para qué serviría auditar un lote sintético.
 
 ### Checkpoint 0
 
@@ -241,6 +244,14 @@ Los materiales del curso presentan ejercicios de pensamiento de una **Caja de He
 6. **alternativa**: búsqueda con filtros, citas y guía humana sin generar respuesta;
 7. **rediseño**: retrieval evaluado primero, respuesta con citas, abstención, aviso de límites y canal de contestación.
 
+Los videos de 2020 (Laura) presentan la Caja como tráiler: hay que leer el PDF (GIFT). Casos: scoring y código postal; asistente de voz y violencia doméstica; app de Chagas sin médico; exoesqueleto sin update. El relato de Laura a veces **no** calza con el PDF. Para el práctico, el PDF; el video es el gancho.
+
+### 2.6 Autoetnografía (clase 1)
+
+**Contexto de curso.** Luciana pide mirar desde *tu* posición: no ves los mismos grupos dañados. El grupo diverso de la materia es, en parte, para eso. En un statement **individual** no se inventan coautores: se **declara** el sesgo de quien escribe.
+
+**Error frecuente.** Pegar el daño de COMPAS o de Amazon CV sin pasar por *este* corpus.
+
 ### Checkpoint 2
 
 Un mapa de actores no está completo porque tenga muchas filas. Está completo para una decisión cuando muestra quién puede influir, quién recibe cada consecuencia, qué voz falta y qué mecanismo cambia el diseño.
@@ -327,6 +338,22 @@ La evaluación debe combinar métricas por clases y grupos éticamente justifica
 | E-03 | Respuesta afirma más que las fuentes | Usuario y terceros | Falsa autoridad | Generación no anclada | Citas, abstención, verificación | Afirmación sin soporte | Responsable de RAG |
 
 El registro no reemplaza análisis. Hace visible quién debe actuar y qué evidencia permitirá saber si el control funciona.
+
+### 3.6 Casos de la cursada (chequeo 02/10/2026)
+
+El valor es el *tipo de daño*. Las cifras de memoria **no** se recitan en la oral:
+
+| Lo que se oye en clase | Chequeo |
+|---|---|
+| Amazon “sancionado” por filtrar mujeres | No hubo sanción. Reuters 2018: el equipo se disolvió. Sigue siendo daño de asignación. |
+| Google “gorilas” y el Congreso | Dos casos: Photos 2015 vs Rekognition/ACLU 2018. |
+| Depixelizar Obama = Meta | No. PULSE (Duke). El video 2020 lo atribuye mejor. |
+| NL, mails de 30 000 € (~2012) | Algoritmo ~2013; 30 000 € es **compensación** Catshuis, no lo exigido. |
+| GPT-3 “en 2019” | El paper de GPT-3 es 2020. |
+| Córdoba, deepfakes, “ya hubo juicio” | Hechos 2024; elevación 2025/2026; el juicio no está cerrado en esa fuente. |
+| Facial CABA recién aprobado (2020) | Inconstitucional 2022–2023. |
+
+**Error frecuente.** “Amazon fue multado” como dato.
 
 ### Checkpoint 3
 
@@ -809,6 +836,31 @@ Un corpus pensado para investigación puede usarse para perfilar personas, local
 
 El Data Statement debe registrar usos previstos, excluidos y plausibles usos indebidos. Los controles pueden incluir acceso, autenticación, límites de consulta, monitoreo, revisión de solicitudes, restricciones de exportación, respuesta a incidentes y retirada de versiones.
 
+### 8.6 Ley 25.326, tal como la presenta el curso (2026-10)
+
+**Contexto de materiales del curso**, no dictamen legal. La presentación actualizada de Luciana 1 (92 diapositivas; el PDF de 73 páginas del repo **no se reemplaza**) recuerda definiciones y principios de la Ley 25.326 (Argentina, 2000):
+
+- datos personales (incluida información inferible) y datos sensibles;
+- titular; disociación;
+- certeza, pertinencia, no excesividad (minimización), actualización;
+- finalidad: no usar para un propósito incompatible con el que motivó la obtención, salvo dominio público *con licencia*;
+- consentimiento libre, expreso e informado, por escrito o equivalente;
+- excepciones (p. ej. fuentes públicas) **no** equivalen a “todo lo scrapeable es lícito”;
+- seguridad, confidencialidad, secreto profesional que sobrevive al vínculo laboral;
+- derechos de acceso, rectificación y supresión.
+
+La misma presentación marca que el tope de multa en pesos de 2000 quedó **simbólico** frente al mercado digital, y compara con la LGPD brasileña (Ley 13.709/2018): sanciones como porcentaje de facturación, DPO obligatorio, más bases legales (interés legítimo), notificación de brechas, alcance si se tratan datos de personas *en* Brasil. El caso de curso (Airbnb) ilustra enforcement fuerte en Brasil y disuasión débil en Argentina: la protección efectiva a veces llega más por el *cliente* que exige estándar GDPR/LGPD que por la multa local.
+
+**Interpretación para el práctico.** El Data Statement de SAIJ no “cumple la 25.326”. Documenta reuso de un recorte ya publicado, ausencia de consentimiento nuevo y la decisión de no republicar el volcado. Eso es ética de documentación, no un certificado AAIP.
+
+**Complemento de los videos (chequeado).** El art. 20 de la 25.326: decisiones que valoran conductas humanas no pueden tener como *único* fundamento un perfil informatizado. Convenio 108+: el Congreso aprobó en 2022 (ley 27.699); el depósito de ratificación es 17/04/2023; el protocolo **aún no está en vigor** (hacen falta más Partes). No digas “Argentina ratificó en 2022 y ya rige”. Multas 1.000–100.000 (Res. AAIP 126/2024); el matiz es acumulación y descuento por pago voluntario, no que “no hay multa”.
+
+**Error frecuente.** Tratar “está en SAIJ / en el Boletín” como base legal para entrenar, embeber y servir a un LLM. Finalidad y expectativa del titular no se agotan en la publicidad del acto.
+
+### 8.7 Scraping y procedencia de la web
+
+El curso señala [dataprovenance.org](https://www.dataprovenance.org/) como lugar para *mirar licencias* de fuentes web, y afirma que el scraping indiscriminado choca con finalidad y genera litigio. **Teoría general:** accesible ≠ licenciable ≠ consentido para minería. Proveniencia (quién publicó, bajo qué términos, si hay robots.txt, si hay PII) es un control *antes* del `wget`.
+
 ### Checkpoint 8
 
 Antes de decir “los datos son públicos”, completá: ¿públicos dónde, para quién, con qué expectativa, bajo qué condiciones y qué cambia al agregarlos, vectorizarlos o generar una respuesta?
@@ -1023,6 +1075,41 @@ Una política “usar IA responsablemente” no es control. “Toda respuesta de
 ### 11.3 Contexto legal y temporal
 
 Las diapositivas locales mencionan normativa argentina, recomendaciones internacionales, el EU AI Act y debates regionales. Son contexto pedagógico, no estado jurídico confirmado al día de hoy. Antes de desplegar o afirmar cumplimiento hay que consultar fuentes oficiales actuales y asesoramiento competente. Esta cautela no paraliza la ética: finalidad, minimización, documentación, participación y reparación pueden diseñarse mientras se verifica el marco aplicable.
+
+**Complemento 2026-10 (curso).** El EU AI Act, en la lectura de la clase, impone transparencia sobre contenido sintético (marca legible por máquina, Art. 50.2 en el slide). Proveedores grandes pueden aplicar la marca **en todo el mundo** porque fragmentar el modelo por región es caro. Eso no convierte a un estudiante de DiploDatos en “conforme al AI Act”. Convierte a la *procedencia del texto* en un problema de auditoría de datasets, no solo de la UE.
+
+LEGAL ≠ ÉTICO sigue valiendo: una multa simbólica en Argentina no vuelve lícito-ético el reuso; un watermark no vuelve verdadera una cita inventada.
+
+### 11.4 Marcas de agua, C2PA y detección
+
+**Teoría general.** Hay al menos cuatro familias (tabla de curso):
+
+| Familia | Idea | Debilidad típica |
+|---|---|---|
+| Watermark estadístico (logits) | El muestreo sesga tokens según una clave; se verifica con un test | Paráfrasis; debate de calidad; “unwatermarking” |
+| Metadatos criptográficos (C2PA) | Procedencia firmada en el archivo | Se pierde al exportar/re-grabar |
+| Marca en píxel (p. ej. SynthID) | Señal en imagen/video | Otro medio, no un fallo SAIJ |
+| Clasificador / PPL | Detectar sin clave del proveedor | Frágil a paráfrasis |
+
+**Contexto de curso.** Anthropic anunció marcas en salidas de Claude (API, Code, etc.) ligadas al AI Act. La crítica de industria: la marca puede persistir aunque el modelo solo haya *corregido* un texto humano. Privacidad, autoría y herramientas para borrar la marca quedan abiertas. Un artículo de prensa citado en el slide no es fuente primaria: tratarlo como **contexto**, no como hecho medido acá.
+
+**Interpretación.** Un watermark responde “¿este string salió de *este* modelo con *esta* clave?”, no “¿es verdadero?” ni “¿tiene licencia?”. Sirve para auditar *lotes* (crowdwork reemplazado por LLM, papers, evaluaciones).
+
+**Error frecuente.** Confundir watermark con citación. Confundir “detecté sintético” con “es fraude”.
+
+### 11.5 Datos sintéticos: fraude vs uso controlado
+
+**Ejemplo de curso.** Encuestas: un bot que cobra como encuestado destruye el dataset; un sintético *calibrado* para prototipar no reemplaza personas y no se paga como si lo fueran.
+
+Protocolo de auditoría esbozado en clase: muestrear el lote **antes** de pagar o ingerir → buscar marcas / C2PA / SynthID → mirar estadísticas de tokens poco humanas → aceptar, penalizar SLA o rechazar.
+
+**Hipótesis SAIJ.** Un “corpus de fallos” bajado de un foro puede estar mezclado con texto de LLM. Sin proveniencia, el Data Statement miente en “quién escribió”.
+
+**Hipótesis CC.** Una nota operativa escrita con un asistente y metida al índice como si fuera el Boletín es el mismo fraude de rol, con o sin watermark.
+
+### Checkpoint 11b
+
+Un proveedor te vende 50 000 “fallos anonimizados”. ¿Qué mirás primero: el watermark, la licencia, o si el titular consintió el reuso? Ordená los tres y decí qué *no* te dice el que pusiste segundo.
 
 ---
 
@@ -1732,7 +1819,7 @@ Para cada hipótesis completá:
 
 ---
 
-## 20. Autoevaluación final de Materia 6
+## 20. Autoevaluación final de Optativa 1
 
 Marcá solo si podés explicarlo con un ejemplo, una limitación y una aplicación SAIJ:
 
@@ -1802,7 +1889,7 @@ Considerá dominada la materia cuando, frente a una demo técnicamente convincen
 
 ---
 
-## 21. Glosario de Materia 6
+## 21. Glosario de Optativa 1
 
 | Término | Definición operativa |
 |---|---|
@@ -1875,7 +1962,7 @@ Quedan como extensiones opcionales, solo si el proyecto las necesita y cuenta co
 
 La regla para expandir es la misma que para modelar: partir de una decisión real y evidencia necesaria, no de una lista de moda.
 
-### Cierre de Materia 6
+### Cierre de Optativa 1
 
 La competencia ética no consiste en no equivocarse. Consiste en hacer visibles los valores, buscar perspectivas que contradigan, medir sin idolatrar métricas, documentar límites, distribuir responsabilidad y reparar. Para SAIJ, eso significa que el proyecto integrador no comenzará con “generemos respuestas”, sino con una pregunta más exigente:
 

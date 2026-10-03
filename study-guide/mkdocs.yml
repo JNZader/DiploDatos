@@ -59,7 +59,11 @@ nav:
       - 3. Introducción al aprendizaje: materias/03-introduccion-aprendizaje.md
       - 4. Aprendizaje supervisado: materias/04-aprendizaje-supervisado.md
       - 5. Aprendizaje no supervisado: materias/05-aprendizaje-no-supervisado.md
-      - 6. Ética práctica: materias/06-etica-practica.md
+  - Optativas:
+      - 1. Ética práctica: materias/06-etica-practica.md
+      - 2. AWS ML Foundations: materias/07-aws-ml-foundations.md
+      - 3. LLMs y modelos generativos: materias/08-llms-aplicaciones.md
+      - 4. Grandes volúmenes (Spark): materias/09-bigdata-spark.md
   - Proyecto integrador: proyecto-integrador.md
   - Apéndice: apendice.md
 

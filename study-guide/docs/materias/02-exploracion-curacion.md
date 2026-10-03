@@ -64,6 +64,21 @@ Usaremos los mismos cuatro rótulos del libro:
 >
 > Completá: “AVD produce un ________. Curación produce una nueva ________ del dataset y debe conservar una ________ de cómo llegó a ella”.
 
+### 0.4 Cursada 2026: Melbourne y Airbnb, no el fuero
+
+**Contexto de aula.** José Robledo (faltantes, encodings, PCA) y Ariel Wolfmann (roles, SQL, ETL). Labs: Melbourne Housing + Airbnb Melbourne 2018. El repo público `AnalisisYCuracion` puede ser **2022**; las notebooks 2026 están en el aula. Esta guía **no** sustituye esos entregables. El hilo acá es SAIJ / TP2.
+
+**Chequeos (no transcripto).**
+
+- Un conteo de nulos **sin** decir el filtro (`dropna` de `Car`, 18k vs 13k de FAMAF) no se puede reproducir. Anotá archivo + filtro.
+- `NaN == NaN` es falso (IEEE). Centinelas (0 baños) no son nulos hasta que los conviertas.
+- Imputá **dentro** del `Pipeline` (train). `IterativeImputer` en sklearn es experimental. Un modelo que traga NaN (HGB, XGBoost) a veces gana a imputar.
+- Medallion: plata = limpieza; oro = lógica de negocio. No llames “oro” a un CSV sin nulos.
+- COMPAS: sesgo documentado (ProPublica); **no** hay “juicios por millones” tipo Loomis.
+- pandas 2 vs 3 cambia dtypes de texto; fijá versión.
+
+**Error frecuente.** Copiar el EDA de Kaggle como si fuera el Data Statement de la mentoría.
+
 ---
 
 ## 1. Del diagnóstico de AVD a una decisión de curación

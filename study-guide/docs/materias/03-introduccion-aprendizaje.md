@@ -258,6 +258,14 @@ Por eso, antes de fijar (y), Javier debe responder:
 
 > **Decisión de Javier — pendiente:** no se afirma aquí cuál es la taxonomía final ni cuántas clases tiene. Esa decisión exige reproducir la curación y documentar el propósito.
 
+### 2.9 El nombre de la columna miente (cursada 2026)
+
+**Contexto de materiales del curso.** En el práctico de préstamos de IAA, en clase se oye que `TARGET` es “si se le dio el crédito”. **Chequeo:** el archivo dice `1 = client defaulted` — todos recibieron el préstamo; el positivo es **incumplió**. El encabezado además describe el HMEQ original (5960 filas, 20% de default); el CSV del práctico es otro recorte (faltan columnas, otra prevalencia). Calculá vos el soporte.
+
+**Interpretación.** Formular el problema incluye leer el diccionario, no el título de la charla. En SAIJ, `sumario` vs `texto` es la misma trampa.
+
+**Error frecuente.** Optimizar recall del “positivo” creyendo que es “crédito otorgado”.
+
 ---
 
 ## 3. Familias de aprendizaje y tipos de salida
@@ -698,6 +706,8 @@ F_1 = 2\cdot\frac{(2/3)(3/4)}{2/3+3/4}
 
 Interpretación: el equilibrio entre calidad de predicciones positivas y cobertura es cercano a 0,706. No significa “70,6% de casos correctos”; esa descripción corresponde a accuracy.
 
+**Cursada 2026, chequeo.** En scikit-learn, `f1_score` binario (el default) es el F1 de `pos_label`. Los verdaderos negativos **no entran**. “Qué tan bien clasifica ambas clases” es F1 macro o balanced accuracy, no el F1 de la clase 1.
+
 ### 9.3 Otro ejemplo: accuracy alta, utilidad nula para la minoría
 
 En 100 casos inventados hay 95 negativos y 5 positivos. Un modelo predice siempre negativo:
@@ -842,6 +852,16 @@ Todo remuestreo debe hacerse **dentro de train**, y dentro de cada fold durante 
 ### 11.3 No confundir rareza con irrelevancia
 
 Una clase escasa puede ser operativamente crítica. Tampoco todo desbalance es un defecto: puede representar la prevalencia real. La decisión es qué desempeño se necesita en cada clase y cómo estimarlo con suficiente incertidumbre.
+
+### 11.4 Pesos, SMOTE y umbral (cursada 2026)
+
+**Chequeo, no transcripto.** `class_weight="balanced"` usa pesos **inversos** a la frecuencia: `n / (k × n_clase)`. Si en clase oíste “el peso es la proporción”, es al revés: con eso la mayoritaria pesaría más.
+
+SMOTE **no** duplica filas. Interpola entre vecinos de la minoritaria (Chawla et al., 2002). Duplicar es `RandomOverSampler`. Remuestreo **solo** en train / en el fold de entrenamiento.
+
+Pesos y SMOTE **inflan** la probabilidad media de la minoritaria: deja de coincidir con la prevalencia. Si el número se usa como tasa, calibrá o no lo trates como probabilidad.
+
+**Error frecuente.** Remuestrear todo el CSV y *después* hacer split.
 
 ---
 
@@ -1421,6 +1441,8 @@ Un **threshold** transforma score o probabilidad en decisión. Bajarlo suele aum
 
 La calibración se aprende con datos separados de los usados para ajustar el modelo, y el threshold se elige con validación según costos operativos. Test conserva su rol final. Este tema queda opcional: primero hay que dominar matriz de confusión, métricas y particiones.
 
+**Chequeo, curva PR.** Umbral **alto** → el modelo predice **pocos** positivos (precisión suele subir, recall baja). En clase a veces se oye al revés (“umbral alto, todos positivos”). No lo recites.
+
 ---
 
 ## 21. Del TP2 curado al entrenamiento futuro
@@ -1587,6 +1609,10 @@ Si el modelo supera baseline en validación pero cae en test temporal, podemos c
 13. **Eliminar clases raras por comodidad.** Requiere razón de dominio, no solo estadística.
 14. **Tomar correlaciones textuales como explicación jurídica.** El modelo detecta asociación predictiva.
 15. **Dejar revisión humana sin diseño.** “Lo revisa una persona” no define operación.
+16. **Creer al nombre de `TARGET`.** Leé el diccionario: positivo puede ser default, no “otorgado”.
+17. **Decir que F1 mira las dos clases.** El F1 binario default mira `pos_label`.
+18. **Invertir `class_weight`.** Balanced es inverso a la frecuencia.
+19. **Confundir SMOTE con copiar filas.**
 
 ---
 

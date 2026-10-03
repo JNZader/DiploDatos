@@ -23,7 +23,7 @@ MathJax 3.2.2 está incluido en `docs/assets/vendor/mathjax/`. La lectura y la p
 
 | Elemento | Propósito |
 | --- | --- |
-| Nueve páginas Markdown | Conservan, en orden, cada byte de la guía verificada. |
+| Nueve páginas canónicas verificadas | index + 01–06 + proyecto + apéndice; conservan, en orden, cada byte de la guía verificada. Las optativas 07–09 se publican pero están fuera de la verificación hash. |
 | `source-manifest.json` | Registra hash, conteos y correspondencia de cada página sin rutas absolutas. |
 | `tests/test_sync_guide.py` | Reconstruye las páginas comprometidas y verifica hash, palabras, líneas, encabezados y manifiesto. |
 | `scripts/sync_guide.py` | Regenera el contenido solo cuando se dispone de una fuente canónica autorizada. |
