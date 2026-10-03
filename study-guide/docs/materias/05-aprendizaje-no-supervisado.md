@@ -813,7 +813,7 @@ DBSCAN no exige elegir K, pero exige elegir \(\varepsilon\) y `min_samples`, que
 
 Usar DBSCAN “porque k-means no dio lindo” sin escalar y sin definir qué harás con el ruido. Si no decidiste antes qué hacer con los puntos sin asignar, el método te lo decide: quedan afuera del análisis, y eso es una decisión de exclusión disfrazada de parámetro técnico.
 
-### 9.6 Checkpoint 7
+### Checkpoint 7
 
 Si duplicás todas las coordenadas del ejemplo (misma estructura, otra escala) y mantenés \(\varepsilon=1{,}5\), ¿qué pasa? Las distancias se duplican: entre 1 y 2 queda 2, mayor que \(\varepsilon=1{,}5\), así que 1 pierde su vecino y el cluster \(\{1,2,3\}\) se rompe; varios puntos pasarían a ruido. La estructura no cambió, pero el resultado sí: por eso se escala (y se justifica $\varepsilon$) **antes** de correr, no después de ver el gráfico.
 

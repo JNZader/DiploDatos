@@ -1113,7 +1113,7 @@ Protocolo de auditoría esbozado en clase: muestrear el lote **antes** de pagar 
 
 **Hipótesis CC.** Una nota operativa escrita con un asistente y metida al índice como si fuera el Boletín es el mismo fraude de rol, con o sin watermark.
 
-### Checkpoint 11b
+### Checkpoint 10
 
 Un proveedor te vende 50 000 “fallos anonimizados”. ¿Qué mirás primero: el watermark, la licencia, o si el titular consintió el reuso? Ordená los tres y decí qué *no* te dice el que pusiste segundo.
 
@@ -1192,7 +1192,7 @@ Un incidente no debe borrarse porque fue “error humano” o “mal uso”. La 
 
 Toda auditoría tiene alcance: datos accesibles, tiempo, permisos y conocimiento. Se reporta qué no pudo probarse. La ausencia de hallazgos no prueba ausencia de riesgo. La transparencia sobre límites evita que un informe acotado se use como sello total.
 
-### Checkpoint 12
+### Checkpoint 11
 
 Un hallazgo sin responsable ni verificación es una observación. Una corrección sin volver a medir es una promesa.
 
@@ -1456,7 +1456,7 @@ Una exploración de vecinos jurídicos debería preguntar:
 
 No hace falta ejecutar el notebook para aprender la pregunta ética. El código viene después del propósito y del protocolo.
 
-### Checkpoint 16
+### Checkpoint 12
 
 Una técnica de remediación puede reducir una diferencia métrica sin reparar la etiqueta, el uso o el daño. Documentá qué cambia y qué no.
 

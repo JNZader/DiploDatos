@@ -581,7 +581,7 @@ Un gráfico puede sugerir que una provincia tiene más documentos. Todavía falt
 - ¿la provincia falta de manera diferencial?
 - ¿el pico proviene de una carga masiva?
 
-> **Checkpoint antes de estadística descriptiva**
+> **Checkpoint 0**
 >
 > - [ ] Puedo nombrar la unidad de análisis.
 > - [ ] Sé qué representa cada variable clave.
@@ -909,7 +909,7 @@ Describe el ancho del 50% central. Como no depende de máximos y mínimos, suele
 6. Redondear antes de calcular proporciones.
 7. Usar porcentajes con denominadores diferentes sin decirlo.
 
-> **Checkpoint 7**
+> **Checkpoint 1**
 >
 > Si media = 100 y mediana = 65 para longitud, ¿qué sospechás? ¿Qué gráfico pedirías? ¿Eliminarías el máximo? La respuesta correcta empieza con “depende de…”.
 
@@ -1172,7 +1172,7 @@ No empieces con un gráfico de cinco dimensiones. Avanzá así:
 4. condicionar por ese confusor;
 5. comparar si la relación persiste.
 
-> **Checkpoint 10**
+> **Checkpoint 2**
 >
 > Si provincia y fuero están asociados, y año también cambia según provincia, ¿alcanza con un único gráfico fuero–año? ¿Qué estratificaciones probarías?
 
@@ -1461,7 +1461,7 @@ Lectura mejor:
 9. Comunicar un hallazgo sin su filtro.
 10. Mostrar todos los gráficos exploratorios en el reporte final.
 
-> **Checkpoint de visualización**
+> **Checkpoint 3**
 >
 > Para cada gráfico del TP1, escribí antes una oración: “El lector debe poder comparar ________ para responder ________”. Si no podés completarla, todavía no elegiste el gráfico.
 
@@ -1710,7 +1710,7 @@ También son riesgosos como feature porque fueron generados con conocimiento exp
 7. Tratar descriptores como texto libre.
 8. Presentar un patrón léxico como rendimiento de modelo.
 
-> **Checkpoint 14**
+> **Checkpoint 4**
 >
 > Antes de contar palabras, deberías poder escribir: “Analizo el campo ________, en unidades de ________, sobre documentos de tipo ________, después de remover ________, para responder ________”.
 
@@ -1930,7 +1930,7 @@ Debés comprender:
 
 Resultado esperado: reglas de inclusión/exclusión justificadas y conteos de impacto.
 
-> **Checkpoint 16**
+> **Checkpoint 5**
 >
 > Antes de pasar al target, decidiste qué filas entran y cuáles no. ¿Qué dos consecuencias tiene esa regla sobre lo que el TP1 puede afirmar después?
 >
@@ -2031,7 +2031,7 @@ Debés producir una narrativa, no una galería:
 - que todos los outliers son errores;
 - que los resultados del grupo son resultados propios.
 
-> **Checkpoint final antes de código**
+> **Checkpoint 6**
 >
 > Podés empezar el TP1 propio cuando puedas explicar sin mirar:
 >

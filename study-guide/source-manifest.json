@@ -10,10 +10,10 @@
     },
     {
       "boundary": "# Materia 1 — Análisis y Visualización de Datos",
-      "bytes": 95980,
+      "bytes": 95908,
       "end_line": 2482,
       "path": "materias/01-analisis-visualizacion.md",
-      "sha256": "787e4ae2ec8c4f087430c78b64a1371c6f99036e87f9f0b58f44fd5570b83aa5",
+      "sha256": "530436c3e487ff6e8d8090ec5208f3c8ed2e499a1793dee2b991f0223c20b3f3",
       "start_line": 46
     },
     {
@@ -42,18 +42,18 @@
     },
     {
       "boundary": "# Materia 5 — Aprendizaje No Supervisado",
-      "bytes": 95714,
+      "bytes": 95710,
       "end_line": 10574,
       "path": "materias/05-aprendizaje-no-supervisado.md",
-      "sha256": "2b802c5a4bc32d7ec38a2dbb152226b02179a4fc850922792c7a05fff0904a11",
+      "sha256": "ca67f2439d8907686f021f2fafad58ce4247178f54b1c892ea9429805d705ce7",
       "start_line": 8595
     },
     {
       "boundary": "# Optativa 1 — Ética práctica en Ciencia de Datos",
-      "bytes": 110727,
+      "bytes": 110726,
       "end_line": 12552,
       "path": "materias/06-etica-practica.md",
-      "sha256": "fc3f9c2e5ed208c8e74dab01227fc6987cf9101318f265175c79a9b55fbd74f2",
+      "sha256": "851e468f2747ed792972d33b28c7627042ac7c320ed4879ba0170e3dc51e5ad6",
       "start_line": 10575
     },
     {
@@ -75,11 +75,11 @@
   ],
   "reconstruction_match": true,
   "source": {
-    "bytes": 605543,
+    "bytes": 605466,
     "filename": "GUIA_ESTUDIO_DIPLO_MENTORIA_SAIJ.md",
     "headings": 1225,
     "lines": 12650,
-    "sha256": "c3f3e760dbc40ccaa70494b38d7b77a3297b51a3de734dceb96282b6a7395a56",
-    "words": 89005
+    "sha256": "e7eefa9f6f43d4c4f92fd51f372965e0e0c2611aaa6a3011e46de6dac116806c",
+    "words": 88997
   }
 }
