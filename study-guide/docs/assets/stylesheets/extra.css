@@ -4,7 +4,7 @@
   --reader-paper-raised: #f8fbfc;
   --reader-ink: #17324a;
   --reader-ink-soft: #415b6d;
-  --reader-teal: #087f78;
+  --reader-teal: #087c76;
   --reader-teal-soft: #d7ecea;
   --reader-amber: #c3841d;
   --reader-border: #c8d5db;
@@ -65,7 +65,7 @@ input {
 }
 
 .md-content__inner {
-  max-width: 60rem;
+  max-width: 46rem;
   margin-inline: auto;
   padding-bottom: 4rem;
 }
@@ -225,5 +225,49 @@ input {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+.md-typeset mjx-container[display="true"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer,
+  .md-search,
+  .md-top,
+  .md-dialog {
+    display: none;
+  }
+
+  .md-main__inner {
+    margin-top: 0;
+  }
+
+  .md-content__inner {
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  pre,
+  blockquote,
+  table {
+    break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
   }
 }

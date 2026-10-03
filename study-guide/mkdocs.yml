@@ -1,12 +1,14 @@
 site_name: DiploDatos — Guía de estudio SAIJ
 site_description: Guía de estudio de ciencia de datos aplicada a jurisprudencia argentina.
 site_url: https://jnzader.github.io/DiploDatos/
+site_author: JNZader
 strict: true
 
 theme:
   name: material
   language: es
   font: false
+  favicon: assets/favicon.svg
   features:
     - navigation.instant
     - navigation.instant.progress
@@ -17,6 +19,7 @@ theme:
     - toc.follow
     - search.suggest
     - search.highlight
+    - content.code.copy
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
