@@ -2,7 +2,7 @@
 
 > **Idea rectora:** un LLM no “sabe”. Predice el siguiente token. Una aplicación es el conjunto de decisiones que rodean esa predicción: dónde corre, qué contexto se le muestra, qué herramientas puede ejecutar y cómo se comprueba que no inventó. La pregunta de directorio no es cuál modelo es más elocuente. Es **privacidad, latencia y volumen de tokens**.
 
-Esta optativa no sustituye el tronco (materias 1–5), ni Ética, ni AWS Academy, ni Spark. El práctico de Moodle son cuatro laboratorios en Colab. SAIJ y el Consorcio Canalero 10 de Mayo son **transferencia hipotética**, no la entrega.
+Esta optativa no sustituye [el tronco](03-introduccion-aprendizaje.md) (materias 1–5), ni Ética, ni AWS Academy, ni Spark. El práctico de Moodle son cuatro laboratorios en Colab. SAIJ y el Consorcio Canalero 10 de Mayo son **transferencia hipotética**, no la entrega.
 
 **Contexto de materiales del curso.** Profesor: Sebastián Pérez. Clases 11–12 y 18–19 de septiembre de 2026. Casos inventados de la cursada: **FinNova** (clase 1) y **Vertex Horizon Seguros** (clase 3). Entrega mencionada en clase: alrededor del 19 de octubre, con holgura administrativa hasta el cierre de notas de noviembre.
 
@@ -276,7 +276,7 @@ Alguien pregunta si una póliza 2024 cubre inundación rural según una modifica
 
 No hay K óptimo universal. Se elige con un set de preguntas cuyo pasaje esperado **conocés**: hit@K. Overlap típico de curso ~10% del chunk. El mismo modelo de embedding en ingesta y consulta.
 
-Híbrido: códigos y nombres propios no viven bien solo en coseno. **Cifra chequeada:** en Chroma *local* el RRF híbrido lo armás vos; la Search API híbrida es Cloud.
+Híbrido: códigos y nombres propios no viven bien solo en [coseno](05-aprendizaje-no-supervisado.md#43-similitud-coseno). **Cifra chequeada:** en Chroma *local* el RRF híbrido lo armás vos; la Search API híbrida es Cloud.
 
 CRAG: un evaluador puntúa chunks → responder / reformular-buscar / “no tengo información”.
 
@@ -284,7 +284,7 @@ Antes de un RAG chico: a veces el corpus **entra en el prompt** con caché. El p
 
 ### Error frecuente
 
-Chunk por `##` al azar (el mismo documento en train y test). Contestar siempre el top-K. Usar un embedding distinto al de ingesta.
+Chunk por `##` al azar (el mismo documento en [train y test](03-introduccion-aprendizaje.md#5-train-validacion-y-test-tres-roles-una-sola-honestidad)). Contestar siempre el top-K. Usar un embedding distinto al de ingesta.
 
 ### Checkpoint 5
 

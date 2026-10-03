@@ -5,7 +5,7 @@
 **Profesor:** Dr. Damián Barsotti. Clases 25–26/09 y 2–3/10/2026.
 Repo del curso (clone local del Bitbucket, fuera del repo; no volver a clonar). Bitbucket: <https://bitbucket.org/bigdata_famaf/diplodatos_bigdata>. Slides: <https://damian-barsotti.github.io/diplodatos_intro/#slide:1>.
 
-Esto **no** es la optativa 3 (labs LLM). **No** es el práctico del Consorcio. PySpark en **modo local** (tus núcleos fingiendo cluster); el código es el que iría a un cluster de verdad.
+Esto **no** es [la optativa 3](08-llms-aplicaciones.md) (labs LLM). **No** es el práctico del Consorcio. PySpark en **modo local** (tus núcleos fingiendo cluster); el código es el que iría a un cluster de verdad.
 
 ## 0. Contrato
 
@@ -25,7 +25,7 @@ Esto **no** es la optativa 3 (labs LLM). **No** es el práctico del Consorcio. P
 
 ### Checkpoint 0
 
-Si el dataset **sí** entra en tu notebook de siempre, ¿sigue haciendo falta Spark para *aprender* el modelo? (Sí, como modelo mental. No, como entrega de Ética/LLMs/CC.)
+Si el dataset **sí** entra en tu notebook de siempre, ¿sigue haciendo falta Spark para [*aprender* el modelo](03-introduccion-aprendizaje.md#1-que-significa-aprender-de-datos)? (Sí, como modelo mental. No, como entrega de Ética/LLMs/CC.)
 
 ## 1. El problema que le da origen
 

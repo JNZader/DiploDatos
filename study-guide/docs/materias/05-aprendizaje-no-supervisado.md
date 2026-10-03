@@ -75,7 +75,7 @@ Antes de avanzar, deberías poder explicar:
 
 ### 1.1 Del error contra una respuesta a la coherencia de una estructura
 
-En aprendizaje supervisado, cada ejemplo suele venir acompañado por un target $y_i$. Un clasificador propone $\hat y_i$ y existe una referencia externa contra la cual medir el error. En aprendizaje no supervisado observamos $x_i$, pero no recibimos una $y_i$ que diga “este es el grupo correcto”, “esta es la dimensión correcta” o “este documento debe ocupar exactamente este lugar”.
+En [aprendizaje supervisado](04-aprendizaje-supervisado.md), cada ejemplo suele venir acompañado por un target $y_i$. Un clasificador propone $\hat y_i$ y existe una referencia externa contra la cual medir el error. En aprendizaje no supervisado observamos $x_i$, pero no recibimos una $y_i$ que diga “este es el grupo correcto”, “esta es la dimensión correcta” o “este documento debe ocupar exactamente este lugar”.
 
 Eso no elimina los objetivos. Los desplaza. Hay que elegir una función que represente qué estructura interesa. k-means, por ejemplo, busca centroides que reduzcan distancias cuadráticas dentro de grupos. Un método jerárquico decide qué grupos fusionar mediante un criterio de enlace. PCA busca direcciones que conserven mucha varianza lineal. Una búsqueda por coseno ordena candidatos según el ángulo entre representaciones. Cada uno responde una pregunta distinta.
 
@@ -164,7 +164,7 @@ Las variables categóricas requieren una codificación. Si se codifica “provin
 
 ### 2.3 TF-IDF: importancia léxica relativa
 
-TF-IDF representa un documento mediante términos. Una forma común es:
+[TF-IDF](03-introduccion-aprendizaje.md#145-tf-idf) representa un documento mediante términos. Una forma común es:
 
 \[
 \operatorname{tfidf}(t,d)=\operatorname{tf}(t,d)\times\log\left(\frac{N}{\operatorname{df}(t)}\right)
@@ -844,7 +844,7 @@ A veces existen etiquetas que no se usaron para ajustar clusters. Se pueden comp
 
 Ejemplo: si hay una etiqueta administrativa de fuero, puede preguntarse cuánto se mezcla en cada cluster. Una fuerte alineación puede indicar señal útil o simplemente que la representación contiene una variable equivalente. Una baja alineación puede significar que los clusters capturan otra dimensión, no que estén “mal”.
 
-Las etiquetas son ayudas de auditoría cuando el objetivo no era reconstruirlas. Si el objetivo real es predecir fuero, el problema es supervisado y debe evaluarse como tal.
+Las etiquetas son ayudas de auditoría cuando el objetivo no era reconstruirlas. Si el objetivo real es predecir fuero, el problema es supervisado y debe [evaluarse](03-introduccion-aprendizaje.md#8-perdida-y-metrica-de-evaluacion) como tal.
 
 **Chequeo de rangos.** ARI **no** vive en \([0,1]\): está acotado por debajo cerca de \(-0{,}5\); el azar da ~0; 1 es acuerdo perfecto. “Las métricas van de 0 a 1” es falso para ARI y para silueta ($-1$ a $1$).
 

@@ -98,7 +98,7 @@ Después resolvé el ejercicio conceptual sin mirar la respuesta. No memorices �
 
 ### 1.1 Qué agrega una familia de modelos
 
-En Materia 3 escribimos el aprendizaje como una búsqueda de una función $f$ que aproxima la relación entre entradas $x$ y targets $y$. Pero “buscar una función” es demasiado amplio. Una familia acota el conjunto de funciones candidatas y define qué cambios resultan fáciles o difíciles.
+En [Materia 3](03-introduccion-aprendizaje.md#42-modelo-e-hipotesis) escribimos el aprendizaje como una búsqueda de una función $f$ que aproxima la relación entre entradas $x$ y targets $y$. Pero “buscar una función” es demasiado amplio. Una familia acota el conjunto de funciones candidatas y define qué cambios resultan fáciles o difíciles.
 
 Un clasificador lineal busca fronteras planas en el espacio de features. Un árbol construye regiones mediante preguntas sucesivas. Una SVM lineal también separa con un hiperplano, pero elige la separación a partir del margen. Un bosque promedia árboles variados. Un boosting corrige errores de manera secuencial. Cada uno mira la misma tabla a través de una geometría distinta.
 
@@ -157,7 +157,7 @@ Para el futuro clasificador de fuero, el sesgo inductivo se discute junto con la
 
 ### 2.1 Comparar no es mirar una sola métrica
 
-Una comparación útil conserva el protocolo y observa varias dimensiones. Una familia puede mejorar macro F1 pero duplicar el tiempo de inferencia, requerir memoria densa, degradar calibración o aumentar errores en una clase crítica. Otra puede puntuar un poco menos y ser más estable, explicable y fácil de revisar.
+Una comparación útil conserva el protocolo y observa varias dimensiones. Una familia puede mejorar [macro F1](03-introduccion-aprendizaje.md#10-promedios-macro-micro-weighted-y-balanced-accuracy) pero duplicar el tiempo de inferencia, requerir memoria densa, degradar calibración o aumentar errores en una clase crítica. Otra puede puntuar un poco menos y ser más estable, explicable y fácil de revisar.
 
 El marco mínimo contiene siete preguntas:
 
@@ -1565,7 +1565,7 @@ Predice siempre la clase más frecuente de train. Comprueba distribución, pipel
 
 ### 15.3 Peldaño 1 — Naive Bayes
 
-Usa probabilidades de términos por clase bajo independencia condicional aproximada. Es rápido, compatible con texto disperso y ofrece una referencia léxica. Materia 3 desarrolló su lógica. Aquí su función es responder: ¿cuánto aprende una regla simple de frecuencias de términos?
+Usa probabilidades de términos por clase bajo independencia condicional aproximada. Es rápido, compatible con texto disperso y ofrece una referencia léxica. [Materia 3](03-introduccion-aprendizaje.md#15-naive-bayes-para-texto-desde-bayes) desarrolló su lógica. Aquí su función es responder: ¿cuánto aprende una regla simple de frecuencias de términos?
 
 ### 15.4 Peldaño 2 — regresión logística
 

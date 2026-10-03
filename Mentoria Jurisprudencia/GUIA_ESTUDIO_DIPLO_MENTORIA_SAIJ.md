@@ -6816,7 +6816,7 @@ Después resolvé el ejercicio conceptual sin mirar la respuesta. No memorices �
 
 ### 1.1 Qué agrega una familia de modelos
 
-En Materia 3 escribimos el aprendizaje como una búsqueda de una función $f$ que aproxima la relación entre entradas $x$ y targets $y$. Pero “buscar una función” es demasiado amplio. Una familia acota el conjunto de funciones candidatas y define qué cambios resultan fáciles o difíciles.
+En [Materia 3](03-introduccion-aprendizaje.md#42-modelo-e-hipotesis) escribimos el aprendizaje como una búsqueda de una función $f$ que aproxima la relación entre entradas $x$ y targets $y$. Pero “buscar una función” es demasiado amplio. Una familia acota el conjunto de funciones candidatas y define qué cambios resultan fáciles o difíciles.
 
 Un clasificador lineal busca fronteras planas en el espacio de features. Un árbol construye regiones mediante preguntas sucesivas. Una SVM lineal también separa con un hiperplano, pero elige la separación a partir del margen. Un bosque promedia árboles variados. Un boosting corrige errores de manera secuencial. Cada uno mira la misma tabla a través de una geometría distinta.
 
@@ -6875,7 +6875,7 @@ Para el futuro clasificador de fuero, el sesgo inductivo se discute junto con la
 
 ### 2.1 Comparar no es mirar una sola métrica
 
-Una comparación útil conserva el protocolo y observa varias dimensiones. Una familia puede mejorar macro F1 pero duplicar el tiempo de inferencia, requerir memoria densa, degradar calibración o aumentar errores en una clase crítica. Otra puede puntuar un poco menos y ser más estable, explicable y fácil de revisar.
+Una comparación útil conserva el protocolo y observa varias dimensiones. Una familia puede mejorar [macro F1](03-introduccion-aprendizaje.md#10-promedios-macro-micro-weighted-y-balanced-accuracy) pero duplicar el tiempo de inferencia, requerir memoria densa, degradar calibración o aumentar errores en una clase crítica. Otra puede puntuar un poco menos y ser más estable, explicable y fácil de revisar.
 
 El marco mínimo contiene siete preguntas:
 
@@ -8283,7 +8283,7 @@ Predice siempre la clase más frecuente de train. Comprueba distribución, pipel
 
 ### 15.3 Peldaño 1 — Naive Bayes
 
-Usa probabilidades de términos por clase bajo independencia condicional aproximada. Es rápido, compatible con texto disperso y ofrece una referencia léxica. Materia 3 desarrolló su lógica. Aquí su función es responder: ¿cuánto aprende una regla simple de frecuencias de términos?
+Usa probabilidades de términos por clase bajo independencia condicional aproximada. Es rápido, compatible con texto disperso y ofrece una referencia léxica. [Materia 3](03-introduccion-aprendizaje.md#15-naive-bayes-para-texto-desde-bayes) desarrolló su lógica. Aquí su función es responder: ¿cuánto aprende una regla simple de frecuencias de términos?
 
 ### 15.4 Peldaño 2 — regresión logística
 
@@ -8769,7 +8769,7 @@ Antes de avanzar, deberías poder explicar:
 
 ### 1.1 Del error contra una respuesta a la coherencia de una estructura
 
-En aprendizaje supervisado, cada ejemplo suele venir acompañado por un target $y_i$. Un clasificador propone $\hat y_i$ y existe una referencia externa contra la cual medir el error. En aprendizaje no supervisado observamos $x_i$, pero no recibimos una $y_i$ que diga “este es el grupo correcto”, “esta es la dimensión correcta” o “este documento debe ocupar exactamente este lugar”.
+En [aprendizaje supervisado](04-aprendizaje-supervisado.md), cada ejemplo suele venir acompañado por un target $y_i$. Un clasificador propone $\hat y_i$ y existe una referencia externa contra la cual medir el error. En aprendizaje no supervisado observamos $x_i$, pero no recibimos una $y_i$ que diga “este es el grupo correcto”, “esta es la dimensión correcta” o “este documento debe ocupar exactamente este lugar”.
 
 Eso no elimina los objetivos. Los desplaza. Hay que elegir una función que represente qué estructura interesa. k-means, por ejemplo, busca centroides que reduzcan distancias cuadráticas dentro de grupos. Un método jerárquico decide qué grupos fusionar mediante un criterio de enlace. PCA busca direcciones que conserven mucha varianza lineal. Una búsqueda por coseno ordena candidatos según el ángulo entre representaciones. Cada uno responde una pregunta distinta.
 
@@ -8858,7 +8858,7 @@ Las variables categóricas requieren una codificación. Si se codifica “provin
 
 ### 2.3 TF-IDF: importancia léxica relativa
 
-TF-IDF representa un documento mediante términos. Una forma común es:
+[TF-IDF](03-introduccion-aprendizaje.md#145-tf-idf) representa un documento mediante términos. Una forma común es:
 
 \[
 \operatorname{tfidf}(t,d)=\operatorname{tf}(t,d)\times\log\left(\frac{N}{\operatorname{df}(t)}\right)
@@ -9538,7 +9538,7 @@ A veces existen etiquetas que no se usaron para ajustar clusters. Se pueden comp
 
 Ejemplo: si hay una etiqueta administrativa de fuero, puede preguntarse cuánto se mezcla en cada cluster. Una fuerte alineación puede indicar señal útil o simplemente que la representación contiene una variable equivalente. Una baja alineación puede significar que los clusters capturan otra dimensión, no que estén “mal”.
 
-Las etiquetas son ayudas de auditoría cuando el objetivo no era reconstruirlas. Si el objetivo real es predecir fuero, el problema es supervisado y debe evaluarse como tal.
+Las etiquetas son ayudas de auditoría cuando el objetivo no era reconstruirlas. Si el objetivo real es predecir fuero, el problema es supervisado y debe [evaluarse](03-introduccion-aprendizaje.md#8-perdida-y-metrica-de-evaluacion) como tal.
 
 **Chequeo de rangos.** ARI **no** vive en \([0,1]\): está acotado por debajo cerca de \(-0{,}5\); el azar da ~0; 1 es acuerdo perfecto. “Las métricas van de 0 a 1” es falso para ARI y para silueta ($-1$ a $1$).
 
@@ -11066,7 +11066,7 @@ La tabla evita la excusa “el sesgo está en los datos”. A veces está en los
 
 **Ejemplo inventado.** Queremos evaluar un buscador sobre 200 consultas históricas. Elegimos las consultas más frecuentes del registro de uso. El 90 % proviene de un grupo experto que conoce la terminología exacta; el 10 % usa lenguaje cotidiano.
 
-El sistema obtiene alto rendimiento global. Sin embargo, la muestra subrepresenta consultas de personas no expertas, búsquedas con errores ortográficos y temas que nunca se consultaron porque el sistema anterior no los hacía visibles.
+El sistema obtiene alto rendimiento global. Sin embargo, [la muestra](01-analisis-visualizacion.md#33-muestra) subrepresenta consultas de personas no expertas, búsquedas con errores ortográficos y temas que nunca se consultaron porque el sistema anterior no los hacía visibles.
 
 El sesgo puede rastrearse así:
 
@@ -11080,7 +11080,7 @@ Agregar ejemplos hasta balancear una tabla no garantiza representatividad. Hace 
 
 ### 4.4 Etiquetas y el caso de fuero
 
-Una etiqueta puede ser correcta respecto de un procedimiento de anotación y aun así no representar una categoría natural. Para **fuero** hay que averiguar:
+Una etiqueta puede ser correcta respecto de un procedimiento de anotación y aun así no representar una categoría natural. Para **[fuero](02-exploracion-curacion.md#8-construir-y-validar-el-target-fuero-desde-materia)** hay que averiguar:
 
 - fuente exacta de la etiqueta;
 - nivel: documento, expediente, órgano, competencia o clasificación editorial;
@@ -11166,7 +11166,7 @@ Un atributo sensible no es solo una columna. Puede estar ausente, mal medido, in
 
 ---
 
-## 6. Matriz de confusión por grupo
+## 6. [Matriz de confusión](03-introduccion-aprendizaje.md#9-matriz-de-confusion-y-metricas-binarias) por grupo
 
 ### 6.1 Del resultado individual a las tasas
 
@@ -12673,7 +12673,7 @@ El proyecto debería comenzar con:
 1. pregunta de uso y población;
 2. corpus versionado;
 3. unidad de indexación;
-4. baseline TF-IDF;
+4. [baseline TF-IDF](materias/05-aprendizaje-no-supervisado.md#23-tf-idf-importancia-lexica-relativa);
 5. embeddings candidatos;
 6. filtros de metadatos;
 7. conjunto de consultas;
@@ -12690,7 +12690,7 @@ La optativa de ética no desarrolló una arquitectura RAG completa, selección d
 
 ## 3. Pregunta de cierre del libro actual
 
-> ¿Podemos demostrar que una representación y un ranking recuperan evidencia pertinente, estable y auditable para consultas SAIJ antes de pedirle a un generador que redacte sobre ella?
+> ¿Podemos demostrar que una [representación y un ranking](materias/05-aprendizaje-no-supervisado.md#2-la-representacion-precede-al-algoritmo) recuperan evidencia pertinente, estable y auditable para consultas SAIJ antes de pedirle a un generador que redacte sobre ella?
 
 Si la respuesta todavía es “no sabemos”, el próximo paso no es una interfaz más vistosa. Es una mejor evaluación de recuperación.
 
@@ -12718,13 +12718,13 @@ No necesitás consultar estas fuentes para entender el capítulo. Sirven únicam
 - Apuntes locales de Introducción al Aprendizaje Automático, usados como alcance primario para marco general, pipeline, capacidad, Naive Bayes y estrategias multiclase.
 - Notebooks locales de selección de modelos y métricas, usados para validación cruzada, sobreajuste, matriz de confusión, accuracy, precision, recall, F1 y promedios multiclase.
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, usado únicamente como roadmap de decisiones SAIJ y fuente rotulada de hallazgos pendientes de reproducción; no se adoptaron sus cantidades ni resultados como evidencia propia.
-- Materia 2 de esta guía, usada como contrato de entrada desde curación y TP2 hacia el futuro entrenamiento.
+- [Materia 2](materias/02-exploracion-curacion.md) de esta guía, usada como contrato de entrada desde curación y TP2 hacia el futuro entrenamiento.
 
 ### Materiales usados para construir la Materia 4
 
 - Inventario y materiales locales de Aprendizaje Supervisado, usados como alcance primario: SVM y kernels, redes neuronales como frontera del programa, random forest, boosting, sistemas de recomendación y buenas prácticas de aprendizaje automático.
 - Demos locales de SVM, kernels, random forest, boosting y buenas prácticas, usadas para mantener continuidad con las familias y el flujo experimental de la cursada; la teoría necesaria quedó desarrollada dentro del capítulo.
-- Materia 3 de esta guía, usada como contrato de entrada para target, particiones, métricas, pipelines, fuga, texto disperso, Naive Bayes y análisis de errores.
+- [Materia 3](materias/03-introduccion-aprendizaje.md) de esta guía, usada como contrato de entrada para target, particiones, métricas, pipelines, fuga, texto disperso, Naive Bayes y análisis de errores.
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, conservado solo como roadmap del futuro trabajo SAIJ y como fuente rotulada de hallazgos pendientes de reproducción. No se incorporaron cifras de desempeño ni se proclamó un modelo ganador.
 - La exclusión de k-NN como bloque central responde al alcance local verificado: no aparece como eje en el inventario disponible de esta materia y no se agregó teoría externa para completar una lista.
 
@@ -12735,7 +12735,7 @@ No necesitás consultar estas fuentes para entender el capítulo. Sirven únicam
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, mantenido únicamente como roadmap general de la mentoría. Materia 5 no adopta clusters, métricas ni desempeños del equipo como resultados de Javier.
 - PCA se incorporó como complemento conceptual acotado para explicar reducción dimensional y su puente con clustering y embeddings; no se afirma que el inventario local disponible pruebe una clase específica sobre PCA.
 - DBSCAN, t-SNE y UMAP se enseñan en la cursada 2026; esta guía los cubre como advertencias de uso, no como recetas, sin adoptar los números de esas notebooks como resultados de Javier.
-- El proyecto de búsqueda semántica y RAG se presenta como integración posterior de la mentoría, no como materia formal de DiploDatos.
+- El [proyecto de búsqueda semántica y RAG](proyecto-integrador.md) se presenta como integración posterior de la mentoría, no como materia formal de DiploDatos.
 
 
 ### Materiales usados para construir la Optativa 1

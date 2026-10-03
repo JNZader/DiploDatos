@@ -2,7 +2,7 @@
 
 > **Idea rectora:** en la nube el orden es **problema de negocio → datos fuera de producción → entrenar o invocar → apagar lo que no se usa**. SageMaker y Bedrock son un catálogo. La nota de esta optativa son los **quizzes** de la plataforma, no los labs.
 
-Esta optativa no sustituye el tronco, ni Ética, ni Perez (LLMs), ni Spark. El Consorcio y SAIJ no se aprueban en Canvas. Los apuntes de subtítulos son fuente; las cifras de clase **no se recitan** sin chequeo.
+Esta optativa no sustituye [el tronco](03-introduccion-aprendizaje.md), ni Ética, ni Perez (LLMs), ni Spark. El Consorcio y SAIJ no se aprueban en Canvas. Los apuntes de subtítulos son fuente; las cifras de clase **no se recitan** sin chequeo.
 
 **Contexto de materiales del curso.** Fabián Hanuseski (Craftech). 4 clases, 8 videos FAMAF (28/08–05/09/2026). Labs asincrónicos, repetibles, **sin puntaje**. Forecast se saltea en clase; el cuestionario **igual** cuenta para el certificado.
 
@@ -165,7 +165,7 @@ El modelo tira un puntaje. Vos tirás un corte. El corte es política.
 \mathrm{Precision} = \frac{TP}{TP+FP},\quad \mathrm{Recall} = \frac{TP}{TP+FN}
 \]
 
-Elegís el corte mirando **esas** cuentas en la matriz, no el accuracy.
+Elegís el corte mirando **esas** cuentas en [la matriz](03-introduccion-aprendizaje.md#9-matriz-de-confusion-y-metricas-binarias), no el accuracy.
 
 ### Error frecuente
 

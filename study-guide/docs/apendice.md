@@ -19,13 +19,13 @@ No necesitás consultar estas fuentes para entender el capítulo. Sirven únicam
 - Apuntes locales de Introducción al Aprendizaje Automático, usados como alcance primario para marco general, pipeline, capacidad, Naive Bayes y estrategias multiclase.
 - Notebooks locales de selección de modelos y métricas, usados para validación cruzada, sobreajuste, matriz de confusión, accuracy, precision, recall, F1 y promedios multiclase.
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, usado únicamente como roadmap de decisiones SAIJ y fuente rotulada de hallazgos pendientes de reproducción; no se adoptaron sus cantidades ni resultados como evidencia propia.
-- Materia 2 de esta guía, usada como contrato de entrada desde curación y TP2 hacia el futuro entrenamiento.
+- [Materia 2](materias/02-exploracion-curacion.md) de esta guía, usada como contrato de entrada desde curación y TP2 hacia el futuro entrenamiento.
 
 ### Materiales usados para construir la Materia 4
 
 - Inventario y materiales locales de Aprendizaje Supervisado, usados como alcance primario: SVM y kernels, redes neuronales como frontera del programa, random forest, boosting, sistemas de recomendación y buenas prácticas de aprendizaje automático.
 - Demos locales de SVM, kernels, random forest, boosting y buenas prácticas, usadas para mantener continuidad con las familias y el flujo experimental de la cursada; la teoría necesaria quedó desarrollada dentro del capítulo.
-- Materia 3 de esta guía, usada como contrato de entrada para target, particiones, métricas, pipelines, fuga, texto disperso, Naive Bayes y análisis de errores.
+- [Materia 3](materias/03-introduccion-aprendizaje.md) de esta guía, usada como contrato de entrada para target, particiones, métricas, pipelines, fuga, texto disperso, Naive Bayes y análisis de errores.
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, conservado solo como roadmap del futuro trabajo SAIJ y como fuente rotulada de hallazgos pendientes de reproducción. No se incorporaron cifras de desempeño ni se proclamó un modelo ganador.
 - La exclusión de k-NN como bloque central responde al alcance local verificado: no aparece como eje en el inventario disponible de esta materia y no se agregó teoría externa para completar una lista.
 
@@ -36,7 +36,7 @@ No necesitás consultar estas fuentes para entender el capítulo. Sirven únicam
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, mantenido únicamente como roadmap general de la mentoría. Materia 5 no adopta clusters, métricas ni desempeños del equipo como resultados de Javier.
 - PCA se incorporó como complemento conceptual acotado para explicar reducción dimensional y su puente con clustering y embeddings; no se afirma que el inventario local disponible pruebe una clase específica sobre PCA.
 - DBSCAN, t-SNE y UMAP se enseñan en la cursada 2026; esta guía los cubre como advertencias de uso, no como recetas, sin adoptar los números de esas notebooks como resultados de Javier.
-- El proyecto de búsqueda semántica y RAG se presenta como integración posterior de la mentoría, no como materia formal de DiploDatos.
+- El [proyecto de búsqueda semántica y RAG](proyecto-integrador.md) se presenta como integración posterior de la mentoría, no como materia formal de DiploDatos.
 
 
 ### Materiales usados para construir la Optativa 1

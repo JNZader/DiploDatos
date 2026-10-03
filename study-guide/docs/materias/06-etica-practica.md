@@ -392,7 +392,7 @@ La tabla evita la excusa “el sesgo está en los datos”. A veces está en los
 
 **Ejemplo inventado.** Queremos evaluar un buscador sobre 200 consultas históricas. Elegimos las consultas más frecuentes del registro de uso. El 90 % proviene de un grupo experto que conoce la terminología exacta; el 10 % usa lenguaje cotidiano.
 
-El sistema obtiene alto rendimiento global. Sin embargo, la muestra subrepresenta consultas de personas no expertas, búsquedas con errores ortográficos y temas que nunca se consultaron porque el sistema anterior no los hacía visibles.
+El sistema obtiene alto rendimiento global. Sin embargo, [la muestra](01-analisis-visualizacion.md#33-muestra) subrepresenta consultas de personas no expertas, búsquedas con errores ortográficos y temas que nunca se consultaron porque el sistema anterior no los hacía visibles.
 
 El sesgo puede rastrearse así:
 
@@ -406,7 +406,7 @@ Agregar ejemplos hasta balancear una tabla no garantiza representatividad. Hace 
 
 ### 4.4 Etiquetas y el caso de fuero
 
-Una etiqueta puede ser correcta respecto de un procedimiento de anotación y aun así no representar una categoría natural. Para **fuero** hay que averiguar:
+Una etiqueta puede ser correcta respecto de un procedimiento de anotación y aun así no representar una categoría natural. Para **[fuero](02-exploracion-curacion.md#8-construir-y-validar-el-target-fuero-desde-materia)** hay que averiguar:
 
 - fuente exacta de la etiqueta;
 - nivel: documento, expediente, órgano, competencia o clasificación editorial;
@@ -492,7 +492,7 @@ Un atributo sensible no es solo una columna. Puede estar ausente, mal medido, in
 
 ---
 
-## 6. Matriz de confusión por grupo
+## 6. [Matriz de confusión](03-introduccion-aprendizaje.md#9-matriz-de-confusion-y-metricas-binarias) por grupo
 
 ### 6.1 Del resultado individual a las tasas
 

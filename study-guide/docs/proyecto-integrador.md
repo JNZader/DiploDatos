@@ -21,7 +21,7 @@ El proyecto debería comenzar con:
 1. pregunta de uso y población;
 2. corpus versionado;
 3. unidad de indexación;
-4. baseline TF-IDF;
+4. [baseline TF-IDF](materias/05-aprendizaje-no-supervisado.md#23-tf-idf-importancia-lexica-relativa);
 5. embeddings candidatos;
 6. filtros de metadatos;
 7. conjunto de consultas;
@@ -38,7 +38,7 @@ La optativa de ética no desarrolló una arquitectura RAG completa, selección d
 
 ## 3. Pregunta de cierre del libro actual
 
-> ¿Podemos demostrar que una representación y un ranking recuperan evidencia pertinente, estable y auditable para consultas SAIJ antes de pedirle a un generador que redacte sobre ella?
+> ¿Podemos demostrar que una [representación y un ranking](materias/05-aprendizaje-no-supervisado.md#2-la-representacion-precede-al-algoritmo) recuperan evidencia pertinente, estable y auditable para consultas SAIJ antes de pedirle a un generador que redacte sobre ella?
 
 Si la respuesta todavía es “no sabemos”, el próximo paso no es una interfaz más vistosa. Es una mejor evaluación de recuperación.
 
