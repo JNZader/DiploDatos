@@ -52,6 +52,10 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.details
+  # pymdownx.highlight is required for Material's content.code.copy feature:
+  # superfences delegates highlighting here, producing the `.highlight` wrapper
+  # that Material's clipboard buttons (`.md-clipboard`) attach to.
+  - pymdownx.highlight
   - pymdownx.superfences
 
 nav:
@@ -74,6 +78,12 @@ extra_css:
   - assets/stylesheets/extra.css
 
 extra_javascript:
-  - assets/javascripts/mathjax.js
-  - assets/javascripts/a11y.js
-  - assets/vendor/mathjax/es5/tex-mml-chtml.js
+  # defer: true → MkDocs core (script_tag filter) emits the `defer` attribute.
+  # Order is load-order: mathjax.js (sets window.MathJax) BEFORE tex-mml-chtml.js
+  # (consumes the config); a11y.js last (document$-only, must run after render).
+  - path: assets/javascripts/mathjax.js
+    defer: true
+  - path: assets/vendor/mathjax/es5/tex-mml-chtml.js
+    defer: true
+  - path: assets/javascripts/a11y.js
+    defer: true

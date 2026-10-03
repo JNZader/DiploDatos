@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://jnzader.github.io/DiploDatos/sitemap.xml
