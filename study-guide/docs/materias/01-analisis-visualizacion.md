@@ -1800,7 +1800,7 @@ Ejemplos:
 
 ### 15.8 Test de hipótesis (cursada 2026, no es el TP1)
 
-**Contexto de clase.** La clase 4 trae contraste de hipótesis (también: prueba, dócima). Ejemplos del slide: “el clasificador A es mejor que B”, “es mejor que un mínimo”, “hay brecha salarial”. El PDF de 71 páginas **ya está** en el árbol de AVD (el download de hoy es el mismo texto).
+**Contexto de clase.** La clase 4 trae contraste de hipótesis (también: prueba, dócima). Ejemplos del slide: “el clasificador A es mejor que B”, “es mejor que un mínimo”, “hay brecha salarial”. El PDF de 71 páginas está en el árbol de AVD (`clases/presentaciones/Clase 4`, fuera de git por `.gitignore`).
 
 Esta guía **no** convierte AVD en un curso de inferencia: el TP1 sigue siendo descriptivo. El mapa mínimo, para no recitar p-valores al voleo:
 

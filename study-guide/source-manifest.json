@@ -2,18 +2,18 @@
   "generated_pages": [
     {
       "boundary": null,
-      "bytes": 4962,
+      "bytes": 4969,
       "end_line": 45,
       "path": "index.md",
-      "sha256": "0d6eba93be11ecfc04c97acbef2b32b424894fd2dda9a511c2eb7dc10ebb5386",
+      "sha256": "a4c5edc4dfd7545f9bb08ebefb318fd684bdd32d80e45599db93f1086a32766c",
       "start_line": 1
     },
     {
       "boundary": "# Materia 1 — Análisis y Visualización de Datos",
-      "bytes": 95961,
+      "bytes": 95980,
       "end_line": 2482,
       "path": "materias/01-analisis-visualizacion.md",
-      "sha256": "14d0f11b698b7e8357af6666a70cff061bf0a5c6d099a44f0012b2073b618dfb",
+      "sha256": "787e4ae2ec8c4f087430c78b64a1371c6f99036e87f9f0b58f44fd5570b83aa5",
       "start_line": 46
     },
     {
@@ -75,11 +75,11 @@
   ],
   "reconstruction_match": true,
   "source": {
-    "bytes": 605517,
+    "bytes": 605543,
     "filename": "GUIA_ESTUDIO_DIPLO_MENTORIA_SAIJ.md",
     "headings": 1225,
     "lines": 12650,
-    "sha256": "1b4cab7ec94ff46946df3ae6ea96537e0bc69c62c5338d9bdd34a94de8c74603",
-    "words": 89007
+    "sha256": "c3f3e760dbc40ccaa70494b38d7b77a3297b51a3de734dceb96282b6a7395a56",
+    "words": 89005
   }
 }

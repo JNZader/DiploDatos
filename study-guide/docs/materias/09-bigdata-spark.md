@@ -56,7 +56,7 @@ Detalle de comandos: en el árbol de DiploDatos, `Programacion Distribuida sobre
 
 **Hipótesis SAIJ:** 874 845 filas no son “big data” en el sentido de este curso. El valor de Spark acá es el vocabulario (partición, shuffle), no levantar un cluster.
 
-**Hipótesis CC:** 35 markdown tampoco. No uses Zeppelin como entrega de otra optativa.
+**Hipótesis CC:** 35 documentos tampoco. No uses Zeppelin como entrega de otra optativa.
 
 ### Checkpoint 1
 
