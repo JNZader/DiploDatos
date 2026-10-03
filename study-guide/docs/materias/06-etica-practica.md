@@ -611,6 +611,12 @@ Aproximadamente 85,7 % de las marcas positivas son correctas.
 
 **Interpretación.** B tiene mejor FPR y PPV, pero peor TPR y FNR. Si el daño más grave es omitir positivos, B está peor. Si revisar falsos positivos consume un recurso escaso o causa daño, A está peor. No existe una frase “B es más justo” sin especificar acción, severidad, alternativas y legitimidad de los grupos.
 
+**Error frecuente.** Confundir TPR con PPV en el relato: “detecta el 90 % de las marcas” no es “detecta el 90 % de los positivos reales”. TPR divide por TP+FN (los positivos reales); PPV divide por TP+FP (lo que el modelo marcó positivo). Cambiar de denominador cambia la pregunta ética: uno mide cobertura sobre quienes deberían recibir el servicio, el otro mide cuánto de lo marcado era correcto.
+
+### Checkpoint 6
+
+En el ejemplo A/B, B tiene mejor PPV pero peor TPR. Si la marca positiva dispara una intervención costosa, ¿qué tasa mirás primero y por qué? PPV: cuántas marcas positivas eran correctas. Si cada FP cuesta una intervención, el daño se ve ahí. TPR no desaparece: sin ella no sabés cuántos positivos reales quedaron afuera. La respuesta completa es “primero PPV para el costo de la acción, sin abandonar TPR”.
+
 ### 6.4 Qué falta en una tabla de tasas
 
 La tabla no muestra:
@@ -637,7 +643,7 @@ Usaremos:
 
 - (A): atributo o grupo bajo análisis;
 - (Y): resultado real o etiqueta de referencia;
-- (Y_pred): predicción binaria;
+- $Y_{pred}$: predicción binaria;
 - (S): score entre 0 y 1;
 - (a) y (b): dos grupos comparados;
 - (P(evento)): probabilidad o proporción estimada.
@@ -654,7 +660,7 @@ P(Y_pred=1 | A=a)=P(Y_pred=1 | A=b)
 
 Símbolo por símbolo:
 
-- (Y_pred=1) es recibir la predicción positiva;
+- $Y_{pred}=1$ es recibir la predicción positiva;
 - la barra | significa “condicionado a”;
 - (A=a) y (A=b) identifican grupos;
 - (P) es la proporción de predicciones positivas dentro de cada grupo.
@@ -690,7 +696,7 @@ para y en {0,1}
 
 - (y=1) compara TPR;
 - (y=0) compara FPR;
-- ({0,1}) indica las dos clases reales.
+- $\{0,1\}$ indica las dos clases reales.
 
 Pregunta: **¿el sistema tiene iguales tasas de acierto positivo y falsa alarma entre grupos?**
 
@@ -704,7 +710,7 @@ La paridad predictiva pide PPV igual:
 P(Y=1 | Y_pred=1, A=a)=P(Y=1 | Y_pred=1, A=b)
 \]
 
-- (Y_pred=1) restringe a predicciones positivas;
+- $Y_{pred}=1$ restringe a predicciones positivas;
 - (Y=1) pregunta cuántas eran correctas;
 - compara confianza práctica de una predicción positiva.
 
@@ -725,7 +731,7 @@ P(Y=1 | S=s, A=a)=s
 - el lado izquierdo es la frecuencia real de positivos;
 - el lado derecho es el score anunciado.
 
-Si (s=0{,}70), alrededor de 70 % de los casos de ese grupo con score cercano a 0,70 deberían ser positivos. Calibración no significa que el score cause el resultado ni que sea ético usarlo.
+Si $s=0{,}70$, alrededor de 70 % de los casos de ese grupo con score cercano a 0,70 deberían ser positivos. Calibración no significa que el score cause el resultado ni que sea ético usarlo.
 
 ### 7.7 Por qué los criterios pueden entrar en conflicto
 
@@ -735,7 +741,7 @@ Cuando los grupos tienen **tasas base** distintas, un predictor imperfecto gener
 BR_a=P(Y=1 | A=a)
 \]
 
-- (BR_a) es proporción de positivos reales en el grupo (a);
+- $BR_a$ es proporción de positivos reales en el grupo (a);
 - (Y=1) es la referencia positiva;
 - (A=a) define el grupo.
 
@@ -752,7 +758,7 @@ La incompatibilidad no es un fracaso de la matemática. Hace visible que “equi
 
 ### 7.8 Grupos pequeños, incertidumbre e inestabilidad
 
-Si un grupo tiene 5 positivos y el modelo omite 1, (FNR=1/5=0{,}20). Si omite 2, (FNR=0{,}40). Un solo caso duplica la tasa. Por eso:
+Si un grupo tiene 5 positivos y el modelo omite 1, $FNR=1/5=0{,}20$. Si omite 2, $FNR=0{,}40$. Un solo caso duplica la tasa. Por eso:
 
 1. reportá numeradores y denominadores;
 2. estimá intervalos o variación por remuestreo cuando corresponda;
@@ -1643,7 +1649,7 @@ Partiría de una hipótesis social que justifique la intersección, no de todas 
 
 ### Respuesta 13
 
-(TPR=24/(24+6)=0{,}80): detecta 80 % del texto realmente sensible. (FNR=6/30=0{,}20): deja sin detectar 20 %. (FPR=8/(8+62)=8/70≈0{,}114): marca por error 11,4 % del texto no sensible. (PPV=24/(24+8)=24/32=0{,}75): tres cuartos de lo marcado eran sensibles. En privacidad suele preocupar mucho FN, pero FP puede censurar contexto. La prioridad depende del uso.
+$TPR=24/(24+6)=0{,}80$: detecta 80 % del texto realmente sensible. $FNR=6/30=0{,}20$: deja sin detectar 20 %. $FPR=8/(8+62)=8/70≈0{,}114$: marca por error 11,4 % del texto no sensible. $PPV=24/(24+8)=24/32=0{,}75$: tres cuartos de lo marcado eran sensibles. En privacidad suele preocupar mucho FN, pero FP puede censurar contexto. La prioridad depende del uso.
 
 ### Respuesta 14
 

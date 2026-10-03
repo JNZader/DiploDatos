@@ -62,7 +62,13 @@ Esta separación es especialmente importante en aprendizaje automático. Un ejem
 
 > **Checkpoint 0**
 >
-> Completá sin mirar: “Un modelo puede aprender a reproducir ________ sin haber aprendido ________”. Una respuesta posible es: “una regla de etiquetado histórica” sin haber aprendido “la naturaleza jurídica verdadera del caso”.
+> Completá sin mirar: “Un modelo puede aprender a reproducir ________ sin haber aprendido ________”.
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Una respuesta posible es: “una regla de etiquetado histórica” sin haber aprendido “la naturaleza jurídica verdadera del caso”.
+> </details>
 
 ---
 
@@ -140,9 +146,9 @@ Esas tareas no son equivalentes. Cambian el target, la salida, las métricas y e
 Una formulación útil responde:
 
 1. **Unidad:** ¿qué representa una observación?
-2. **Entrada (X):** ¿qué información estará disponible al predecir?
+2. **Entrada $X$:** ¿qué información estará disponible al predecir?
 3. **Features:** ¿cómo se expresa esa información para el modelo?
-4. **Target (y):** ¿qué salida se usa como respuesta durante entrenamiento?
+4. **Target $y$:** ¿qué salida se usa como respuesta durante entrenamiento?
 5. **Salida operacional:** ¿qué recibe la persona o sistema usuario?
 6. **Escenario de uso:** ¿quién usa la salida, cuándo y para qué?
 7. **Criterio de éxito:** ¿qué métricas y condiciones indican utilidad?
@@ -155,13 +161,13 @@ La **unidad de análisis** define qué es un caso. Podría ser un documento, un 
 
 **Pregunta manual:** tomá tres filas hipotéticas que comparten identificador y texto casi idéntico. ¿Son tres experiencias independientes? No necesariamente. Tal vez sean un grupo que debe permanecer unido.
 
-### 2.3 Entradas, matriz (X) y features
+### 2.3 Entradas, matriz $X$ y features
 
-Usamos (X) para representar todas las entradas del dataset. Cada fila (x_i) corresponde al caso (i). Sus columnas son **features**, es decir, variables que el modelo puede usar.
+Usamos $X$ para representar todas las entradas del dataset. Cada fila $x_i$ corresponde al caso $i$. Sus columnas son **features**, es decir, variables que el modelo puede usar.
 
 Una notación común es:
 
-[
+$$
 X =
 \begin{bmatrix}
 x_{11} & x_{12} & \cdots & x_{1p} \\
@@ -169,30 +175,30 @@ x_{21} & x_{22} & \cdots & x_{2p} \\
 \vdots & \vdots & \ddots & \vdots \\
 x_{n1} & x_{n2} & \cdots & x_{np}
 \end{bmatrix}
-]
+$$
 
 Símbolo por símbolo:
 
-- (X) es el conjunto de entradas representado como matriz;
-- (n) es la cantidad de observaciones;
-- (p) es la cantidad de features;
-- (x_{ij}) es el valor de la feature (j) para la observación (i);
-- (x_i) es la fila completa del caso (i).
+- $X$ es el conjunto de entradas representado como matriz;
+- $n$ es la cantidad de observaciones;
+- $p$ es la cantidad de features;
+- $x_{ij}$ es el valor de la feature $j$ para la observación $i$;
+- $x_i$ es la fila completa del caso $i$.
 
-En texto, (p) puede ser el tamaño del vocabulario y (x_{ij}) indicar cuántas veces aparece el término (j) en el documento (i). Aunque no veamos una tabla densa, la idea matricial sigue vigente.
+En texto, $p$ puede ser el tamaño del vocabulario y $x_{ij}$ indicar cuántas veces aparece el término $j$ en el documento $i$. Aunque no veamos una tabla densa, la idea matricial sigue vigente.
 
-### 2.4 Target (y)
+### 2.4 Target $y$
 
 El vector de targets puede escribirse:
 
-[
+$$
 y = [y_1, y_2, \ldots, y_n]
-]
+$$
 
-- (y) reúne las respuestas usadas para aprender;
-- (y_i) es la respuesta asociada al caso (i);
-- en regresión, (y_i) suele ser numérico continuo;
-- en clasificación, (y_i) representa una categoría;
+- $y$ reúne las respuestas usadas para aprender;
+- $y_i$ es la respuesta asociada al caso $i$;
+- en regresión, $y_i$ suele ser numérico continuo;
+- en clasificación, $y_i$ representa una categoría;
 - en multietiqueta, cada caso puede tener un vector de varios indicadores.
 
 Llamarlo target no lo convierte en verdad absoluta. Puede provenir de anotación humana, una regla de negocio, una categoría administrativa o un mapeo construido. Su calidad limita lo que el modelo puede aprender.
@@ -228,9 +234,9 @@ Un criterio defendible combina:
 Supongamos ocho notas breves sobre trámites, cada una con una categoría A, B o C. Queremos sugerir una categoría a una persona revisora.
 
 - Unidad: una nota, no cada oración.
-- (X): texto disponible antes de clasificar.
+- $X$: texto disponible antes de clasificar.
 - Features: conteos de términos construidos solo con train.
-- (y): categoría administrativa revisada A/B/C.
+- $y$: categoría administrativa revisada A/B/C.
 - Salida: ranking de tres categorías con posibilidad de “revisar”.
 - Uso: asistencia, no asignación automática.
 - Éxito: mejorar una baseline mayoritaria en F1 macro, mantener resultados razonables por clase y enviar a revisión casos de baja confianza.
@@ -248,7 +254,7 @@ Si cada documento recibe **exactamente un fuero**, la tarea candidata es clasifi
 - campos institucionales pueden revelar el target por un atajo;
 - la definición de fuero útil para ruteo puede diferir de la categoría histórica.
 
-Por eso, antes de fijar (y), Javier debe responder:
+Por eso, antes de fijar $y$, Javier debe responder:
 
 1. ¿Se excluyen categorías combinadas, se mapean, se conservan o se formula multietiqueta?
 2. ¿Qué ocurre con etiquetas raras o dudosas?
@@ -272,23 +278,23 @@ Por eso, antes de fijar (y), Javier debe responder:
 
 ### 3.1 Aprendizaje supervisado
 
-En aprendizaje supervisado observamos pares ((x_i, y_i)). El modelo intenta aprender una función:
+En aprendizaje supervisado observamos pares $(x_i, y_i)$. El modelo intenta aprender una función:
 
-[
+$$
 f: \mathcal{X} \rightarrow \mathcal{Y}
-]
+$$
 
-- (f) es la regla aprendida;
-- (mathcal{X}) es el espacio de entradas posibles;
-- (mathcal{Y}) es el espacio de salidas;
-- (x_i \in \mathcal{X}) es un ejemplo;
-- (y_i \in \mathcal{Y}) es su respuesta.
+- $f$ es la regla aprendida;
+- $\mathcal{X}$ es el espacio de entradas posibles;
+- $\mathcal{Y}$ es el espacio de salidas;
+- $x_i \in \mathcal{X}$ es un ejemplo;
+- $y_i \in \mathcal{Y}$ es su respuesta.
 
 La materia se concentra en esta familia porque el candidato SAIJ usaría textos con etiquetas de fuero.
 
 ### 3.2 Aprendizaje no supervisado
 
-En aprendizaje no supervisado observamos (X) sin un target externo (y). Buscamos estructura: grupos, dimensiones latentes, patrones de similitud o casos atípicos. Un agrupamiento de textos no “descubre fueros verdaderos” automáticamente. Produce grupos según una representación y un criterio de similitud; la interpretación llega después.
+En aprendizaje no supervisado observamos $X$ sin un target externo $y$. Buscamos estructura: grupos, dimensiones latentes, patrones de similitud o casos atípicos. Un agrupamiento de textos no “descubre fueros verdaderos” automáticamente. Produce grupos según una representación y un criterio de similitud; la interpretación llega después.
 
 ### 3.3 Aprendizaje por refuerzo
 
@@ -304,14 +310,20 @@ No se decide por el tipo visual de la columna solamente. Un número que codifica
 ### 3.5 Binaria, multiclase y multietiqueta
 
 - **Binaria:** dos clases mutuamente excluyentes, como “requiere revisión / no requiere”.
-- **Multiclase:** una clase entre (K>2), como A/B/C.
+- **Multiclase:** una clase entre $K>2$, como A/B/C.
 - **Multietiqueta:** un subconjunto de etiquetas, como A y C simultáneamente.
 
 Un documento SAIJ con varias ramas posibles no debería forzarse a multiclase solo porque un algoritmo espera un vector unidimensional. Primero se decide qué salida representa el uso.
 
 > **Checkpoint 1**
 >
-> Si un documento puede pertenecer simultáneamente a CIVIL y COMERCIAL, ¿es multiclase? No bajo esa definición: es multietiqueta. Sería multiclase solo si una regla de negocio obliga a elegir una categoría única y esa transformación se documenta.
+> Si un documento puede pertenecer simultáneamente a CIVIL y COMERCIAL, ¿es multiclase?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> No bajo esa definición: es multietiqueta. Sería multiclase solo si una regla de negocio obliga a elegir una categoría única y esa transformación se documenta.
+> </details>
 
 ---
 
@@ -321,34 +333,34 @@ Un documento SAIJ con varias ramas posibles no debería forzarse a multiclase so
 
 Un dataset supervisado se representa como:
 
-[
+$$
 \mathcal{D} = \{(x_i, y_i)\}_{i=1}^{n}
-]
+$$
 
-- (mathcal{D}) es el conjunto de datos;
+- $\mathcal{D}$ es el conjunto de datos;
 - las llaves indican una colección de pares;
-- (i) identifica una observación;
-- (n) es la cantidad de observaciones;
-- (x_i) es la entrada del caso (i);
-- (y_i) es su target.
+- $i$ identifica una observación;
+- $n$ es la cantidad de observaciones;
+- $x_i$ es la entrada del caso $i$;
+- $y_i$ es su target.
 
 La fórmula no dice que los casos sean independientes, representativos ni correctos. Esas son condiciones que debemos investigar.
 
 ### 4.2 Modelo e hipótesis
 
-Una **hipótesis** es una regla candidata. El **espacio de hipótesis** (mathcal{H}) es el conjunto de reglas que el procedimiento puede considerar. El entrenamiento selecciona una:
+Una **hipótesis** es una regla candidata. El **espacio de hipótesis** $\mathcal{H}$ es el conjunto de reglas que el procedimiento puede considerar. El entrenamiento selecciona una:
 
-[
+$$
 f^* = \arg\min_{f \in \mathcal{H}} L_{train}(f)
-]
+$$
 
 Símbolo por símbolo:
 
-- (f) es una hipótesis candidata;
-- (mathcal{H}) es la familia permitida;
-- (L_{train}(f)) es la pérdida de esa hipótesis en train;
-- (arg\min) significa “la opción que produce el valor mínimo”;
-- (f^*) es la hipótesis seleccionada.
+- $f$ es una hipótesis candidata;
+- $\mathcal{H}$ es la familia permitida;
+- $L_{train}(f)$ es la pérdida de esa hipótesis en train;
+- $\arg\min$ significa “la opción que produce el valor mínimo”;
+- $f^*$ es la hipótesis seleccionada.
 
 La fórmula resume la optimización, no garantiza generalización. Dos modelos pueden tener pérdida parecida en train y comportamiento distinto en test.
 
@@ -471,7 +483,7 @@ Si el uso real recibe expedientes nuevos en años futuros, una evaluación aleat
 
 **Decisión de Javier — pendiente:** identificar el reloj operativo correcto, los grupos de documentos relacionados y el escenario real de llegada. Solo entonces elegir split principal y pruebas secundarias.
 
-> **Error frecuente:** estratificar y creer que ya se evitó toda fuga. La estratificación cuida proporciones de (y); no impide que duplicados crucen particiones.
+> **Error frecuente:** estratificar y creer que ya se evitó toda fuga. La estratificación cuida proporciones de $y$; no impide que duplicados crucen particiones.
 
 ---
 
@@ -509,7 +521,7 @@ La regla mayoritaria puede tener accuracy alta cuando una clase domina. Ese es p
 En 100 ejemplos inventados, 80 pertenecen a A, 15 a B y 5 a C. La baseline mayoritaria predice siempre A:
 
 - acierta 80;
-- accuracy = (80/100 = 0{,}80);
+- accuracy = $80/100 = 0{,}80$;
 - recall de A = 1;
 - recall de B = 0;
 - recall de C = 0.
@@ -560,7 +572,13 @@ La intuición del equilibrio no dice que debamos calcular una descomposición ex
 
 > **Checkpoint 2**
 >
-> Un modelo tiene 99% en train y 61% en validación; otro 73% y 70%. Sin conocer la métrica ni el uso, no se puede declarar ganador. El primero muestra una brecha preocupante; el segundo parece más estable, pero todavía debe compararse con baseline y por clase.
+> Un modelo tiene 99% en train y 61% en validación; otro 73% y 70%.
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Sin conocer la métrica ni el uso, no se puede declarar ganador. El primero muestra una brecha preocupante; el segundo parece más estable, pero todavía debe compararse con baseline y por clase.
+> </details>
 
 ---
 
@@ -580,16 +598,16 @@ En clasificación probabilística puede minimizarse log-loss y reportarse F1 mac
 
 Una forma general es:
 
-[
+$$
 L(f) = \frac{1}{n}\sum_{i=1}^{n}\ell(y_i, f(x_i))
-]
+$$
 
-- (L(f)) es la pérdida promedio del modelo (f);
-- (n) es la cantidad de ejemplos;
-- (sum) suma el aporte de todos;
-- (y_i) es el target real;
-- (f(x_i)) es la predicción;
-- (ell) mide el error de un ejemplo.
+- $L(f)$ es la pérdida promedio del modelo $f$;
+- $n$ es la cantidad de ejemplos;
+- $\sum$ suma el aporte de todos;
+- $y_i$ es el target real;
+- $f(x_i)$ es la predicción;
+- $\ell$ mide el error de un ejemplo.
 
 La fórmula no decide qué errores importan más. Esa decisión puede incorporarse con pesos, otra pérdida o criterios operativos.
 
@@ -626,83 +644,83 @@ Supongamos 20 casos:
 - FP = 3;
 - FN = 2.
 
-Comprobación: (6+9+3+2=20).
+Comprobación: $6+9+3+2=20$.
 
 #### Accuracy
 
-[
+$$
 \text{Accuracy} = \frac{TP+TN}{TP+TN+FP+FN}
-]
+$$
 
 Símbolo por símbolo:
 
-- (TP+TN) cuenta aciertos;
-- (TP+TN+FP+FN) cuenta todos los casos;
+- $TP+TN$ cuenta aciertos;
+- $TP+TN+FP+FN$ cuenta todos los casos;
 - el cociente es la proporción total correcta.
 
 Cálculo:
 
-[
+$$
 \frac{6+9}{6+9+3+2}=\frac{15}{20}=0{,}75
-]
+$$
 
 Interpretación: se acertó el 75% de estos ejemplos. No informa por sí sola qué clase sufrió los errores.
 
 #### Precision
 
-[
+$$
 \text{Precision} = \frac{TP}{TP+FP}
-]
+$$
 
-- (TP) son positivos predichos correctamente;
-- (TP+FP) son todos los casos que el modelo llamó positivos;
+- $TP$ son positivos predichos correctamente;
+- $TP+FP$ son todos los casos que el modelo llamó positivos;
 - precision responde: “cuando predijo positivo, ¿con qué frecuencia acertó?”.
 
 Cálculo:
 
-[
+$$
 \frac{6}{6+3}=\frac{6}{9}\approx 0{,}667
-]
+$$
 
 Interpretación: aproximadamente dos de cada tres predicciones positivas fueron correctas.
 
 #### Recall
 
-[
+$$
 \text{Recall} = \frac{TP}{TP+FN}
-]
+$$
 
-- (TP+FN) son todos los positivos reales;
+- $TP+FN$ son todos los positivos reales;
 - recall responde: “de los positivos que existían, ¿qué proporción detectó?”.
 
 Cálculo:
 
-[
+$$
 \frac{6}{6+2}=\frac{6}{8}=0{,}75
-]
+$$
 
 Interpretación: detectó tres de cada cuatro positivos reales.
 
 #### F1
 
-[
+$$
 F_1 = 2\cdot\frac{\text{Precision}\cdot\text{Recall}}
 {\text{Precision}+\text{Recall}}
-]
+$$
 
-- (F_1) es la media armónica de precision y recall;
+- $F_1$ es la media armónica de precision y recall;
 - el producto reúne ambas;
 - la suma normaliza;
 - el factor 2 deja el resultado en la misma escala;
 - la media armónica cae si una de las dos es baja.
 
-Usando (2/3) y (3/4):
+Usando $2/3$ y $3/4$:
 
-[
+$$
 F_1 = 2\cdot\frac{(2/3)(3/4)}{2/3+3/4}
 =2\cdot\frac{1/2}{17/12}
 =\frac{12}{17}\approx0{,}706
-]
+$$
 
 Interpretación: el equilibrio entre calidad de predicciones positivas y cobertura es cercano a 0,706. No significa “70,6% de casos correctos”; esa descripción corresponde a accuracy.
 
@@ -716,8 +734,8 @@ En 100 casos inventados hay 95 negativos y 5 positivos. Un modelo predice siempr
 - FN = 5;
 - TP = 0;
 - FP = 0;
-- accuracy = (95/100=0{,}95);
-- recall positivo = (0/(0+5)=0).
+- accuracy = $95/100=0{,}95$;
+- recall positivo = $0/(0+5)=0$.
 
 La accuracy parece excelente, pero el sistema no detecta ningún positivo. El ejemplo muestra por qué se necesitan baseline y métricas por clase.
 
@@ -733,7 +751,7 @@ Ejemplo inventado:
 | B | 2 | 5 | 1 |
 | C | 0 | 2 | 4 |
 
-Total: (10+8+6=24). Aciertos: (8+5+4=17). Accuracy: (17/24\approx0{,}708).
+Total: $10+8+6=24$. Aciertos: $8+5+4=17$. Accuracy: $17/24\approx0{,}708$.
 
 Pero la matriz agrega información: B se confunde dos veces con A; C se confunde dos veces con B. Esas parejas guían análisis textual y revisión del target.
 
@@ -760,37 +778,37 @@ En multiclase obtenemos una métrica por clase. Para resumir debemos decidir cu�
 
 ### 10.2 Macro
 
-[
+$$
 M_{macro}=\frac{1}{K}\sum_{k=1}^{K} M_k
-]
+$$
 
-- (M_k) es la métrica de la clase (k);
-- (K) es la cantidad de clases;
+- $M_k$ es la métrica de la clase $k$;
+- $K$ es la cantidad de clases;
 - cada clase pesa lo mismo;
-- (sum) suma métricas por clase.
+- $\sum$ suma métricas por clase.
 
 Si recalls de A, B y C son 0,90; 0,60; 0,30:
 
-[
+$$
 Recall_{macro}=\frac{0{,}90+0{,}60+0{,}30}{3}=0{,}60
-]
+$$
 
 ### 10.3 Weighted
 
-[
+$$
 M_{weighted}=\sum_{k=1}^{K}\frac{n_k}{n}M_k
-]
+$$
 
-- (n_k) es el soporte real de la clase (k);
-- (n) es el total;
-- (n_k/n) es el peso de esa clase.
+- $n_k$ es el soporte real de la clase $k$;
+- $n$ es el total;
+- $n_k/n$ es el peso de esa clase.
 
 Si soportes son 80, 15 y 5, con los recalls anteriores:
 
-[
+$$
 0{,}80(0{,}90)+0{,}15(0{,}60)+0{,}05(0{,}30)
 =0{,}72+0{,}09+0{,}015=0{,}825
-]
+$$
 
 El promedio weighted es alto porque A domina. No está mal calculado; responde una pregunta global dominada por la composición observada.
 
@@ -815,9 +833,9 @@ No siempre macro debe ser la única métrica. Conviene acompañarla con:
 
 **Contexto opcional dentro del nivel DiploDatos.** En multiclase, balanced accuracy puede entenderse como el promedio del recall por clase:
 
-[
+$$
 \text{Balanced Accuracy}=\frac{1}{K}\sum_{k=1}^{K} Recall_k
-]
+$$
 
 Es, en este uso, equivalente al recall macro. Sirve para que cada clase tenga el mismo peso, pero no reemplaza precision ni revela qué clases se confunden.
 
@@ -869,15 +887,15 @@ Pesos y SMOTE **inflan** la probabilidad media de la minoritaria: deja de coinci
 
 ### 12.1 K-fold ordinaria
 
-Se divide train en (K) partes. En cada iteración, una parte valida y las restantes entrenan. Se obtienen (K) resultados:
+Se divide train en $K$ partes. En cada iteración, una parte valida y las restantes entrenan. Se obtienen $K$ resultados:
 
-[
+$$
 \bar M = \frac{1}{K}\sum_{k=1}^{K}M_k
-]
+$$
 
-- (M_k) es la métrica en el fold (k);
-- (K) es la cantidad de folds;
-- \(\bar M\) resume el desempeño promedio.
+- $M_k$ es la métrica en el fold $k$;
+- $K$ es la cantidad de folds;
+- $\bar M$ resume el desempeño promedio.
 
 También se mira dispersión: resultados muy variables indican sensibilidad a la partición.
 
@@ -988,9 +1006,9 @@ Vocabulario ordenado:
 
 Bag of Words ignora el orden global y cuenta apariciones.
 
-- Documento 1 → ([1,0,1,0,1])
-- Documento 2 → ([0,1,1,0,0])
-- Documento 3 → ([0,0,0,1,1])
+- Documento 1 → $[1,0,1,0,1]$
+- Documento 2 → $[0,1,1,0,0]$
+- Documento 3 → $[0,0,0,1,1]$
 
 Cada posición corresponde al mismo término en todos los documentos. Se conserva presencia o frecuencia, pero no la sintaxis completa.
 
@@ -998,12 +1016,12 @@ Cada posición corresponde al mismo término en todos los documentos. Se conserv
 
 En una representación binaria, cada posición indica si el término aparece:
 
-[
+$$
 x_{ij}=\begin{cases}
 1 & \text{si el término } j \text{ aparece en el documento } i\\
 0 & \text{si no aparece}
 \end{cases}
-]
+$$
 
 Esto reduce la influencia de repeticiones. Puede ser útil cuando “apareció o no” importa más que cuántas veces.
 
@@ -1021,27 +1039,27 @@ En texto jurídico, expresiones de varias palabras pueden ser relevantes. Pero i
 
 TF-IDF combina frecuencia en un documento con rareza en el corpus de entrenamiento. Una forma conceptual es:
 
-[
+$$
 TFIDF(t,d)=TF(t,d)\cdot IDF(t)
-]
+$$
 
-- (t) es un término;
-- (d) es un documento;
-- (TF(t,d)) mide cuánto aparece (t) en (d);
-- (IDF(t)) baja el peso de términos presentes en muchos documentos;
+- $t$ es un término;
+- $d$ es un documento;
+- $TF(t,d)$ mide cuánto aparece $t$ en $d$;
+- $IDF(t)$ baja el peso de términos presentes en muchos documentos;
 - el producto da peso mayor a términos relativamente característicos.
 
 Una forma suavizada de IDF es:
 
-[
+$$
 IDF(t)=\log\left(\frac{1+N}{1+df(t)}\right)+1
-]
+$$
 
-- (N) es la cantidad de documentos de train;
-- (df(t)) es cuántos documentos de train contienen (t);
-- (1+) evita divisiones problemáticas y suaviza;
-- (log) comprime diferencias grandes;
-- el (+1) final conserva pesos positivos según esta convención.
+- $N$ es la cantidad de documentos de train;
+- $df(t)$ es cuántos documentos de train contienen $t$;
+- $1+$ evita divisiones problemáticas y suaviza;
+- $\log$ comprime diferencias grandes;
+- el $+1$ final conserva pesos positivos según esta convención.
 
 Ejemplo inventado: en 10 documentos, “recurso” aparece en 8 y “quiebra” en 1. “Quiebra” recibe IDF mayor. Eso no prueba que sea mejor feature: solo que es más rara.
 
@@ -1049,17 +1067,17 @@ Ejemplo inventado: en 10 documentos, “recurso” aparece en 8 y “quiebra” 
 
 Los documentos tienen longitudes distintas. Sin normalización, un texto largo puede acumular mayores conteos o pesos solo por extensión. Normalizar un vector, por ejemplo a longitud euclídea 1, permite comparar patrones relativos.
 
-Para un vector (x):
+Para un vector $x$:
 
-[
+$$
 \|x\|_2=\sqrt{\sum_{j=1}^{p}x_j^2},
 \qquad
 x' = \frac{x}{\|x\|_2}
-]
+$$
 
-- (|x|_2) es la longitud del vector;
+- $|x|_2$ es la longitud del vector;
 - se elevan componentes al cuadrado, se suman y se toma raíz;
-- (x') es el vector reescalado;
+- $x'$ es el vector reescalado;
 - la dirección se conserva, la magnitud se controla.
 
 ### 14.7 Vocabulario desconocido
@@ -1097,46 +1115,46 @@ La alta dimensión no significa que cada documento sea “complejo” en todas l
 
 Queremos comparar:
 
-[
+$$
 P(y=c\mid x)
-]
+$$
 
-Se lee: probabilidad de que la clase sea (c) dado el documento representado por (x).
+Se lee: probabilidad de que la clase sea $c$ dado el documento representado por $x$.
 
 El teorema de Bayes permite escribir:
 
-[
+$$
 P(y=c\mid x)=\frac{P(x\mid y=c)P(y=c)}{P(x)}
-]
+$$
 
 Símbolo por símbolo:
 
-- (P(y=c\mid x)): probabilidad posterior de la clase después de observar el texto;
-- (P(x\mid y=c)): verosimilitud de observar esas features si la clase fuera (c);
-- (P(y=c)): probabilidad previa o prior de la clase;
-- (P(x)): probabilidad del documento bajo todas las clases;
+- $P(y=c\mid x)$: probabilidad posterior de la clase después de observar el texto;
+- $P(x\mid y=c)$: verosimilitud de observar esas features si la clase fuera $c$;
+- $P(y=c)$: probabilidad previa o prior de la clase;
+- $P(x)$: probabilidad del documento bajo todas las clases;
 - la barra vertical significa “condicionado a”.
 
-Para elegir la clase con mayor posterior, (P(x)) es igual para todas las clases candidatas. Por eso comparamos:
+Para elegir la clase con mayor posterior, $P(x)$ es igual para todas las clases candidatas. Por eso comparamos:
 
-[
+$$
 \hat y=\arg\max_c P(y=c)P(x\mid y=c)
-]
+$$
 
-- (hat y) es la clase predicha;
-- (arg\max_c) elige la clase con mayor valor;
+- $\hat y$ es la clase predicha;
+- $\arg\max_c$ elige la clase con mayor valor;
 - el producto combina prior y compatibilidad del texto.
 
 ### 15.2 La suposición ingenua
 
-Si (x) contiene features (x_1,\ldots,x_p), Naive Bayes asume independencia condicional dada la clase:
+Si $x$ contiene features $x_1,\ldots,x_p$, Naive Bayes asume independencia condicional dada la clase:
 
-[
+$$
 P(x\mid y=c)\approx\prod_{j=1}^{p}P(x_j\mid y=c)
-]
+$$
 
-- (prod) multiplica aportes de todas las features;
-- (P(x_j\mid y=c)) mide compatibilidad de la feature (j) con la clase;
+- $\prod$ multiplica aportes de todas las features;
+- $P(x_j\mid y=c)$ mide compatibilidad de la feature $j$ con la clase;
 - “condicional” significa que se supone independencia una vez conocida la clase.
 
 En lenguaje, las palabras no son realmente independientes: “seguridad” y “social” aparecen relacionadas. La suposición es simplificadora, no una descripción literal. Aun así, el modelo puede ser una baseline fuerte y eficiente porque necesita estimaciones simples y trabaja bien con conteos dispersos.
@@ -1147,25 +1165,25 @@ Tenemos dos clases, A y B, y un vocabulario de tres términos: `laboral`, `pena`
 
 Conteos de train inventados después de suavizar:
 
-| Término | (P(t\mid A)) | (P(t\mid B)) |
+| Término | $P(t\mid A)$ | $P(t\mid B)$ |
 |---|---:|---:|
 | laboral | 0,50 | 0,10 |
 | pena | 0,10 | 0,60 |
 | contrato | 0,40 | 0,30 |
 
-Priors: (P(A)=0{,}6), (P(B)=0{,}4).
+Priors: $P(A)=0{,}6$, $P(B)=0{,}4$.
 
 Documento nuevo: “laboral contrato”. Usando presencia simplificada:
 
-[
+$$
 Score(A)=0{,}6\times0{,}50\times0{,}40=0{,}12
-]
+$$
 
-[
+$$
 Score(B)=0{,}4\times0{,}10\times0{,}30=0{,}012
-]
+$$
 
-Como (0{,}12>0{,}012), se predice A. Estos scores no están normalizados como probabilidades finales; para comparar alcanza el orden.
+Como $0{,}12>0{,}012$, se predice A. Estos scores no están normalizados como probabilidades finales; para comparar alcanza el orden.
 
 ### 15.4 El problema del cero y suavizado
 
@@ -1173,22 +1191,22 @@ Si un término nunca apareció en train para una clase, su probabilidad estimada
 
 Para Naive Bayes multinomial:
 
-[
+$$
 P(t\mid c)=\frac{N_{t,c}+\alpha}{N_c+\alpha V}
-]
+$$
 
-- (N_{t,c}) es el conteo del término (t) en documentos de clase (c);
-- (N_c) es el total de conteos de términos en la clase (c);
-- (V) es el tamaño del vocabulario;
-- (alpha) es la intensidad de suavizado, positiva;
-- el numerador agrega (alpha) al término;
-- el denominador agrega (alpha) para cada uno de los (V) términos.
+- $N_{t,c}$ es el conteo del término $t$ en documentos de clase $c$;
+- $N_c$ es el total de conteos de términos en la clase $c$;
+- $V$ es el tamaño del vocabulario;
+- $\alpha$ es la intensidad de suavizado, positiva;
+- el numerador agrega $\alpha$ al término;
+- el denominador agrega $\alpha$ para cada uno de los $V$ términos.
 
-Ejemplo: si (N_{t,c}=0), (N_c=20), (V=5), (alpha=1):
+Ejemplo: si $N_{t,c}=0$, $N_c=20$, $V=5$, $\alpha=1$:
 
-[
+$$
 P(t\mid c)=\frac{0+1}{20+1\cdot5}=\frac{1}{25}=0{,}04
-]
+$$
 
 Ya no es cero. No inventa evidencia fuerte; reserva una probabilidad pequeña.
 
@@ -1224,11 +1242,11 @@ Naive Bayes puede servir como baseline de texto, no como veredicto final. Si pre
 
 ### 16.1 Nativo multiclase
 
-Algunos modelos comparan todas las clases dentro de una sola formulación. Naive Bayes calcula un score por clase naturalmente. Otros modelos pueden producir una distribución conjunta sobre (K) clases.
+Algunos modelos comparan todas las clases dentro de una sola formulación. Naive Bayes calcula un score por clase naturalmente. Otros modelos pueden producir una distribución conjunta sobre $K$ clases.
 
 ### 16.2 One-vs-Rest, OvR
 
-Se entrenan (K) clasificadores binarios. Cada uno distingue una clase del resto. Luego se elige el score mayor.
+Se entrenan $K$ clasificadores binarios. Cada uno distingue una clase del resto. Luego se elige el score mayor.
 
 Ventajas: simple y permite reutilizar clasificadores binarios. Límites: cada problema induce desbalance; scores separados pueden no ser comparables; en multietiqueta la decisión ya no debe ser “un único ganador”.
 
@@ -1236,11 +1254,11 @@ Ventajas: simple y permite reutilizar clasificadores binarios. Límites: cada pr
 
 Se entrena un clasificador por cada par de clases:
 
-[
+$$
 \frac{K(K-1)}{2}
-]
+$$
 
-Con (K=4): (4\cdot3/2=6) clasificadores. Cada uno ve solo dos clases y luego se combinan votos. El costo crece cuadráticamente con (K).
+Con $K=4$: $4\cdot3/2=6$ clasificadores. Cada uno ve solo dos clases y luego se combinan votos. El costo crece cuadráticamente con $K$.
 
 ### 16.4 No profundizar antes de formular
 
@@ -1483,7 +1501,7 @@ Antes de entrenar, el equipo futuro debería poder responder:
 
 1. ¿Qué snapshot exacto usamos?
 2. ¿Qué representa cada fila?
-3. ¿Cómo se creó cada (y_i)?
+3. ¿Cómo se creó cada $y_i$?
 4. ¿Qué casos se excluyeron y por qué?
 5. ¿Qué grupos no pueden separarse?
 6. ¿Qué fecha ordena un split temporal?
@@ -1626,7 +1644,7 @@ Un modelo acierta usando una marca de plantilla asociada a cada clase. Explicá 
 
 ### Ejercicio 2 — Formulación completa
 
-Transformá “predecir fuero” en una formulación que incluya unidad, (X), (y), salida, usuario, uso y criterio de éxito.
+Transformá “predecir fuero” en una formulación que incluya unidad, $X$, $y$, salida, usuario, uso y criterio de éxito.
 
 ### Ejercicio 3 — Regresión o clasificación
 
@@ -1686,7 +1704,7 @@ Dos palabras aparecen tres veces en un documento. Una aparece en casi todo train
 
 ### Ejercicio 17 — Naive Bayes y cero
 
-¿Por qué un término nunca visto en una clase puede anular el score sin suavizado? Explicá cómo cambia con (alpha>0).
+¿Por qué un término nunca visto en una clase puede anular el score sin suavizado? Explicá cómo cambia con $\alpha>0$.
 
 ### Ejercicio 18 — N-gramas
 
@@ -1750,7 +1768,7 @@ M1 sugiere alta brecha y posible sobreajuste, fuga de selección o diferencia fu
 
 ### Respuesta 10
 
-Total (=12+20+4+4=40). Accuracy (=(12+20)/40=32/40=0{,}80). Precision (=12/(12+4)=12/16=0{,}75). Recall (=12/(12+4)=0{,}75). Como precision y recall son iguales, F1 también es 0,75. Cada cifra responde una pregunta distinta.
+Total $=12+20+4+4=40$. Accuracy $=(12+20)/40=32/40=0{,}80$. Precision $=12/(12+4)=12/16=0{,}75$. Recall $=12/(12+4)=0{,}75$. Como precision y recall son iguales, F1 también es 0,75. Cada cifra responde una pregunta distinta.
 
 ### Respuesta 11
 
@@ -1758,15 +1776,15 @@ Para evitar asignaciones positivas equivocadas, precision de la clase de interé
 
 ### Respuesta 12
 
-Macro (=(0{,}90+0{,}20)/2=0{,}55). Weighted (=0{,}90(90/100)+0{,}20(10/100)=0{,}81+0{,}02=0{,}83). Macro muestra que una clase funciona muy mal dándoles igual peso. Weighted refleja que la clase grande domina la población.
+Macro $=(0{,}90+0{,}20)/2=0{,}55$. Weighted $=0{,}90(90/100)+0{,}20(10/100)=0{,}81+0{,}02=0{,}83$. Macro muestra que una clase funciona muy mal dándoles igual peso. Weighted refleja que la clase grande domina la población.
 
 ### Respuesta 13
 
-No se pueden distribuir tres casos de C entre cinco folds garantizando presencia en cada validación. Puede reducirse (K), recolectar más ejemplos, usar una partición diseñada con cautela o reportar incertidumbre y métricas por clase. Duplicar casos antes de dividir no crea evidencia independiente y puede causar fuga.
+No se pueden distribuir tres casos de C entre cinco folds garantizando presencia en cada validación. Puede reducirse $K$, recolectar más ejemplos, usar una partición diseñada con cautela o reportar incertidumbre y métricas por clase. Duplicar casos antes de dividir no crea evidencia independiente y puede causar fuga.
 
 ### Respuesta 14
 
-El vocabulario e IDF incorporaron qué términos existen y cuán frecuentes son en los folds que luego simulan ser no vistos. Aunque no usen (y), la transformación aprendió de (X) de validación. Debe ajustarse dentro de cada train fold y aplicarse sin reajuste.
+El vocabulario e IDF incorporaron qué términos existen y cuán frecuentes son en los folds que luego simulan ser no vistos. Aunque no usen $y$, la transformación aprendió de $X$ de validación. Debe ajustarse dentro de cada train fold y aplicarse sin reajuste.
 
 ### Respuesta 15
 
@@ -1778,7 +1796,7 @@ La palabra presente en pocos documentos tendrá mayor IDF. Eso indica rareza doc
 
 ### Respuesta 17
 
-Naive Bayes multiplica probabilidades por feature. Un factor cero vuelve cero todo el producto para esa clase. Con (alpha>0), el conteo cero recibe una masa pequeña y el denominador se ajusta para todas las palabras. Así “no observado” deja de significar “imposible”.
+Naive Bayes multiplica probabilidades por feature. Un factor cero vuelve cero todo el producto para esa clase. Con $\alpha>0$, el conteo cero recibe una masa pequeña y el denominador se ajusta para todas las palabras. Así “no observado” deja de significar “imposible”.
 
 ### Respuesta 18
 
@@ -1816,7 +1834,7 @@ Marcá cada afirmación como **sí**, **todavía no** o **puedo explicarla con u
 
 ### Formulación
 
-- [ ] Defino unidad, (X), features y (y).
+- [ ] Defino unidad, $X$, features y $y$.
 - [ ] Separo target de salida operacional.
 - [ ] Puedo justificar usuario, uso y criterio de éxito.
 - [ ] Reconozco límites de un target construido.
@@ -1862,7 +1880,7 @@ Considerá dominada la materia cuando puedas tomar un experimento ajeno y pregun
 
 1. ¿qué problema resolvía?;
 2. ¿qué representaba una fila?;
-3. ¿cómo se construyó (y)?;
+3. ¿cómo se construyó $y$?;
 4. ¿qué futuro estimó el split?;
 5. ¿qué aprendió el preprocesamiento y dónde?;
 6. ¿cuál fue la baseline?;
@@ -1887,7 +1905,7 @@ Considerá dominada la materia cuando puedas tomar un experimento ajeno y pregun
 | **Capacidad** | Complejidad de patrones que una familia de modelos puede representar. |
 | **Clasificación** | Predicción de categorías. |
 | **Cross-validation** | Evaluación repetida rotando particiones de entrenamiento y validación. |
-| **Dataset supervisado** | Colección de pares ((x_i,y_i)). |
+| **Dataset supervisado** | Colección de pares $(x_i,y_i)$. |
 | **Desbalance** | Diferencia marcada entre soportes de clases. |
 | **Drift** | Cambio en datos, prevalencias o relación entrada–target a través del tiempo. |
 | **Feature** | Variable de entrada disponible y autorizada para predecir. |
@@ -1910,7 +1928,7 @@ Considerá dominada la materia cuando puedas tomar un experimento ajeno y pregun
 | **Multiclase** | Una clase única entre más de dos opciones. |
 | **Multietiqueta** | Varias etiquetas simultáneas por caso. |
 | **Naive Bayes** | Clasificador probabilístico basado en Bayes e independencia condicional aproximada. |
-| **N-grama** | Secuencia contigua de (n) elementos de texto. |
+| **N-grama** | Secuencia contigua de $n$ elementos de texto. |
 | **OvO** | Estrategia con un clasificador por par de clases. |
 | **OvR** | Estrategia con un clasificador por clase contra el resto. |
 | **Parámetro** | Valor aprendido durante entrenamiento. |

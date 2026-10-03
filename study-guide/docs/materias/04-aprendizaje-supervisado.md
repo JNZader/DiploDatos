@@ -19,7 +19,7 @@ Al completar la Materia 4 deberías poder:
 3. reconstruir el score, la frontera y la probabilidad de una regresión logística;
 4. distinguir regularización L1 de L2 y relacionarlas con complejidad, correlación y estabilidad;
 5. explicar cómo un árbol divide recursivamente el espacio y por qué la profundidad puede sobreajustar;
-6. describir hiperplano, margen, vectores soporte, margen blando, (C) y kernels en SVM;
+6. describir hiperplano, margen, vectores soporte, margen blando, $C$ y kernels en SVM;
 7. diferenciar bagging, random forest y boosting sin reducirlos a “muchos árboles”;
 8. adaptar pesos, muestreo y umbrales al desbalance sin contaminar validación ni test;
 9. diseñar selección de hiperparámetros con validación compatible con grupos y tiempo;
@@ -58,7 +58,7 @@ Los materiales de **2026** (Karim Nemer Pelliza y Diego González Dondo) organiz
 
 Esta guía sigue desarrollando sobre todo las familias para una comparación defendible del futuro clasificador de fuero: modelos lineales, árboles, SVM y ensambles. Regresión logística y árboles se explican también como bases conceptuales indispensables para entender fronteras, probabilidades, regularización y ensambles.
 
-**k-NN no se desarrolla como familia central.** El inventario local disponible no lo presenta como eje de esta cursada y la instrucción de alcance pide incluirlo solo si está respaldado por las fuentes locales. No se rellena ese hueco con material externo. Esta omisión no implica que k-NN sea inútil; significa que el libro respeta el límite declarado. En particular, no vamos a introducir distancia, elección de (k), maldición de la dimensionalidad y limitaciones en texto como si hubieran sido parte del trayecto local verificado.
+**k-NN no se desarrolla como familia central.** El inventario local disponible no lo presenta como eje de esta cursada y la instrucción de alcance pide incluirlo solo si está respaldado por las fuentes locales. No se rellena ese hueco con material externo. Esta omisión no implica que k-NN sea inútil; significa que el libro respeta el límite declarado. En particular, no vamos a introducir distancia, elección de $k$, maldición de la dimensionalidad y limitaciones en texto como si hubieran sido parte del trayecto local verificado.
 
 En **esta guía**, redes (MLP, CNN, RNN, Transformer) y recomendadores no se desarrollan al mismo detalle que SVM y ensambles: el clasificador de fuero primero necesita controles simples, lineales, SVM y árboles. Eso no niega la cursada: las clases 2–4 *sí* los dan. Hasta el resumen de videos, queda este mapa mínimo:
 
@@ -98,7 +98,7 @@ Después resolvé el ejercicio conceptual sin mirar la respuesta. No memorices �
 
 ### 1.1 Qué agrega una familia de modelos
 
-En Materia 3 escribimos el aprendizaje como una búsqueda de una función (f) que aproxima la relación entre entradas (x) y targets (y). Pero “buscar una función” es demasiado amplio. Una familia acota el conjunto de funciones candidatas y define qué cambios resultan fáciles o difíciles.
+En Materia 3 escribimos el aprendizaje como una búsqueda de una función $f$ que aproxima la relación entre entradas $x$ y targets $y$. Pero “buscar una función” es demasiado amplio. Una familia acota el conjunto de funciones candidatas y define qué cambios resultan fáciles o difíciles.
 
 Un clasificador lineal busca fronteras planas en el espacio de features. Un árbol construye regiones mediante preguntas sucesivas. Una SVM lineal también separa con un hiperplano, pero elige la separación a partir del margen. Un bosque promedia árboles variados. Un boosting corrige errores de manera secuencial. Cada uno mira la misma tabla a través de una geometría distinta.
 
@@ -114,10 +114,10 @@ Sin preferencia, los datos finitos no determinan una única regla para casos fut
 
 Supongamos documentos representados por dos features:
 
-- (x_1): presencia ponderada de términos relacionados con tributos;
-- (x_2): presencia ponderada de términos relacionados con relaciones laborales.
+- $x_1$: presencia ponderada de términos relacionados con tributos;
+- $x_2$: presencia ponderada de términos relacionados con relaciones laborales.
 
-Una frontera lineal podría separar documentos cuando (x_1-x_2>0). Esa regla supone que una combinación aditiva alcanza. Un árbol podría preguntar primero si (x_1>0.7) y, si no, si (x_2<0.2). Esa regla crea regiones rectangulares y admite interacciones abruptas.
+Una frontera lineal podría separar documentos cuando $x_1-x_2>0$. Esa regla supone que una combinación aditiva alcanza. Un árbol podría preguntar primero si $x_1>0.7$ y, si no, si $x_2<0.2$. Esa regla crea regiones rectangulares y admite interacciones abruptas.
 
 Ninguna geometría es “más inteligente” por sí sola. Si la señal real se distribuye entre miles de palabras sumando evidencia débil, la linealidad puede ser una excelente preferencia. Si unas pocas reglas condicionales sobre metadata dominan, un árbol puede representarlas de forma compacta. Esto debe probarse.
 
@@ -175,7 +175,7 @@ El marco mínimo contiene siete preguntas:
 |---|---|---|---|---|---|
 | Frontera | Hiperplano | Regiones por cortes | Hiperplano de margen amplio | Votación de muchas regiones | Suma secuencial de reglas |
 | Escalado | Recomendado; afecta regularización | Poco sensible a escalas monotónicas | Importante | Poco sensible | Poco sensible en árboles |
-| Capacidad | Controlada por features y regularización | Crece con profundidad y hojas | Controlada por (C) y representación | Alta, moderada por promedio y límites | Alta y secuencial, controlada por tasa y complejidad |
+| Capacidad | Controlada por features y regularización | Crece con profundidad y hojas | Controlada por $C$ y representación | Alta, moderada por promedio y límites | Alta y secuencial, controlada por tasa y complejidad |
 | Disperso | Muy compatible | Posible, no siempre conveniente | Muy compatible | Puede ser costoso | Depende de implementación y representación |
 | Probabilidad nativa | Sí en logística | Frecuencia por hoja, a menudo poco calibrada | No necesariamente | Promedio de votos/proporciones, no garantía de calibración | Scores o probabilidades según pérdida, no garantía de calibración |
 | Explicación | Coeficientes | Reglas de un árbol | Pesos y margen | Importancias y explicaciones agregadas | Contribuciones agregadas, más complejas |
@@ -232,95 +232,95 @@ En texto, esta idea es potente. Un documento puede contener muchas señales déb
 
 ### 3.2 Vocabulario mínimo
 
-- **Feature (x_j):** valor de la columna (j) para una observación.
-- **Coeficiente (w_j):** peso aprendido para esa feature.
-- **Intercepto (b):** término constante.
-- **Score o logit (z):** suma ponderada antes de convertirla en probabilidad.
+- **Feature $x_j$:** valor de la columna $j$ para una observación.
+- **Coeficiente $w_j$:** peso aprendido para esa feature.
+- **Intercepto $b$:** término constante.
+- **Score o logit $z$:** suma ponderada antes de convertirla en probabilidad.
 - **Frontera de decisión:** conjunto de puntos donde dos decisiones quedan empatadas.
 - **Pérdida logística:** criterio de ajuste que penaliza probabilidades incompatibles con la clase real.
 - **Regularización:** preferencia por coeficientes controlados.
 
 ### 3.3 Ejemplo trabajado: score lineal
 
-**Ejemplo ilustrativo inventado.** Clasificamos entre “laboral” ((y=1)) y “no laboral” ((y=0)) usando dos features ya transformadas:
+**Ejemplo ilustrativo inventado.** Clasificamos entre “laboral” $(y=1)$ y “no laboral” $(y=0)$ usando dos features ya transformadas:
 
-- (x_1): peso de vocabulario laboral;
-- (x_2): peso de vocabulario tributario.
+- $x_1$: peso de vocabulario laboral;
+- $x_2$: peso de vocabulario tributario.
 
 Supongamos que el modelo aprendió:
 
-[
+$$
 z = b + w_1x_1 + w_2x_2
-]
+$$
 
-con (b=-0.4), (w_1=1.8), (w_2=-1.2). Para un documento con (x_1=0.9) y (x_2=0.2):
+con $b=-0.4$, $w_1=1.8$, $w_2=-1.2$. Para un documento con $x_1=0.9$ y $x_2=0.2$:
 
-[
+$$
 z=-0.4+(1.8)(0.9)+(-1.2)(0.2)=0.98
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (z) es el score total del documento;
-- (b) es la evidencia base cuando las features valen cero;
-- (w_1) mide cuánto cambia el score por una unidad de (x_1), manteniendo las demás columnas fijas;
-- (x_1) es el valor observado de la primera feature;
-- (w_2) cumple el mismo papel para la segunda feature;
-- (x_2) es su valor observado;
-- el signo positivo de (w_1) empuja hacia laboral;
-- el signo negativo de (w_2) empuja en sentido contrario.
+- $z$ es el score total del documento;
+- $b$ es la evidencia base cuando las features valen cero;
+- $w_1$ mide cuánto cambia el score por una unidad de $x_1$, manteniendo las demás columnas fijas;
+- $x_1$ es el valor observado de la primera feature;
+- $w_2$ cumple el mismo papel para la segunda feature;
+- $x_2$ es su valor observado;
+- el signo positivo de $w_1$ empuja hacia laboral;
+- el signo negativo de $w_2$ empuja en sentido contrario.
 
-El score (0.98) no es todavía una probabilidad. Es una posición respecto de la frontera. En el caso binario con umbral usual, (z=0) separa las decisiones. Como (0.98>0), el documento quedaría del lado positivo.
+El score (0.98) no es todavía una probabilidad. Es una posición respecto de la frontera. En el caso binario con umbral usual, $z=0$ separa las decisiones. Como $0.98>0$, el documento quedaría del lado positivo.
 
 ### 3.4 De score a probabilidad: la sigmoide
 
 La regresión logística transforma el score mediante:
 
-[
+$$
 p(y=1\mid x)=\sigma(z)=\frac{1}{1+e^{-z}}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (p(y=1\mid x)) es la probabilidad estimada de la clase positiva dado el vector (x);
-- (\sigma) nombra la función sigmoide;
-- (z) es el score lineal calculado antes;
-- (e) es la base de los logaritmos naturales;
-- (-z) invierte el sentido dentro de la exponencial;
-- el denominador (1+e^{-z}) mantiene el resultado entre 0 y 1.
+- $p(y=1\mid x)$ es la probabilidad estimada de la clase positiva dado el vector $x$;
+- $\sigma$ nombra la función sigmoide;
+- $z$ es el score lineal calculado antes;
+- $e$ es la base de los logaritmos naturales;
+- $-z$ invierte el sentido dentro de la exponencial;
+- el denominador $1+e^{-z}$ mantiene el resultado entre 0 y 1.
 
-Para (z=0.98), la sigmoide produce aproximadamente (0.727). La interpretación prudente es: **según este modelo y sus datos de entrenamiento**, la estimación para la clase positiva es cercana a 0.73. No significa que el documento “sea 73 % laboral” ni garantiza calibración perfecta.
+Para $z=0.98$, la sigmoide produce aproximadamente (0.727). La interpretación prudente es: **según este modelo y sus datos de entrenamiento**, la estimación para la clase positiva es cercana a 0.73. No significa que el documento “sea 73 % laboral” ni garantiza calibración perfecta.
 
-Cuando (z=0), la probabilidad es (0.5). Scores grandes y positivos se acercan a 1; grandes y negativos se acercan a 0. La sigmoide cambia la escala, no agrega evidencia nueva.
+Cuando $z=0$, la probabilidad es (0.5). Scores grandes y positivos se acercan a 1; grandes y negativos se acercan a 0. La sigmoide cambia la escala, no agrega evidencia nueva.
 
 ### 3.5 Log-odds y coeficientes
 
 La misma relación puede escribirse:
 
-[
+$$
 \log\left(\frac{p}{1-p}\right)=b+\sum_{j=1}^{d}w_jx_j
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (p) es la probabilidad estimada de la clase positiva;
-- (1-p) es la de la clase negativa;
-- (p/(1-p)) son los *odds*;
-- (\log) convierte esos odds multiplicativos en una escala aditiva;
-- (d) es la cantidad de features;
-- (j) recorre las features;
-- (\sum) suma sus contribuciones;
-- (w_jx_j) es la contribución lineal de la feature (j).
+- $p$ es la probabilidad estimada de la clase positiva;
+- $1-p$ es la de la clase negativa;
+- $p/(1-p)$ son los *odds*;
+- $\log$ convierte esos odds multiplicativos en una escala aditiva;
+- $d$ es la cantidad de features;
+- $j$ recorre las features;
+- $\sum$ suma sus contribuciones;
+- $w_jx_j$ es la contribución lineal de la feature $j$.
 
-Si una feature aumenta una unidad y todo lo demás permanece fijo, los log-odds cambian en (w_j). Los odds se multiplican por (e^{w_j}). Esta interpretación exige cuidado: en TF-IDF “una unidad” puede no ser intuitiva y las features correlacionadas comparten señal. Un coeficiente no es efecto causal.
+Si una feature aumenta una unidad y todo lo demás permanece fijo, los log-odds cambian en $w_j$. Los odds se multiplican por $e^{w_j}$. Esta interpretación exige cuidado: en TF-IDF “una unidad” puede no ser intuitiva y las features correlacionadas comparten señal. Un coeficiente no es efecto causal.
 
 ### 3.6 Frontera de decisión
 
 Con dos features y umbral 0.5, la frontera satisface:
 
-[
+$$
 b+w_1x_1+w_2x_2=0
-]
+$$
 
 Todos los puntos de un lado generan score positivo; los del otro, score negativo. En dimensiones altas sigue siendo un hiperplano, aunque no podamos dibujarlo. Agregar n-gramas, interacciones o transformaciones curva la frontera respecto del dato original sin dejar de ser lineal en el espacio transformado.
 
@@ -328,55 +328,55 @@ Todos los puntos de un lado generan score positivo; los del otro, score negativo
 
 Para una observación binaria, la pérdida es:
 
-[
+$$
 \ell(y,p)=-\left[y\log(p)+(1-y)\log(1-p)\right]
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (\ell) es la pérdida de una observación;
-- (y) vale 1 para la clase positiva y 0 para la negativa;
-- (p) es la probabilidad estimada de la positiva;
-- (\log(p)) recompensa asignar probabilidad alta cuando (y=1);
-- (\log(1-p)) hace lo mismo para la negativa;
+- $\ell$ es la pérdida de una observación;
+- $y$ vale 1 para la clase positiva y 0 para la negativa;
+- $p$ es la probabilidad estimada de la positiva;
+- $\log(p)$ recompensa asignar probabilidad alta cuando $y=1$;
+- $\log(1-p)$ hace lo mismo para la negativa;
 - el signo menos convierte logaritmos negativos en una pérdida positiva.
 
-Si el caso real es positivo, queda (-\log p): predecir (p=0.9) cuesta poco; predecir (p=0.01) cuesta mucho. La pérdida no trata igual una equivocación dudosa que una equivocación extremadamente confiada.
+Si el caso real es positivo, queda $-\log p$: predecir $p=0.9$ cuesta poco; predecir $p=0.01$ cuesta mucho. La pérdida no trata igual una equivocación dudosa que una equivocación extremadamente confiada.
 
 ### 3.8 Regularización L2 y L1
 
 El ajuste suele minimizar una combinación:
 
-[
+$$
 J(w,b)=\frac{1}{n}\sum_{i=1}^{n}\ell\left(y_i,p_i\right)+\lambda\,\Omega(w)
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (J) es el objetivo total a minimizar;
-- (n) es la cantidad de observaciones de train;
-- (i) recorre esas observaciones;
-- (\ell(y_i,p_i)) es la pérdida predictiva del caso (i);
-- (\Omega(w)) mide complejidad de los coeficientes;
-- (\lambda) controla cuánto pesa esa complejidad frente al ajuste.
+- $J$ es el objetivo total a minimizar;
+- $n$ es la cantidad de observaciones de train;
+- $i$ recorre esas observaciones;
+- $\ell(y_i,p_i)$ es la pérdida predictiva del caso $i$;
+- $\Omega(w)$ mide complejidad de los coeficientes;
+- $\lambda$ controla cuánto pesa esa complejidad frente al ajuste.
 
 Para L2:
 
-[
+$$
 \Omega_{L2}(w)=\sum_{j=1}^{d}w_j^2
-]
+$$
 
 L2 castiga con fuerza coeficientes muy grandes y suele repartir señal entre features correlacionadas. Reduce varianza y estabiliza, pero no suele volver exactamente cero muchos pesos.
 
 Para L1:
 
-[
+$$
 \Omega_{L1}(w)=\sum_{j=1}^{d}|w_j|
-]
+$$
 
 L1 suma valores absolutos y puede llevar coeficientes exactamente a cero. Eso produce una forma de selección, aunque “cero” no significa irrelevancia jurídica: con términos correlacionados, el modelo puede conservar uno y descartar otro de manera inestable.
 
-Algunas bibliotecas parametrizan la fuerza con (C) en lugar de (\lambda). Frecuentemente, (C) actúa de forma inversa: (C) grande implica regularización más débil; (C) pequeño, regularización más fuerte. Nunca hay que interpretar el nombre sin revisar la convención de la herramienta elegida.
+Algunas bibliotecas parametrizan la fuerza con $C$ en lugar de $\lambda$. Frecuentemente, $C$ actúa de forma inversa: $C$ grande implica regularización más débil; $C$ pequeño, regularización más fuerte. Nunca hay que interpretar el nombre sin revisar la convención de la herramienta elegida.
 
 ### 3.9 Escalado
 
@@ -384,35 +384,35 @@ La regularización compara magnitudes de coeficientes. Si una feature varía ent
 
 Estandarizar una feature suele usar:
 
-[
+$$
 x'_{ij}=\frac{x_{ij}-\mu_j}{s_j}
-]
+$$
 
-donde (x_{ij}) es el valor original de la observación (i) en la feature (j), (\mu_j) es la media calculada **solo en train**, (s_j) es su desvío estándar de train y (x'_{ij}) es el valor transformado. Validación y test usan los mismos (\mu_j) y (s_j), nunca los recalculan.
+donde $x_{ij}$ es el valor original de la observación $i$ en la feature $j$, $\mu_j$ es la media calculada **solo en train**, $s_j$ es su desvío estándar de train y $x'_{ij}$ es el valor transformado. Validación y test usan los mismos $\mu_j$ y $s_j$, nunca los recalculan.
 
 En texto TF-IDF, la representación ya tiene otra lógica de normalización y suele conservarse dispersa. Centrar una matriz dispersa restando medias puede llenarla de valores no cero y destruir su ventaja de memoria. El escalado no es una receta única; depende de representación y familia.
 
 ### 3.10 Multiclase y softmax
 
-Para (K) clases, una regresión logística multinomial calcula un score por clase:
+Para $K$ clases, una regresión logística multinomial calcula un score por clase:
 
-[
+$$
 z_k=b_k+w_k^Tx
-]
+$$
 
 y los convierte en probabilidades con softmax:
 
-[
+$$
 p(y=k\mid x)=\frac{e^{z_k}}{\sum_{r=1}^{K}e^{z_r}}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (K) es el número total de clases;
-- (k) identifica la clase cuya probabilidad calculamos;
-- (z_k) es su score;
-- (e^{z_k}) convierte ese score en una cantidad positiva;
-- (r) recorre todas las clases en el denominador;
+- $K$ es el número total de clases;
+- $k$ identifica la clase cuya probabilidad calculamos;
+- $z_k$ es su score;
+- $e^{z_k}$ convierte ese score en una cantidad positiva;
+- $r$ recorre todas las clases en el denominador;
 - la suma normaliza para que las probabilidades totalicen 1.
 
 Softmax compara scores relativos. Sumar la misma constante a todos no cambia las probabilidades. Una clase puede recibir 0.55 no porque tenga evidencia absoluta fuerte, sino porque sus competidoras recibieron menos.
@@ -431,7 +431,7 @@ Esto no demuestra que un lineal gane. Explica una razón de ingeniería y sesgo 
 
 > **Checkpoint 3**
 >
-> Si duplicamos todos los valores de una feature sin reentrenar, ¿qué ocurre? Su contribución (w_jx_j) se duplica. Si reentrenamos con regularización, el coeficiente puede reajustarse, pero la penalización y la optimización cambian; por eso las unidades importan.
+> Si duplicamos todos los valores de una feature sin reentrenar, ¿qué ocurre? Su contribución $w_jx_j$ se duplica. Si reentrenamos con regularización, el coeficiente puede reajustarse, pero la penalización y la optimización cambian; por eso las unidades importan.
 
 **Transferencia a SAIJ.** Una regresión logística con TF-IDF sería un escalón razonable después de Naive Bayes porque mantiene compatibilidad con texto disperso, produce una frontera interpretable y permite probabilidades candidatas. “Razonable” no significa “ganadora”. Debe compararse con la misma partición, vocabulario aprendido solo en train, métricas multiclase, calibración y análisis de confusiones.
 
@@ -479,48 +479,48 @@ La rama izquierda queda pura; la derecha todavía mezcla. El algoritmo evalúa s
 
 ### 4.4 Impureza Gini
 
-Para un nodo (t) con (K) clases:
+Para un nodo $t$ con $K$ clases:
 
-[
+$$
 G(t)=1-\sum_{k=1}^{K}p_{k\mid t}^{2}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (G(t)) es la impureza Gini del nodo;
-- (K) es la cantidad de clases;
-- (k) recorre las clases;
-- (p_{k\mid t}) es la proporción de la clase (k) dentro del nodo (t);
+- $G(t)$ es la impureza Gini del nodo;
+- $K$ es la cantidad de clases;
+- $k$ recorre las clases;
+- $p_{k\mid t}$ es la proporción de la clase $k$ dentro del nodo $t$;
 - elevar al cuadrado y sumar aumenta cuando una clase domina;
 - restar de 1 da cero en una hoja pura y valores mayores cuando hay mezcla.
 
-En el nodo inicial binario, (p_A=0.6) y (p_B=0.4):
+En el nodo inicial binario, $p_A=0.6$ y $p_B=0.4$:
 
-[
+$$
 G(t)=1-(0.6^2+0.4^2)=1-(0.36+0.16)=0.48
-]
+$$
 
 Para evaluar el corte calculamos impureza ponderada de los hijos:
 
-[
+$$
 G_{split}=\frac{n_L}{n}G(L)+\frac{n_R}{n}G(R)
-]
+$$
 
-donde (n) es el tamaño del nodo padre, (n_L) y (n_R) los tamaños de hijos, y (G(L)), (G(R)) sus impurezas. La ganancia es (G(t)-G_{split}). El árbol busca una reducción grande, sujeta a restricciones.
+donde $n$ es el tamaño del nodo padre, $n_L$ y $n_R$ los tamaños de hijos, y $G(L)$, $G(R)$ sus impurezas. La ganancia es $G(t)-G_{split}$. El árbol busca una reducción grande, sujeta a restricciones.
 
 ### 4.5 Entropía
 
 Otra medida es:
 
-[
+$$
 H(t)=-\sum_{k=1}^{K}p_{k\mid t}\log_2 p_{k\mid t}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (H(t)) es la entropía del nodo;
-- (p_{k\mid t}) es la proporción de clase;
-- (\log_2) mide información en base 2;
+- $H(t)$ es la entropía del nodo;
+- $p_{k\mid t}$ es la proporción de clase;
+- $\log_2$ mide información en base 2;
 - el signo menos vuelve positivo el resultado;
 - los términos con probabilidad cero se tratan como contribución cero por límite.
 
@@ -538,19 +538,19 @@ Si permitimos cortes hasta que cada hoja tenga uno o pocos ejemplos, el árbol p
 
 Una forma conceptual de poda costo-complejidad es:
 
-[
+$$
 R_\alpha(T)=R(T)+\alpha|T|
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (T) es el árbol;
-- (R(T)) es su error o impureza agregada en entrenamiento;
-- (|T|) representa la cantidad de hojas;
-- (\alpha) es el costo asignado a cada hoja adicional;
-- (R_\alpha(T)) equilibra ajuste y tamaño.
+- $T$ es el árbol;
+- $R(T)$ es su error o impureza agregada en entrenamiento;
+- $|T|$ representa la cantidad de hojas;
+- $\alpha$ es el costo asignado a cada hoja adicional;
+- $R_\alpha(T)$ equilibra ajuste y tamaño.
 
-Con (\alpha) pequeño se toleran más hojas; con (\alpha) grande se prefiere un árbol compacto. El valor se selecciona mediante validación, no mirando test.
+Con $\alpha$ pequeño se toleran más hojas; con $\alpha$ grande se prefiere un árbol compacto. El valor se selecciona mediante validación, no mirando test.
 
 ### 4.7 Escalado y categorías
 
@@ -564,7 +564,7 @@ Codificar una categoría nominal como 1, 2, 3 puede inventar un orden. Algunas i
 
 > **Checkpoint 4**
 >
-> ¿Por qué un árbol puede modelar una interacción sin crear manualmente (x_1x_2)? Porque una rama puede preguntar por (x_1) y luego, solo dentro de ese subconjunto, preguntar por (x_2). El efecto de la segunda depende del resultado de la primera.
+> ¿Por qué un árbol puede modelar una interacción sin crear manualmente $x_1x_2$? Porque una rama puede preguntar por $x_1$ y luego, solo dentro de ese subconjunto, preguntar por $x_2$. El efecto de la segunda depende del resultado de la primera.
 
 **Transferencia a SAIJ.** Un árbol individual es útil como laboratorio conceptual y baseline tabular interpretable. Para TF-IDF enorme, su búsqueda de cortes puede ser costosa e inestable. Si se prueba, debe justificarse la representación y compararse no solo por métrica, sino por estabilidad de ramas y shortcuts.
 
@@ -592,65 +592,65 @@ Los puntos más cercanos a la frontera son los **vectores soporte**. Mueven la a
 
 ### 5.2 Vocabulario
 
-- **Hiperplano:** frontera lineal en (d) dimensiones.
+- **Hiperplano:** frontera lineal en $d$ dimensiones.
 - **Margen:** distancia de seguridad entre frontera y casos cercanos.
 - **Vector soporte:** observación que determina o viola el margen.
 - **Margen duro:** separación sin errores ni invasiones, si existe.
 - **Margen blando:** permite violaciones pagando una penalización.
-- **(C):** equilibrio entre margen amplio y violaciones.
+- **$C$:** equilibrio entre margen amplio y violaciones.
 - **Kernel:** función que permite una frontera no lineal mediante similitudes implícitas.
-- **(\gamma):** escala de influencia en kernels como RBF.
+- **$\gamma$:** escala de influencia en kernels como RBF.
 
 ### 5.3 Hiperplano y predicción
 
 La frontera lineal se escribe:
 
-[
+$$
 w^Tx+b=0
-]
+$$
 
 La decisión usa el signo:
 
-[
+$$
 f(x)=w^Tx+b
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (x) es el vector de features de una observación;
-- (w) es el vector normal al hiperplano;
-- (w^Tx) es el producto que suma contribuciones;
-- (b) desplaza la frontera;
-- (f(x)) es el score o margen firmado;
+- $x$ es el vector de features de una observación;
+- $w$ es el vector normal al hiperplano;
+- $w^Tx$ es el producto que suma contribuciones;
+- $b$ desplaza la frontera;
+- $f(x)$ es el score o margen firmado;
 - signo positivo y negativo indican lados opuestos.
 
 La distancia geométrica a la frontera es:
 
-[
+$$
 \operatorname{dist}(x)=\frac{|w^Tx+b|}{\|w\|_2}
-]
+$$
 
-donde el numerador es la magnitud del score, (\|w\|_2) es la norma euclídea de los pesos y el cociente corrige por la escala de (w). Un score bruto solo puede compararse con cautela entre modelos si sus escalas difieren.
+donde el numerador es la magnitud del score, $\|w\|_2$ es la norma euclídea de los pesos y el cociente corrige por la escala de $w$. Un score bruto solo puede compararse con cautela entre modelos si sus escalas difieren.
 
 ### 5.4 Margen duro
 
-Para etiquetas binarias (y_i\in\{-1,+1\}), el problema ideal busca:
+Para etiquetas binarias $y_i\in\{-1,+1\}$, el problema ideal busca:
 
-[
+$$
 \min_{w,b}\frac{1}{2}\|w\|_2^2
-]
+$$
 
 sujeto a:
 
-[
+$$
 y_i(w^Tx_i+b)\ge 1 \quad \text{para todo } i
-]
+$$
 
 **Símbolo por símbolo:**
 
-- minimizar (\|w\|_2^2/2) equivale a maximizar el margen;
-- (x_i) es la observación (i);
-- (y_i) indica su clase con signo;
+- minimizar $\|w\|_2^2/2$ equivale a maximizar el margen;
+- $x_i$ es la observación $i$;
+- $y_i$ indica su clase con signo;
 - si la clasificación es correcta y está fuera del margen, el producto es al menos 1;
 - la restricción debe cumplirse para todos los casos.
 
@@ -658,38 +658,38 @@ En datos reales puede no existir separación perfecta o puede ser indeseable: fo
 
 ### 5.5 Margen blando y parámetro C
 
-Introducimos variables de holgura (\xi_i):
+Introducimos variables de holgura $\xi_i$:
 
-[
+$$
 \min_{w,b,\xi}\frac{1}{2}\|w\|_2^2+C\sum_{i=1}^{n}\xi_i
-]
+$$
 
 sujeto a:
 
-[
+$$
 y_i(w^Tx_i+b)\ge 1-\xi_i,\qquad \xi_i\ge 0
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (\xi_i) mide cuánto invade o cruza el margen la observación (i);
-- (C) asigna costo total a esas violaciones;
+- $\xi_i$ mide cuánto invade o cruza el margen la observación $i$;
+- $C$ asigna costo total a esas violaciones;
 - el primer término favorece margen amplio;
 - el segundo favorece ajustar los casos de train;
-- (C) grande castiga fuerte las violaciones y puede estrechar el margen;
-- (C) pequeño acepta más violaciones para una frontera más regularizada.
+- $C$ grande castiga fuerte las violaciones y puede estrechar el margen;
+- $C$ pequeño acepta más violaciones para una frontera más regularizada.
 
-No hay un (C) universal. Su efecto depende de escalado, cantidad de datos, representación y convención de la implementación.
+No hay un $C$ universal. Su efecto depende de escalado, cantidad de datos, representación y convención de la implementación.
 
 ### 5.6 Hinge loss
 
 La pérdida bisagra puede escribirse:
 
-[
+$$
 \ell_{hinge}(y,f(x))=\max(0,1-yf(x))
-]
+$$
 
-- si (yf(x)\ge1), el caso está correctamente clasificado fuera del margen y la pérdida es cero;
+- si $yf(x)\ge1$, el caso está correctamente clasificado fuera del margen y la pérdida es cero;
 - si queda dentro del margen, paga una pérdida positiva;
 - si cruza al lado incorrecto, paga más.
 
@@ -703,26 +703,26 @@ La distancia y el margen dependen de coordenadas. Si una feature numérica tiene
 
 Un kernel calcula similitud como si los datos se hubieran proyectado a otro espacio. El kernel RBF típico es:
 
-[
+$$
 K(x,x')=\exp\left(-\gamma\|x-x'\|_2^2\right)
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (x) y (x') son dos observaciones;
-- (\|x-x'\|_2^2) es su distancia euclídea al cuadrado;
-- (\gamma) controla cuán rápido cae la similitud con la distancia;
-- (\exp) transforma el valor en una similitud entre 0 y 1;
-- (\gamma) grande produce zonas de influencia muy locales y una frontera flexible;
-- (\gamma) pequeño produce influencia amplia y una frontera más suave.
+- $x$ y $x'$ son dos observaciones;
+- $\|x-x'\|_2^2$ es su distancia euclídea al cuadrado;
+- $\gamma$ controla cuán rápido cae la similitud con la distancia;
+- $\exp$ transforma el valor en una similitud entre 0 y 1;
+- $\gamma$ grande produce zonas de influencia muy locales y una frontera flexible;
+- $\gamma$ pequeño produce influencia amplia y una frontera más suave.
 
-Un kernel puede modelar no linealidad, pero suele escalar peor con la cantidad de observaciones y requiere tuning conjunto de (C) y (\gamma). En texto disperso de alta dimensión, un kernel lineal suele ser un candidato temprano porque ya existe gran expresividad y el cómputo puede aprovechar ceros. “Suele” es una hipótesis de trabajo, no un veredicto SAIJ.
+Un kernel puede modelar no linealidad, pero suele escalar peor con la cantidad de observaciones y requiere tuning conjunto de $C$ y $\gamma$. En texto disperso de alta dimensión, un kernel lineal suele ser un candidato temprano porque ya existe gran expresividad y el cómputo puede aprovechar ceros. “Suele” es una hipótesis de trabajo, no un veredicto SAIJ.
 
 ### 5.9 Multiclase
 
 La SVM binaria debe extenderse para múltiples fueros, por ejemplo mediante one-vs-rest o one-vs-one. La primera entrena una frontera por clase contra el resto; la segunda, una por cada par. La estrategia afecta costo, cantidad de modelos y significado de scores.
 
-Con muchas clases, one-vs-one crea (K(K-1)/2) clasificadores. Con (K=8), serían 28. One-vs-rest crea 8. Sin embargo, la comparación no se reduce al conteo: implementaciones y tamaños de subproblemas importan.
+Con muchas clases, one-vs-one crea $K(K-1)/2$ clasificadores. Con $K=8$, serían 28. One-vs-rest crea 8. Sin embargo, la comparación no se reduce al conteo: implementaciones y tamaños de subproblemas importan.
 
 ### 5.10 Score, no probabilidad
 
@@ -738,13 +738,13 @@ El margen de una SVM ordena confianza geométrica, pero no es una probabilidad. 
 
 > **Ejercicio conceptual 7**
 >
-> Aumentar (C) mejora train y empeora validación. ¿Qué interpretación proponés?
+> Aumentar $C$ mejora train y empeora validación. ¿Qué interpretación proponés?
 >
 > **Respuesta razonada:** el costo alto de violaciones puede haber llevado a una frontera más ajustada a casos particulares, reduciendo regularización efectiva. Hay que confirmar estabilidad en validación y revisar escalado, ruido y rango de búsqueda.
 
 > **Ejercicio conceptual 8**
 >
-> ¿Por qué un RBF con (\gamma) enorme puede sobreajustar?
+> ¿Por qué un RBF con $\gamma$ enorme puede sobreajustar?
 >
 > **Respuesta razonada:** cada observación influye en una región muy pequeña; la frontera puede rodear casos individuales. Esa flexibilidad reproduce detalles de train que quizá no se repitan.
 
@@ -770,30 +770,30 @@ Preguntas para auditar diversidad:
 
 ### 6.3 Bagging
 
-**Bagging** abrevia *bootstrap aggregating*. Entrena (B) modelos sobre muestras bootstrap de train. Una muestra bootstrap toma (n) observaciones con reemplazo de un conjunto de tamaño (n): algunas aparecen varias veces y otras quedan fuera.
+**Bagging** abrevia *bootstrap aggregating*. Entrena $B$ modelos sobre muestras bootstrap de train. Una muestra bootstrap toma $n$ observaciones con reemplazo de un conjunto de tamaño $n$: algunas aparecen varias veces y otras quedan fuera.
 
 Para clasificación, la predicción puede ser votación:
 
-[
+$$
 \hat y(x)=\operatorname{modo}\{h_1(x),h_2(x),\ldots,h_B(x)\}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (x) es la observación nueva;
-- (h_b) es el modelo número (b);
-- (B) es la cantidad total de miembros;
-- cada (h_b(x)) emite una clase;
-- (\operatorname{modo}) elige la más votada;
-- (\hat y(x)) es la predicción agregada.
+- $x$ es la observación nueva;
+- $h_b$ es el modelo número $b$;
+- $B$ es la cantidad total de miembros;
+- cada $h_b(x)$ emite una clase;
+- $\operatorname{modo}$ elige la más votada;
+- $\hat y(x)$ es la predicción agregada.
 
 Si se promedian probabilidades estimadas:
 
-[
+$$
 \hat p_k(x)=\frac{1}{B}\sum_{b=1}^{B}\hat p_{bk}(x)
-]
+$$
 
-donde (\hat p_{bk}(x)) es la probabilidad que el miembro (b) asigna a la clase (k). El promedio puede ser más estable, pero no queda calibrado por definición.
+donde $\hat p_{bk}(x)$ es la probabilidad que el miembro $b$ asigna a la clase $k$. El promedio puede ser más estable, pero no queda calibrado por definición.
 
 ### 6.4 Random forest
 
@@ -812,18 +812,18 @@ La cantidad de árboles suele reducir la variabilidad del promedio hasta estabil
 
 Una muestra bootstrap deja fuera aproximadamente una fracción de train para cada árbol. Esas observaciones **out-of-bag** (OOB) pueden evaluarse usando solo árboles que no las incluyeron.
 
-Para una observación (i), definamos (B_i^{OOB}) como el conjunto de árboles cuyo bootstrap no contenía a (i). Su predicción OOB es:
+Para una observación $i$, definamos $B_i^{OOB}$ como el conjunto de árboles cuyo bootstrap no contenía a $i$. Su predicción OOB es:
 
-[
+$$
 \hat y_i^{OOB}=\operatorname{modo}\{h_b(x_i):b\in B_i^{OOB}\}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (x_i) es la observación de train evaluada;
-- (b\in B_i^{OOB}) restringe la votación a árboles que no la vieron;
+- $x_i$ es la observación de train evaluada;
+- $b\in B_i^{OOB}$ restringe la votación a árboles que no la vieron;
 - el modo agrega sus clases;
-- (\hat y_i^{OOB}) permite una estimación interna.
+- $\hat y_i^{OOB}$ permite una estimación interna.
 
 OOB es útil como diagnóstico y a veces como alternativa eficiente a una validación adicional, pero no reemplaza automáticamente un split temporal o grupal. El bootstrap aleatorio puede mezclar documentos relacionados o futuros respecto del caso evaluado. La estructura operacional manda.
 
@@ -831,24 +831,24 @@ OOB es útil como diagnóstico y a veces como alternativa eficiente a una valida
 
 Boosting construye aprendices secuencialmente. Cada nuevo miembro intenta corregir errores o residuos del conjunto anterior. En clasificación con gradiente boosting, la idea general es sumar funciones pequeñas:
 
-[
+$$
 F_M(x)=F_0(x)+\sum_{m=1}^{M}\eta\,h_m(x)
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (F_0(x)) es la predicción inicial, por ejemplo basada en prevalencias;
-- (M) es el número de etapas;
-- (m) identifica una etapa;
-- (h_m(x)) es el aprendiz débil agregado en esa etapa;
-- (\eta) es la tasa de aprendizaje;
-- (F_M(x)) es el score final acumulado.
+- $F_0(x)$ es la predicción inicial, por ejemplo basada en prevalencias;
+- $M$ es el número de etapas;
+- $m$ identifica una etapa;
+- $h_m(x)$ es el aprendiz débil agregado en esa etapa;
+- $\eta$ es la tasa de aprendizaje;
+- $F_M(x)$ es el score final acumulado.
 
 Un **aprendiz débil** no significa inútil: es un modelo deliberadamente simple, como un árbol poco profundo, que mejora un aspecto. La secuencia convierte muchas correcciones pequeñas en una regla potente.
 
 ### 6.7 Tasa de aprendizaje y número de etapas
 
-Una (\eta) pequeña hace que cada árbol aporte poco. Suele requerir más etapas, aumenta tiempo, pero puede producir aprendizaje gradual. Una (\eta) grande corrige rápido y puede sobreajustar o volverse inestable. Número de etapas y tasa se seleccionan juntos.
+Una $\eta$ pequeña hace que cada árbol aporte poco. Suele requerir más etapas, aumenta tiempo, pero puede producir aprendizaje gradual. Una $\eta$ grande corrige rápido y puede sobreajustar o volverse inestable. Número de etapas y tasa se seleccionan juntos.
 
 Otros controles:
 
@@ -922,17 +922,17 @@ Mezclar niveles causa confusión. Un peso de clase cambia el objetivo de entrena
 
 Una pérdida ponderada puede escribirse:
 
-[
+$$
 J=\frac{1}{n}\sum_{i=1}^{n}\alpha_{y_i}\,\ell(y_i,\hat y_i)
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (n) es el tamaño de train;
-- (i) recorre observaciones;
-- (y_i) es la clase real;
-- (\alpha_{y_i}) es el peso asignado a esa clase;
-- (\ell) es la pérdida base;
+- $n$ es el tamaño de train;
+- $i$ recorre observaciones;
+- $y_i$ es la clase real;
+- $\alpha_{y_i}$ es el peso asignado a esa clase;
+- $\ell$ es la pérdida base;
 - un peso mayor hace que equivocarse en esa clase cueste más durante el ajuste.
 
 En regresión logística y SVM, los pesos modifican la contribución a la pérdida. En árboles, alteran el cálculo ponderado de impureza o el costo de errores. En boosting, pueden combinarse con la pérdida o pesos de muestra, pero interactúan con la corrección secuencial.
@@ -962,17 +962,17 @@ En multiclase, un umbral único puede no alcanzar. Pueden usarse umbral de proba
 
 Si el costo de enviar un caso penal a un fuero equivocado fuera mayor que el de derivarlo a revisión, las decisiones deberían reflejarlo. Una matriz de costos conceptual es:
 
-[
+$$
 R(a\mid x)=\sum_{k=1}^{K}C(a,k)\,p(y=k\mid x)
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (a) es una acción posible: asignar una clase o abstenerse;
-- (k) recorre clases reales;
-- (C(a,k)) es el costo de tomar acción (a) cuando la verdad es (k);
-- (p(y=k\mid x)) es la probabilidad estimada;
-- (R(a\mid x)) es el riesgo esperado;
+- $a$ es una acción posible: asignar una clase o abstenerse;
+- $k$ recorre clases reales;
+- $C(a,k)$ es el costo de tomar acción $a$ cuando la verdad es $k$;
+- $p(y=k\mid x)$ es la probabilidad estimada;
+- $R(a\mid x)$ es el riesgo esperado;
 - se elige la acción con menor riesgo si probabilidades y costos son confiables.
 
 En SAIJ, los costos no deben inventarse. Son una **decisión pendiente de Javier y del contexto de uso**. El ejercicio enseña la estructura, no fija valores.
@@ -995,7 +995,7 @@ En SAIJ, los costos no deben inventarse. Son una **decisión pendiente de Javier
 
 ### 8.1 Parámetro versus hiperparámetro
 
-Los **parámetros** se aprenden dentro del ajuste: coeficientes, cortes o pesos de árboles. Los **hiperparámetros** configuran ese aprendizaje: regularización, profundidad, (C), (\gamma), cantidad de árboles o tasa.
+Los **parámetros** se aprenden dentro del ajuste: coeficientes, cortes o pesos de árboles. Los **hiperparámetros** configuran ese aprendizaje: regularización, profundidad, $C$, $\gamma$, cantidad de árboles o tasa.
 
 Elegir hiperparámetros también aprende de datos. Si probamos cien configuraciones y elegimos la mejor sobre test, test deja de ser una estimación final y se convierte en validación encubierta.
 
@@ -1009,30 +1009,30 @@ regularización: L1, L2
 ngramas: unigramas, uni+bigramas
 ```
 
-Eso produce (3\times2\times2=12) configuraciones. La búsqueda aleatoria toma combinaciones desde rangos o distribuciones. Puede explorar mejor cuando pocos hiperparámetros dominan y evita gastar la misma resolución en dimensiones poco sensibles.
+Eso produce $3\times2\times2=12$ configuraciones. La búsqueda aleatoria toma combinaciones desde rangos o distribuciones. Puede explorar mejor cuando pocos hiperparámetros dominan y evita gastar la misma resolución en dimensiones poco sensibles.
 
 Ninguna búsqueda compensa un rango absurdo o una validación inválida. El presupuesto y los valores deben registrarse antes de mirar resultados finales.
 
 ### 8.3 Validación cruzada
 
-Para (K) folds, una métrica promedio es:
+Para $K$ folds, una métrica promedio es:
 
-[
+$$
 \bar m=\frac{1}{K}\sum_{k=1}^{K}m_k
-]
+$$
 
 y su dispersión muestral puede resumirse:
 
-[
+$$
 s_m=\sqrt{\frac{1}{K-1}\sum_{k=1}^{K}(m_k-\bar m)^2}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (K) es la cantidad de folds;
-- (m_k) es la métrica en el fold (k);
-- (\bar m) es el promedio;
-- (s_m) resume cuánto varía entre folds;
+- $K$ es la cantidad de folds;
+- $m_k$ es la métrica en el fold $k$;
+- $\bar m$ es el promedio;
+- $s_m$ resume cuánto varía entre folds;
 - una media sin dispersión oculta inestabilidad.
 
 Los folds no son réplicas independientes perfectas porque comparten datos de entrenamiento. La dispersión es diagnóstico, no intervalo causal automático.
@@ -1112,7 +1112,7 @@ Separar un paso “porque ya estaba precomputado” no lo vuelve inocente. Si fu
 |---|---|---|---|---|---|
 | Logística | Sí para numéricas; cuidado con dispersión | One-hot u otra codificación legítima | Imputación/indicadores | Excelente compatibilidad | Regularización afectada por escala |
 | SVM lineal | Importante | Codificación numérica válida | Tratamiento explícito | Excelente compatibilidad | Margen dominado por escalas |
-| SVM RBF | Esencial | Codificación y densidad cuidadas | Tratamiento explícito | Puede ser costoso | Costo cuadrático/sensibilidad a (\gamma) |
+| SVM RBF | Esencial | Codificación y densidad cuidadas | Tratamiento explícito | Puede ser costoso | Costo cuadrático/sensibilidad a $\gamma$ |
 | Árbol | Poco sensible a escala | Depende de implementación | Depende de implementación | Posible pero no siempre adecuado | Orden artificial y alta cardinalidad |
 | Bosque | Poco sensible | Igual que árbol | Igual que implementación | Costo potencial alto | Memoria e importancias sesgadas |
 | Boosting | Poco sensible si usa árboles | Implementación específica | Algunas manejan faltantes | Debe justificarse | Tuning y leakage en encoding |
@@ -1182,15 +1182,15 @@ A discrimina mejor; B puede calibrar mejor. Para ranking podría preferirse A; p
 
 Para clasificación binaria:
 
-[
+$$
 BS=\frac{1}{n}\sum_{i=1}^{n}(p_i-y_i)^2
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (n) es la cantidad de casos;
-- (p_i) es la probabilidad estimada del caso (i);
-- (y_i) vale 0 o 1;
+- $n$ es la cantidad de casos;
+- $p_i$ es la probabilidad estimada del caso $i$;
+- $y_i$ vale 0 o 1;
 - la diferencia al cuadrado penaliza distancia probabilística;
 - menor Brier es mejor, pero mezcla calibración y discriminación.
 
@@ -1208,10 +1208,10 @@ Con probabilidad binaria y costos simples, un umbral no tiene por qué ser 0.5. 
 
 En multiclase SAIJ podrían usarse dos criterios:
 
-1. probabilidad máxima superior a (\tau);
-2. diferencia entre primera y segunda clase superior a (\delta).
+1. probabilidad máxima superior a $\tau$;
+2. diferencia entre primera y segunda clase superior a $\delta$.
 
-Si alguno falla, se abstiene. (\tau) controla confianza absoluta estimada; (\delta), ambigüedad relativa. Ambos son hiperparámetros operacionales y no se inventan sin costos y capacidad humana.
+Si alguno falla, se abstiene. $\tau$ controla confianza absoluta estimada; $\delta$, ambigüedad relativa. Ambos son hiperparámetros operacionales y no se inventan sin costos y capacidad humana.
 
 ### 10.6 Error frecuente, checkpoint y SAIJ
 
@@ -1238,17 +1238,17 @@ Si alguno falla, se abstiene. (\tau) controla confianza absoluta estimada; (\del
 - **Explicación global:** resume cómo se comporta el modelo en general.
 - **Explicación local:** intenta explicar una predicción concreta.
 
-Coeficientes son globales; contribuciones (w_jx_j) son locales para un lineal. Un árbol pequeño admite reglas globales; una ruta explica un caso. Un bosque requiere agregación; una importancia global no explica por sí sola un documento.
+Coeficientes son globales; contribuciones $w_jx_j$ son locales para un lineal. Un árbol pequeño admite reglas globales; una ruta explica un caso. Un bosque requiere agregación; una importancia global no explica por sí sola un documento.
 
 ### 11.2 Coeficientes y contribuciones
 
 Para un lineal:
 
-[
+$$
 z=b+\sum_j w_jx_j
-]
+$$
 
-El coeficiente (w_j) describe sensibilidad por unidad, mientras (w_jx_j) describe contribución de esa feature en el caso. Un peso alto no importa localmente si (x_j=0). En multiclase, cada clase tiene su vector y la interpretación es relativa a las demás o a la estrategia OvR.
+El coeficiente $w_j$ describe sensibilidad por unidad, mientras $w_jx_j$ describe contribución de esa feature en el caso. Un peso alto no importa localmente si $x_j=0$. En multiclase, cada clase tiene su vector y la interpretación es relativa a las demás o a la estrategia OvR.
 
 Correlación entre términos distribuye señal. Cambiar regularización o vocabulario puede alterar pesos sin cambiar mucho predicciones. La estabilidad de explicación debe comprobarse.
 
@@ -1262,17 +1262,17 @@ Esa medida favorece features con muchos valores o muchas oportunidades de corte.
 
 La importancia por permutación mide cuánto cae una métrica al romper una feature en datos de evaluación:
 
-[
+$$
 I_j=m(X,y)-m(X^{\pi(j)},y)
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (m) es la métrica elegida;
-- (X) es la matriz original;
-- (y) son targets;
-- (X^{\pi(j)}) es la misma matriz con la columna (j) permutada;
-- (I_j) es la caída atribuida a destruir su asociación.
+- $m$ es la métrica elegida;
+- $X$ es la matriz original;
+- $y$ son targets;
+- $X^{\pi(j)}$ es la misma matriz con la columna $j$ permutada;
+- $I_j$ es la caída atribuida a destruir su asociación.
 
 Si dos features son redundantes, permutar una puede causar poca caída porque la otra conserva señal. Si permutar genera combinaciones imposibles, la estimación sale fuera de distribución. La importancia depende de métrica y muestra.
 
@@ -1341,26 +1341,26 @@ Los árboles sobre datos dispersos de enorme dimensión evalúan muchas oportuni
 
 ### 12.5 Disperso versus denso
 
-Si (N) documentos, (D) features y solo una fracción (\rho) es no cero:
+Si $N$ documentos, $D$ features y solo una fracción $\rho$ es no cero:
 
-- almacenamiento denso crece aproximadamente con (N\times D);
-- almacenamiento disperso crece con (\rho ND) más índices.
+- almacenamiento denso crece aproximadamente con $N\times D$;
+- almacenamiento disperso crece con $\rho ND$ más índices.
 
-Con (\rho) muy pequeña, la diferencia es enorme. Pero algunos algoritmos convierten internamente a denso; comprobar compatibilidad es parte de la selección.
+Con $\rho$ muy pequeña, la diferencia es enorme. Pero algunos algoritmos convierten internamente a denso; comprobar compatibilidad es parte de la selección.
 
 ### 12.6 Presupuesto experimental
 
 El costo total aproximado de una búsqueda es:
 
-[
+$$
 T_{total}\approx H\times K\times T_{fit}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (H) es la cantidad de configuraciones;
-- (K) es la cantidad de folds;
-- (T_{fit}) es el tiempo medio de un ajuste;
+- $H$ es la cantidad de configuraciones;
+- $K$ es la cantidad de folds;
+- $T_{fit}$ es el tiempo medio de un ajuste;
 - el producto omite paralelismo y overhead, pero muestra la escala.
 
 Si probamos 60 configuraciones en 5 folds, son 300 ajustes por familia. Agregar calibración o nested CV multiplica más. Diseñar búsquedas informadas también es rigor.
@@ -1483,18 +1483,18 @@ Precision, recall y F1 por fuero revelan asimetrías ocultas por promedios. Una 
 
 ### 14.3 Pares de confusión
 
-Para clases (a) y (b), una tasa dirigida puede ser:
+Para clases $a$ y $b$, una tasa dirigida puede ser:
 
-[
+$$
 q_{a\to b}=\frac{C_{ab}}{\sum_{r=1}^{K}C_{ar}}
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (C_{ab}) es la cantidad real (a) predicha como (b);
-- el denominador suma toda la fila real (a);
-- (q_{a\to b}) es la fracción de la clase (a) desviada hacia (b);
-- no tiene por qué igualar (q_{b\to a}).
+- $C_{ab}$ es la cantidad real $a$ predicha como $b$;
+- el denominador suma toda la fila real $a$;
+- $q_{a\to b}$ es la fracción de la clase $a$ desviada hacia $b$;
+- no tiene por qué igualar $q_{b\to a}$.
 
 La asimetría orienta hipótesis: una clase amplia puede absorber a una específica, o la etiqueta puede ser jerárquica.
 
@@ -1648,18 +1648,18 @@ Macro da igual peso a cada clase; weighted pondera por soporte; micro agrega dec
 
 ### 16.3 Regla de abstención
 
-Definamos (p_{(1)}) como la mayor probabilidad y (p_{(2)}) como la segunda. Una regla simple:
+Definamos $p_{(1)}$ como la mayor probabilidad y $p_{(2)}$ como la segunda. Una regla simple:
 
-[
+$$
 \text{aceptar si }p_{(1)}\ge\tau\quad\text{y}\quad p_{(1)}-p_{(2)}\ge\delta
-]
+$$
 
 **Símbolo por símbolo:**
 
-- (p_{(1)}) es la probabilidad de la clase líder;
-- (p_{(2)}) es la competidora inmediata;
-- (\tau) es el umbral absoluto;
-- (\delta) es la separación mínima;
+- $p_{(1)}$ es la probabilidad de la clase líder;
+- $p_{(2)}$ es la competidora inmediata;
+- $\tau$ es el umbral absoluto;
+- $\delta$ es la separación mínima;
 - si no se cumplen ambos, el sistema deriva a revisión.
 
 Para scores sin calibrar puede usarse margen relativo, pero su interpretación operacional se valida. Una regla específica por clase puede responder a costos distintos, siempre con soporte suficiente.
@@ -1668,15 +1668,15 @@ Para scores sin calibrar puede usarse margen relativo, pero su interpretación o
 
 La **cobertura** es la fracción de casos autoaceptados:
 
-[
+$$
 \operatorname{cobertura}=\frac{n_{aceptados}}{n_{total}}
-]
+$$
 
 El **riesgo selectivo** mide error entre aceptados:
 
-[
+$$
 \operatorname{riesgo}=\frac{n_{errores\ aceptados}}{n_{aceptados}}
-]
+$$
 
 Aumentar umbrales suele bajar cobertura y riesgo, pero no siempre de forma uniforme por clase o grupo. Si la abstención recae desproporcionadamente en una región o tipo documental, el flujo humano absorbe esa desigualdad y debe medirse.
 
@@ -1809,7 +1809,7 @@ Antes de implementar, completá esta hoja en lenguaje natural:
 - **Mayoría:** qué verifica ________
 - **Naive Bayes:** representación ________
 - **Logística:** regularización a comparar ________
-- **SVM lineal:** rango de (C) ________
+- **SVM lineal:** rango de $C$ ________
 - **Árbol/ensambles:** condición de entrada ________
 
 ### 18.4 Evaluación
@@ -1866,8 +1866,8 @@ Marcá solo lo que puedas explicar con un ejemplo propio:
 - [ ] Reconstruyo Gini, entropía y ganancia de un split.
 - [ ] Relaciono profundidad, hojas y poda con generalización.
 - [ ] Explico hiperplano, margen y vectores soporte.
-- [ ] Distingo margen duro y blando, y el papel de (C).
-- [ ] Explico kernel RBF y la intuición de (\gamma).
+- [ ] Distingo margen duro y blando, y el papel de $C$.
+- [ ] Explico kernel RBF y la intuición de $\gamma$.
 - [ ] Distingo bagging, random forest y boosting.
 - [ ] Explico OOB y por qué no reemplaza siempre un split temporal.
 - [ ] Relaciono tasa de aprendizaje, etapas y sobreajuste.

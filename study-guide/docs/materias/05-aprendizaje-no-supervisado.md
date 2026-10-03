@@ -43,6 +43,23 @@ Los materiales locales inventariados sostienen como ejes explícitos la introduc
 
 **Cursada 2026.** Las clases de Laura y Georgina *sí* recorren DBSCAN, t-SNE y UMAP (y FIFA como práctico). Esta guía **no** adopta los números de esas notebooks ni del apunte de verificación como resultados de Javier. Se actualiza el alcance: esos métodos existen en la materia; acá se enseñan como *advertencias de uso*, no como receta FIFA. La profundidad sigue en geometría, k-means, jerárquico, evaluación, estabilidad, PCA y embeddings.
 
+### 0.4 Qué deberías poder hacer al terminar
+
+Al completar la materia deberías poder:
+
+1. explicar por qué “sin target” no significa “sin criterio” y qué decisiones quedan ocultas en representación, escala y métrica;
+2. distinguir metadatos, TF-IDF y embeddings como representaciones que responden preguntas distintas;
+3. decidir entre escalado por columna y normalización por fila, y separar ajuste de evaluación en el preprocesamiento;
+4. calcular a mano distancia euclídea, Manhattan y similitud coseno e interpretar qué significa cercanía en cada una;
+5. ejecutar k-means a mano: asignación, actualización de centroides, inercia, y explicar los mínimos locales;
+6. interpretar silhouette por observación y por distribución, sin tratarlo como certificado;
+7. explicar single, complete, average y Ward, y leer el dendrograma como historia de fusiones;
+8. describir DBSCAN con vecindad \(\varepsilon\), `min_samples`, núcleo, frontera y ruido, y su sensibilidad a escala;
+9. evaluar sin ground truth combinando evaluación interna, estabilidad, revisión cualitativa y utilidad;
+10. nombrar clusters con evidencia y límites, sin reificar el rótulo como categoría jurídica;
+11. usar PCA como complemento acotado y separar varianza capturada de significado;
+12. diseñar un protocolo mínimo de recuperación (Precision@k, Recall@k, MRR) y evaluar la recuperación antes de agregar un generador.
+
 ### Checkpoint 0
 
 Antes de avanzar, deberías poder explicar:
@@ -58,7 +75,7 @@ Antes de avanzar, deberías poder explicar:
 
 ### 1.1 Del error contra una respuesta a la coherencia de una estructura
 
-En aprendizaje supervisado, cada ejemplo suele venir acompañado por un target (y_i). Un clasificador propone (hat y_i) y existe una referencia externa contra la cual medir el error. En aprendizaje no supervisado observamos (x_i), pero no recibimos una (y_i) que diga “este es el grupo correcto”, “esta es la dimensión correcta” o “este documento debe ocupar exactamente este lugar”.
+En aprendizaje supervisado, cada ejemplo suele venir acompañado por un target $y_i$. Un clasificador propone $\hat y_i$ y existe una referencia externa contra la cual medir el error. En aprendizaje no supervisado observamos $x_i$, pero no recibimos una $y_i$ que diga “este es el grupo correcto”, “esta es la dimensión correcta” o “este documento debe ocupar exactamente este lugar”.
 
 Eso no elimina los objetivos. Los desplaza. Hay que elegir una función que represente qué estructura interesa. k-means, por ejemplo, busca centroides que reduzcan distancias cuadráticas dentro de grupos. Un método jerárquico decide qué grupos fusionar mediante un criterio de enlace. PCA busca direcciones que conserven mucha varianza lineal. Una búsqueda por coseno ordena candidatos según el ángulo entre representaciones. Cada uno responde una pregunta distinta.
 
@@ -131,9 +148,9 @@ Un documento jurídico tiene hechos, argumentos, citas, decisiones, estructura, 
 
 Símbolo por símbolo:
 
-- (mathbf{x}_i): representación completa del objeto (i);
+- $\mathbf{x}_i$: representación completa del objeto (i);
 - (i): índice del documento u observación;
-- (x_{ij}): valor de la característica (j) para el objeto (i);
+- $x_{ij}$: valor de la característica (j) para el objeto (i);
 - (j): índice de característica;
 - (p): cantidad total de características o dimensiones.
 
@@ -157,9 +174,9 @@ Símbolo por símbolo:
 
 - (t): término;
 - (d): documento;
-- (operatorname{tf}(t,d)): frecuencia del término (t) dentro de (d), en forma bruta o normalizada;
+- $\operatorname{tf}(t,d)$: frecuencia del término (t) dentro de (d), en forma bruta o normalizada;
 - (N): cantidad de documentos del corpus de ajuste;
-- (operatorname{df}(t)): cantidad de documentos que contienen (t);
+- $\operatorname{df}(t)$: cantidad de documentos que contienen (t);
 - (log): logaritmo, que comprime diferencias extremas;
 - el producto: combina presencia local con rareza global.
 
@@ -191,8 +208,8 @@ f(d)=\mathbf{z}_d\in\mathbb{R}^{m}.
 
 - (f): modelo o función de representación;
 - (d): documento o fragmento;
-- (mathbf{z}_d): embedding resultante;
-- (mathbb{R}^{m}): espacio de (m) números reales;
+- $\mathbf{z}_d$: embedding resultante;
+- $\mathbb{R}^{m}$: espacio de (m) números reales;
 - (m): dimensión del embedding.
 
 “Denso” significa que muchas coordenadas pueden tener valores distintos de cero. A diferencia de TF-IDF, cada coordenada aislada no suele equivaler a una palabra interpretable. El significado surge del patrón completo y del entrenamiento del modelo.
@@ -233,10 +250,10 @@ Una transformación frecuente es el puntaje estándar:
 z_{ij}=\frac{x_{ij}-\mu_j}{\sigma_j}.
 \]
 
-- (x_{ij}): valor original de la observación (i) en la variable (j);
-- (mu_j): media de la variable (j), aprendida en el conjunto de ajuste;
-- (sigma_j): desvío estándar de esa variable;
-- (z_{ij}): valor centrado y medido en desvíos estándar.
+- $x_{ij}$: valor original de la observación (i) en la variable (j);
+- $\mu_j$: media de la variable (j), aprendida en el conjunto de ajuste;
+- $\sigma_j$: desvío estándar de esa variable;
+- $z_{ij}$: valor centrado y medido en desvíos estándar.
 
 **Ejemplo inventado.** Si la longitud media es (10.000), el desvío es (2.000) y un documento mide (14.000):
 
@@ -265,7 +282,7 @@ En texto suele interesar la dirección del vector más que su magnitud. La norma
 - cada coordenada se divide por la misma longitud;
 - el vector conserva dirección y pierde magnitud absoluta.
 
-**Ejemplo inventado.** Para (mathbf{x}=(3,4)), la norma es (sqrt{9+16}=5). Entonces:
+**Ejemplo inventado.** Para $\mathbf{x}=(3,4)$, la norma es $\sqrt{9+16}=5$. Entonces:
 
 \[
 \hat{\mathbf{x}}=(3/5,4/5)=(0{,}6,0{,}8).
@@ -298,7 +315,7 @@ La decisión pendiente no es “usar StandardScaler”. Es decidir qué variable
 
 ### 4.1 Distancia euclídea
 
-La distancia euclídea entre dos vectores (mathbf{x}) y (mathbf{y}) es:
+La distancia euclídea entre dos vectores $\mathbf{x}$ y $\mathbf{y}$ es:
 
 \[
 d_2(\mathbf{x},\mathbf{y})
@@ -308,13 +325,13 @@ d_2(\mathbf{x},\mathbf{y})
 Símbolo por símbolo:
 
 - (p): número de dimensiones;
-- (x_j), (y_j): coordenadas (j) de los dos objetos;
-- (x_j-y_j): diferencia en esa coordenada;
+- $x_j$, $y_j$: coordenadas (j) de los dos objetos;
+- $x_j-y_j$: diferencia en esa coordenada;
 - el cuadrado evita cancelaciones y penaliza diferencias grandes;
 - la suma combina dimensiones;
 - la raíz devuelve la unidad original cuando las variables comparten unidad.
 
-**Ejemplo inventado.** Sean (mathbf{x}=(1,2)) y (mathbf{y}=(4,6)):
+**Ejemplo inventado.** Sean $\mathbf{x}=(1,2)$ y $\mathbf{y}=(4,6)$:
 
 \[
 d_2=\sqrt{(1-4)^2+(2-6)^2}
@@ -330,7 +347,7 @@ d_1(\mathbf{x},\mathbf{y})
 =\sum_{j=1}^{p}|x_j-y_j|.
 \]
 
-- (|x_j-y_j|): diferencia absoluta en la dimensión (j);
+- $|x_j-y_j|$: diferencia absoluta en la dimensión (j);
 - la suma agrega desplazamientos por ejes;
 - no eleva al cuadrado, por lo que una diferencia grande no crece tan rápido como en la suma cuadrática.
 
@@ -357,7 +374,7 @@ Interpretación: recorrido total si solo pudiéramos movernos horizontal y verti
 - el cociente mide alineación angular;
 - para vectores no negativos suele quedar entre 0 y 1; en general puede ir de (-1) a (1).
 
-**Ejemplo inventado.** (mathbf{x}=(1,1)), (mathbf{y}=(2,0)):
+**Ejemplo inventado.** $\mathbf{x}=(1,1)$, $\mathbf{y}=(2,0)$:
 
 \[
 \mathbf{x}\cdot\mathbf{y}=2,
@@ -375,7 +392,7 @@ No mide coincidencia de magnitud; mide dirección.
 
 Al crecer (p), el volumen de un espacio crece tan rápido que una cantidad fija de puntos queda dispersa. Intuitivamente, hay muchas maneras de diferir en al menos una dimensión. Los “vecinos” pueden dejar de ser realmente cercanos y las distancias pueden concentrarse: la diferencia relativa entre el vecino más próximo y uno lejano se reduce.
 
-Un ejemplo geométrico ayuda. En una línea, una cuadrícula con diez posiciones cubre el espacio con diez puntos. En dos dimensiones, mantener la misma resolución requiere (10^2=100). En cien dimensiones requeriría (10^{100}), una cantidad imposible. No es una receta literal de muestreo; muestra el crecimiento combinatorio.
+Un ejemplo geométrico ayuda. En una línea, una cuadrícula con diez posiciones cubre el espacio con diez puntos. En dos dimensiones, mantener la misma resolución requiere $10^2=100$. En cien dimensiones requeriría $10^{100}$, una cantidad imposible. No es una receta literal de muestreo; muestra el crecimiento combinatorio.
 
 En TF-IDF, miles de dimensiones no vuelven inútil la representación: la matriz suele ser dispersa y el coseno puede funcionar bien. Pero obliga a preguntar qué términos son ruido, qué tan estables son los vecinos y si la señal semántica se diluye. En embeddings densos, muchas dimensiones tampoco garantizan mejor semántica; la geometría depende del entrenamiento.
 
@@ -383,7 +400,7 @@ En TF-IDF, miles de dimensiones no vuelven inútil la representación: la matriz
 
 ### 4.5 Material complementario integrado 2 — Coseno y euclídea después de normalizar
 
-Si (hat{\mathbf{x}}) y (hat{\mathbf{y}}) tienen norma uno:
+Si $\hat{\mathbf{x}}$ y $\hat{\mathbf{y}}$ tienen norma uno:
 
 \[
 \lVert\hat{\mathbf{x}}-\hat{\mathbf{y}}\rVert_2^2
@@ -406,7 +423,7 @@ Interpretación: sobre la esfera unitaria, ordenar por mayor coseno equivale a o
 
 1. comparar variables de unidades distintas sin escalar;
 2. usar coseno con vectores cero, donde el denominador no existe;
-3. creer que similitud (0{,}9) tiene significado universal;
+3. creer que similitud $0{,}9$ tiene significado universal;
 4. interpretar cercanía del embedding como equivalencia jurídica;
 5. cambiar normalización entre indexación y consulta.
 
@@ -416,7 +433,7 @@ Para recuperar textos por contenido, TF-IDF o embeddings normalizados con coseno
 
 ### Checkpoint 3
 
-Dos embeddings tienen coseno (0{,}95). ¿Son jurídicamente equivalentes? No. Solo son muy alineados según ese modelo y preprocesamiento. La equivalencia exige revisar contenido, jurisdicción, tiempo, rol procesal y propósito.
+Dos embeddings tienen coseno $0{,}95$. ¿Son jurídicamente equivalentes? No. Solo son muy alineados según ese modelo y preprocesamiento. La equivalencia exige revisar contenido, jurisdicción, tiempo, rol procesal y propósito.
 
 ---
 
@@ -478,15 +495,15 @@ Repite hasta que las asignaciones o el objetivo cambian muy poco.
 
 ### 6.2 Centroide
 
-Para el cluster (C_k), su centroide es:
+Para el cluster $C_k$, su centroide es:
 
 \[
 \boldsymbol{\mu}_k=\frac{1}{|C_k|}\sum_{\mathbf{x}_i\in C_k}\mathbf{x}_i.
 \]
 
-- (C_k): conjunto de observaciones asignadas al grupo (k);
-- (|C_k|): cantidad de observaciones del grupo;
-- (mathbf{x}_i): vector de la observación (i);
+- $C_k$: conjunto de observaciones asignadas al grupo (k);
+- $|C_k|$: cantidad de observaciones del grupo;
+- $\mathbf{x}_i$: vector de la observación (i);
 - \(\boldsymbol{\mu}_k\): media coordenada por coordenada.
 
 El centroide puede no ser una observación real. En texto, un centroide TF-IDF no es un documento; es un perfil promedio de pesos.
@@ -498,8 +515,8 @@ c_i=\arg\min_{k\in\{1,\ldots,K\}}
 \lVert\mathbf{x}_i-\boldsymbol{\mu}_k\rVert_2^2.
 \]
 
-- (c_i): cluster asignado a (i);
-- (arg\min): índice (k) que minimiza la expresión;
+- $c_i$: cluster asignado a (i);
+- $\arg\min$: índice (k) que minimiza la expresión;
 - (K): número fijado de clusters;
 - la distancia cuadrática favorece cercanía euclídea al centro.
 
@@ -518,14 +535,14 @@ k-means intenta reducir (J). Una inercia menor para el mismo (K), datos y prepro
 
 ### 6.5 Ejemplo inventado trabajado a mano
 
-Datos unidimensionales: (1,2,8,9). Elegimos (K=2) y centroides iniciales (mu_1=1), (mu_2=8).
+Datos unidimensionales: (1,2,8,9). Elegimos (K=2) y centroides iniciales $\mu_1=1$, $\mu_2=8$.
 
 **Asignación:**
 
 - (1) y (2) están más cerca de (1);
 - (8) y (9) están más cerca de (8).
 
-Quedan (C_1=\{1,2\}), (C_2=\{8,9\}).
+Quedan $C_1=\{1,2\}$, $C_2=\{8,9\}$.
 
 **Actualización:**
 
@@ -592,7 +609,7 @@ k-means podría resumir perfiles de documentos para exploración. Antes de nombr
 
 ### Checkpoint 4
 
-Si se duplica numéricamente una variable sin escalar, ¿puede cambiar k-means? Sí. Sus diferencias cuadráticas pesan cuatro veces más, porque ((2\Delta)^2=4\Delta^2).
+Si se duplica numéricamente una variable sin escalar, ¿puede cambiar k-means? Sí. Sus diferencias cuadráticas pesan cuatro veces más, porque $(2\Delta)^2=4\Delta^2$.
 
 ---
 
@@ -670,7 +687,7 @@ Con (n) observaciones, se calculan o actualizan distancias entre grupos. Al inic
 
 **Ejemplo inventado unidimensional:** A=1, B=2, C=8, D=10.
 
-Distancias iniciales: AB=1, CD=2, BC=6, AC=7, BD=8, AD=9. Primero se fusionan A y B. Después la distancia entre ({A,B}) y C dependerá del linkage.
+Distancias iniciales: AB=1, CD=2, BC=6, AC=7, BD=8, AD=9. Primero se fusionan A y B. Después la distancia entre $\{A,B\}$ y C dependerá del linkage.
 
 ### 8.3 Dendrograma y corte
 
@@ -691,7 +708,7 @@ d_{\text{single}}(A,B)=
 
 Toma el par más cercano. Puede recuperar formas alargadas, pero sufre **chaining**: una cadena de puntos intermedios conecta grupos que intuitivamente parecían separados.
 
-En el ejemplo, distancia entre ({1,2}) y ({8}) es (min(7,6)=6).
+En el ejemplo, distancia entre $\{1,2\}$ y $\{8\}$ es $\min(7,6)=6$.
 
 ### 8.5 Complete linkage
 
@@ -702,7 +719,7 @@ d_{\text{complete}}(A,B)=
 
 Controla el par más lejano y favorece grupos compactos. Puede ser sensible a outliers.
 
-Entre ({1,2}) y ({8}): (max(7,6)=7).
+Entre $\{1,2\}$ y $\{8\}$: $\max(7,6)=7$.
 
 ### 8.6 Average linkage
 
@@ -712,7 +729,7 @@ d_{\text{average}}(A,B)=
 \sum_{\mathbf{x}\in A}\sum_{\mathbf{y}\in B}d(\mathbf{x},\mathbf{y}).
 \]
 
-Promedia todas las distancias cruzadas. En el ejemplo: ((7+6)/2=6{,}5). Suele ser un compromiso entre chaining y compactación extrema.
+Promedia todas las distancias cruzadas. En el ejemplo: $(7+6)/2=6{,}5$. Suele ser un compromiso entre chaining y compactación extrema.
 
 ### 8.7 Ward
 
@@ -724,11 +741,11 @@ Ward elige la fusión que produce el menor aumento de suma de cuadrados dentro d
 \lVert\boldsymbol{\mu}_A-\boldsymbol{\mu}_B\rVert_2^2.
 \]
 
-- (|A|), (|B|): tamaños;
+- $|A|$, $|B|$: tamaños;
 - \(\boldsymbol{\mu}_A\), \(\boldsymbol{\mu}_B\): centroides;
 - el factor pondera por tamaño;
 - la distancia cuadrática mide separación entre medias;
-- (Delta): aumento de variación interna al fusionar.
+- $\Delta$: aumento de variación interna al fusionar.
 
 Ward está ligado a geometría euclídea y favorece clusters compactos. No debe combinarse sin pensar con cualquier disimilitud.
 
@@ -757,11 +774,52 @@ Si single linkage une dos conjuntos mediante pocos documentos puente, ¿la soluc
 
 ## 9. DBSCAN: densidad y ruido, con cautela
 
-**Cursada 2026.** Georgina lo enseña. Agrupa por densidad, admite formas no convexas, marca ruido. Lo mínimo: vecindad \(\varepsilon\), `min_samples`, núcleo / frontera / ruido, sensibilidad a escala y densidades distintas.
+**Cursada 2026.** Georgina lo enseña. Agrupa por densidad, admite formas no convexas, marca ruido. No se desarrolla el laboratorio FIFA acá: esta sección enseña el mecanismo y sus riesgos, no una receta de notebook.
 
-No se desarrolla el laboratorio FIFA acá. **Interpretación para SAIJ:** llamar “ruido” a un fallo es especialmente riesgoso. Rareza geométrica \(\neq\) irrelevancia. Cualquier exclusión pide política humana.
+### 9.1 Intuición
 
-**Error frecuente.** Usar DBSCAN “porque k-means no dio lindo” sin escalar y sin definir qué harás con el ruido.
+k-means y el jerárquico definen grupos por cercanía a un centro o por enlaces entre pares. DBSCAN hace otra pregunta: **¿dónde hay densidad suficiente?** Une puntos que están cerca unos de otros y deja afuera, como *ruido*, a los puntos aislados. Por eso puede recuperar formas no convexas (por ejemplo, dos medias lunas) que un corte por centroides parte mal.
+
+### 9.2 Vocabulario
+
+- **Vecindad épsilon ($\varepsilon$):** el radio alrededor de un punto que cuenta como “cerca”. Un punto se relaciona con los que están a distancia \(\le \varepsilon\).
+- **`min_samples`:** la cantidad mínima de vecinos (incluido el propio punto) para que un punto sea **núcleo**.
+- **Núcleo:** punto con al menos `min_samples` vecinos dentro de \(\varepsilon\).
+- **Frontera:** punto que no es núcleo pero está dentro de \(\varepsilon\) de un núcleo.
+- **Ruido:** punto que no es núcleo ni alcanzable desde un núcleo; queda sin asignar.
+
+Dos parámetros cambian todo: \(\varepsilon\) y `min_samples`. Y como la densidad se mide con distancias, la escala de las variables la altera igual que en k-means.
+
+### 9.3 Ejemplo inventado mínimo
+
+Puntos unidimensionales: \(1, 2, 3, 8, 9, 15\). Fijamos \(\varepsilon=1{,}5\) y `min_samples=2`.
+
+- Vecindad de 1: \(\{1,2\}\) → 2 vecinos → **núcleo**.
+- Vecindad de 2: \(\{1,2,3\}\) → **núcleo**.
+- Vecindad de 3: \(\{2,3\}\) (el 1 queda a distancia 2) → **núcleo**.
+- Vecindad de 8: \(\{8,9\}\) → **núcleo**.
+- Vecindad de 9: \(\{8,9\}\) → **núcleo**.
+- Vecindad de 15: \(\{15\}\) → 1 vecino, y no está dentro de \(\varepsilon\) de ningún núcleo → **ruido**.
+
+Resultado: dos clusters \(\{1,2,3\}\) y \(\{8,9\}\), y un punto de ruido: 15.
+
+**Interpretación.** 15 no es un error. Es un punto aislado **a esta escala y con este \(\varepsilon\)**. Con otro \(\varepsilon\) o después de escalar, 15 podría integrarse a un grupo o seguir solo. El rótulo “ruido” describe la geometría, no el valor del caso.
+
+### 9.4 Interpretación
+
+DBSCAN no exige elegir K, pero exige elegir \(\varepsilon\) y `min_samples`, que son tan arbitrarios como K. Ventaja: no obliga a que todo punto pertenezca a un grupo; desventaja: la frontera entre “frontera” y “ruido” depende de dos números. Si las densidades de los grupos son muy distintas, un único \(\varepsilon\) puede perder el grupo más disperso o mezclar el más denso.
+
+### 9.5 Error frecuente
+
+Usar DBSCAN “porque k-means no dio lindo” sin escalar y sin definir qué harás con el ruido. Si no decidiste antes qué hacer con los puntos sin asignar, el método te lo decide: quedan afuera del análisis, y eso es una decisión de exclusión disfrazada de parámetro técnico.
+
+### 9.6 Checkpoint 7
+
+Si duplicás todas las coordenadas del ejemplo (misma estructura, otra escala) y mantenés \(\varepsilon=1{,}5\), ¿qué pasa? Las distancias se duplican: entre 1 y 2 queda 2, mayor que \(\varepsilon=1{,}5\), así que 1 pierde su vecino y el cluster \(\{1,2,3\}\) se rompe; varios puntos pasarían a ruido. La estructura no cambió, pero el resultado sí: por eso se escala (y se justifica $\varepsilon$) **antes** de correr, no después de ver el gráfico.
+
+### 9.7 Transferencia SAIJ
+
+Llamar “ruido” a un fallo es especialmente riesgoso. **Rareza geométrica \(\neq\) irrelevancia:** un documento aislado puede ser el único representante de un tema, una excepción jurídicamente importante o un artefacto de representación. Cualquier exclusión (de un cluster o como ruido) pide política humana: quién decide, con qué criterio y cómo se audita. Un cluster denso tampoco es una categoría legal; sigue siendo una agrupación según esta representación y estos dos parámetros.
 
 ---
 
@@ -788,7 +846,7 @@ Ejemplo: si hay una etiqueta administrativa de fuero, puede preguntarse cuánto 
 
 Las etiquetas son ayudas de auditoría cuando el objetivo no era reconstruirlas. Si el objetivo real es predecir fuero, el problema es supervisado y debe evaluarse como tal.
 
-**Chequeo de rangos.** ARI **no** vive en \([0,1]\): está acotado por debajo cerca de \(-0{,}5\); el azar da ~0; 1 es acuerdo perfecto. “Las métricas van de 0 a 1” es falso para ARI y para silueta (\(-1\) a \(1\)).
+**Chequeo de rangos.** ARI **no** vive en \([0,1]\): está acotado por debajo cerca de \(-0{,}5\); el azar da ~0; 1 es acuerdo perfecto. “Las métricas van de 0 a 1” es falso para ARI y para silueta ($-1$ a $1$).
 
 ### 10.3 Evaluación cualitativa
 
@@ -854,7 +912,7 @@ Esto es un diseño pendiente, no un resultado.
 
 Elegir la corrida cuyo gráfico “se ve mejor” después de mirar muchas. Esa selección visual no controlada produce optimismo y oculta intentos fallidos.
 
-### Checkpoint 7
+### Checkpoint 8
 
 Una solución es estable entre semillas pero cambia por completo entre TF-IDF y embeddings. ¿Qué aprendemos? Que la inicialización no es la principal fuente de incertidumbre; la representación define estructuras diferentes y debe decidirse según el propósito.
 
@@ -903,7 +961,7 @@ Dos personas pueden asignar nombres distintos. Ese desacuerdo es información. C
 
 No todo cluster necesita nombre. “No interpretable con evidencia suficiente” es una salida válida.
 
-### Checkpoint 8
+### Checkpoint 9
 
 ¿Por qué mirar solo términos de mayor peso puede engañar? Porque pueden representar fórmulas comunes, nombres propios, artefactos de OCR o rasgos que diferencian el grupo sin resumir todos sus documentos.
 
@@ -919,7 +977,7 @@ PCA, análisis de componentes principales, busca direcciones ortogonales que cap
 
 ### 12.2 Centrado
 
-Sea una matriz (X\in\mathbb{R}^{n\times p}):
+Sea una matriz $X\in\mathbb{R}^{n\times p}$:
 
 - (n): observaciones;
 - (p): variables;
@@ -932,10 +990,10 @@ Primero se resta la media de cada columna:
 X_c=X-\mathbf{1}\boldsymbol{\mu}^{\top}.
 \]
 
-- (X_c): matriz centrada;
+- $X_c$: matriz centrada;
 - \(\boldsymbol{\mu}\): vector de medias de columnas;
-- (mathbf{1}): vector de unos que replica las medias para todas las filas;
-- ({}^{\top}): transposición.
+- $\mathbf{1}$: vector de unos que replica las medias para todas las filas;
+- $^{\top}$: transposición.
 
 Centrar coloca el origen en el promedio. Sin centrado, la primera dirección podría capturar desplazamiento respecto del cero arbitrario.
 
@@ -947,25 +1005,25 @@ Una matriz de covarianza muestral es:
 S=\frac{1}{n-1}X_c^{\top}X_c.
 \]
 
-- (S_{jj}): varianza de la variable (j);
-- (S_{jk}): covarianza entre variables (j) y (k);
+- $S_{jj}$: varianza de la variable (j);
+- $S_{jk}$: covarianza entre variables (j) y (k);
 - covarianza positiva: tienden a aumentar juntas;
 - negativa: una aumenta cuando otra disminuye;
 - cercana a cero: poca relación lineal, no independencia garantizada.
 
-PCA encuentra vectores propios (mathbf{v}_r) y valores propios (lambda_r):
+PCA encuentra vectores propios $\mathbf{v}_r$ y valores propios $\lambda_r$:
 
 \[
 S\mathbf{v}_r=\lambda_r\mathbf{v}_r.
 \]
 
-- (mathbf{v}_r): dirección del componente (r);
-- (lambda_r): varianza capturada en esa dirección;
-- los componentes se ordenan de mayor a menor (lambda).
+- $\mathbf{v}_r$: dirección del componente (r);
+- $\lambda_r$: varianza capturada en esa dirección;
+- los componentes se ordenan de mayor a menor $\lambda$.
 
 ### 12.4 Proyección
 
-El score de una observación centrada (mathbf{x}_{c,i}) sobre el componente (r) es:
+El score de una observación centrada $\mathbf{x}_{c,i}$ sobre el componente (r) es:
 
 \[
 z_{ir}=\mathbf{x}_{c,i}^{\top}\mathbf{v}_r.
@@ -990,7 +1048,7 @@ R_m=\frac{\sum_{r=1}^{m}\lambda_r}
 - (p): componentes totales posibles;
 - numerador: varianza conservada;
 - denominador: varianza total;
-- (R_m): proporción de varianza explicada.
+- $R_m$: proporción de varianza explicada.
 
 Un valor alto no garantiza conservación de información jurídicamente relevante. Una señal rara pero importante puede tener poca varianza.
 
@@ -1006,9 +1064,9 @@ Con (m) componentes, una reconstrucción aproximada es:
 \hat{X}=Z_mV_m^{\top}+\mathbf{1}\boldsymbol{\mu}^{\top}.
 \]
 
-- (Z_m): coordenadas reducidas;
-- (V_m): componentes retenidos;
-- (hat X): aproximación de la matriz original.
+- $Z_m$: coordenadas reducidas;
+- $V_m$: componentes retenidos;
+- $\hat X$: aproximación de la matriz original.
 
 El error de reconstrucción mide información lineal perdida. No recupera matices descartados ni vuelve interpretables los componentes. Los signos de un componente pueden invertirse sin cambiar la solución geométrica.
 
@@ -1040,7 +1098,7 @@ Por eso un mapa sirve para formular preguntas y seleccionar casos, no como evide
 
 PCA podría ayudar a inspeccionar metadatos numéricos o comprimir una representación antes de otro método. Una proyección de embeddings podría servir como mapa exploratorio. Ninguna autoriza a inferir que dos islas visuales son ramas doctrinales.
 
-### Checkpoint 9
+### Checkpoint 10
 
 Si los dos primeros componentes explican gran varianza, ¿basta para visualizar “la estructura verdadera”? No. Capturan varianza lineal, no necesariamente la estructura relevante, y el plano omite componentes restantes.
 
@@ -1075,8 +1133,8 @@ Si índice y consulta se normalizan, el producto punto equivale al coseno:
 =\cos(\mathbf{q},\mathbf{d}).
 \]
 
-- (mathbf{q}): embedding de consulta;
-- (mathbf{d}): embedding de documento o fragmento;
+- $\mathbf{q}$: embedding de consulta;
+- $\mathbf{d}$: embedding de documento o fragmento;
 - sombrero: normalización L2;
 - el score ordena candidatos por alineación.
 
@@ -1117,7 +1175,7 @@ Usar un umbral de coseno tomado de otro modelo y asumir que conserva significado
 
 Los embeddings pueden generar candidatos para revisión, navegación o búsqueda semántica. Javier todavía debe decidir unidad, modelo, segmentación, normalización, metadatos obligatorios, conjunto de consultas y evaluación. No se informa que ningún modelo ya funcione bien.
 
-### Checkpoint 10
+### Checkpoint 11
 
 ¿Por qué un baseline TF-IDF sigue siendo necesario si hay embeddings? Porque ofrece trazabilidad léxica, puede rendir muy bien en terminología exacta y revela si la complejidad semántica aporta una mejora real.
 
@@ -1236,7 +1294,7 @@ Luego calcula un score, por ejemplo coseno:
 s_i=\cos(\mathbf{q},\mathbf{d}_i).
 \]
 
-Ordena índices (i) de mayor a menor (s_i). El resultado es un ranking, no una respuesta jurídica.
+Ordena índices (i) de mayor a menor $s_i$. El resultado es un ranking, no una respuesta jurídica.
 
 ### 16.2 Ranking y top-k
 
@@ -1288,7 +1346,7 @@ Para la posición del primer resultado pertinente:
 \operatorname{MRR}=\frac{1}{Q}\sum_{q=1}^{Q}\operatorname{RR}(q).
 \]
 
-- (operatorname{rank}_q): posición del primer relevante para consulta (q);
+- $\operatorname{rank}_q$: posición del primer relevante para consulta (q);
 - (Q): cantidad de consultas;
 - MRR: promedio recíproco.
 
@@ -1332,7 +1390,7 @@ Evaluar la respuesta generada sin evaluar por separado qué recuperó el sistema
 
 El primer experimento no debería ser “hacer un chatbot”. Debería ser construir y auditar una recuperación: corpus versionado, consultas, juicios, baseline TF-IDF, candidato denso, filtros y análisis de errores.
 
-### Checkpoint 11
+### Checkpoint 12
 
 Si un generador produce una respuesta correcta pese a no recuperar el antecedente pertinente, ¿el RAG está validado? No. Puede haber respondido por conocimiento previo o casualidad; la cadena de evidencia falló.
 
@@ -1624,11 +1682,11 @@ La longitud puede dominar porque sus diferencias numéricas son mucho mayores. k
 
 ### Respuesta 5
 
-La norma es (sqrt{0^2+3^2+4^2}=5). El vector normalizado es ((0,0{,}6,0{,}8)). Conserva dirección y pierde magnitud: ((0,6,8)) quedaría igual. Eso puede ser deseable para comparar proporciones, pero no si la magnitud total importa.
+La norma es $\sqrt{0^2+3^2+4^2}=5$. El vector normalizado es $(0,0{,}6,0{,}8)$. Conserva dirección y pierde magnitud: ((0,6,8)) quedaría igual. Eso puede ser deseable para comparar proporciones, pero no si la magnitud total importa.
 
 ### Respuesta 6
 
-Diferencias: (3) y (4). Euclídea: (sqrt{3^2+4^2}=5). Manhattan: (3+4=7). La primera mide línea recta; la segunda suma desplazamientos por ejes. Formalizan costos geométricos distintos. Elegir depende del problema, escala y robustez deseada.
+Diferencias: (3) y (4). Euclídea: $\sqrt{3^2+4^2}=5$. Manhattan: (3+4=7). La primera mide línea recta; la segunda suma desplazamientos por ejes. Formalizan costos geométricos distintos. Elegir depende del problema, escala y robustez deseada.
 
 ### Respuesta 7
 
@@ -1722,7 +1780,7 @@ Puede ser error de extracción, idioma distinto, documento excepcional válido, 
 
 ### Respuesta 27
 
-Precision@5 (=3/5=0{,}6). Recall@5 (=3/6=0{,}5). No indican relevancia de posiciones individuales, gravedad de omisiones, acuerdo entre jueces, calidad fuera de top 5 ni utilidad por tipo de consulta. Tampoco son resultados SAIJ porque el escenario es inventado.
+Precision@5 $=3/5=0{,}6$. Recall@5 $=3/6=0{,}5$. No indican relevancia de posiciones individuales, gravedad de omisiones, acuerdo entre jueces, calidad fuera de top 5 ni utilidad por tipo de consulta. Tampoco son resultados SAIJ porque el escenario es inventado.
 
 ### Respuesta 28
 

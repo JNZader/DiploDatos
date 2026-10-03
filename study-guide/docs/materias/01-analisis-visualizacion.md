@@ -1930,6 +1930,16 @@ Debés comprender:
 
 Resultado esperado: reglas de inclusión/exclusión justificadas y conteos de impacto.
 
+> **Checkpoint 16**
+>
+> Antes de pasar al target, decidiste qué filas entran y cuáles no. ¿Qué dos consecuencias tiene esa regla sobre lo que el TP1 puede afirmar después?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Define la **población** sobre la que valen todos los conteos posteriores (fuera de esa regla no se puede generalizar nada) y **condiciona el target**: la regla de inclusión decide qué documentos pueden clasificarse, así que cambiar la regla cambia la distribución y las ambigüedades de `fuero`. Por eso la regla debe quedar escrita y con conteos de impacto, no implícita en un filtro.
+> </details>
+
 #### Etapa C — Target `fuero`
 
 Debés comprender:

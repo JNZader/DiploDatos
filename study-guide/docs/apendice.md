@@ -35,7 +35,7 @@ No necesitás consultar estas fuentes para entender el capítulo. Sirven únicam
 - Materias 1–4 de esta guía, usadas como contrato de entrada para calidad del corpus, representación, particiones, evaluación, familias de modelos y análisis de errores.
 - Notebook del equipo `Mentoria_trabajo_G01.ipynb`, mantenido únicamente como roadmap general de la mentoría. Materia 5 no adopta clusters, métricas ni desempeños del equipo como resultados de Javier.
 - PCA se incorporó como complemento conceptual acotado para explicar reducción dimensional y su puente con clustering y embeddings; no se afirma que el inventario local disponible pruebe una clase específica sobre PCA.
-- DBSCAN, t-SNE y UMAP no se desarrollaron porque no aparecen identificados en los materiales locales actualmente disponibles. Se registró la omisión y, para mapas de visualización, la advertencia conceptual necesaria sin atribuir cobertura inexistente a la cursada.
+- DBSCAN, t-SNE y UMAP se enseñan en la cursada 2026; esta guía los cubre como advertencias de uso, no como recetas, sin adoptar los números de esas notebooks como resultados de Javier.
 - El proyecto de búsqueda semántica y RAG se presenta como integración posterior de la mentoría, no como materia formal de DiploDatos.
 
 

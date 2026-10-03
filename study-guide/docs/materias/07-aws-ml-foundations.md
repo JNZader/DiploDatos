@@ -57,6 +57,8 @@ intuición
 
 ¿Qué parte del curso cuenta para la evaluación? Si contestás “los labs”, paramos acá.
 
+> **Respuesta razonada:** los **quizzes** de la plataforma. Los labs son asincrónicos, repetibles y **sin puntaje**; la idea rectora de la optativa lo dice: la nota son los quizzes, no los labs.
+
 ---
 
 ## 1. El problema antes de la consola
@@ -87,6 +89,8 @@ Empezar por “hagamos SageMaker” porque hay crédito de Academy.
 
 “Bajar 10% los reclamos en 6 meses.” ¿Online o batch? ¿Qué es un FP caro?
 
+> **Respuesta razonada:** depende de cuándo se necesita la decisión: si el reclamo se clasifica en el momento de la llamada, *online*; si la medición es periódica sobre un lote, *batch*. El plazo “6 meses” es la meta de negocio, no la cadencia. Un FP caro es marcar como problema algo que no lo es cuando esa marca dispara una acción costosa o dañina (en el capítulo: bloquearle la tarjeta a quien viaja a Europa cuesta reputación).
+
 ### Hipótesis SAIJ
 
 “Clasificar fuero” no es métrica de negocio. ¿Quién usa la etiqueta y qué pasa si es CIVIL-COMERCIAL cuando era penal?
@@ -94,6 +98,8 @@ Empezar por “hagamos SageMaker” porque hay crédito de Academy.
 ### Ejercicio
 
 Escribí la línea de problema para un bot de FAQ **sin** nombrar un servicio AWS.
+
+> **Respuesta razonada:** una línea con decisión, usuario, métrica, plazo y modo. Ejemplo: “un bot responde consultas frecuentes en línea; éxito = resolver sin intervención humana ≥ 80 % con TTFT &lt; 2 s, medido en 3 meses”. No hace falta ningún nombre de servicio.
 
 ---
 
@@ -129,6 +135,8 @@ Dejar el endpoint de un lab prendido el fin de semana. Umbral *hardcodeado* en e
 
 ¿Por qué el umbral va en una variable de entorno y no en el artefacto del modelo?
 
+> **Respuesta razonada:** el umbral es una **decisión de política** (costo de FP vs FN) que cambia sin reentrenar. Si queda hardcodeado en el artefacto, se congela con el modelo; en una variable de entorno se ajusta por despliegue o por negocio sin reempaquetar nada.
+
 ### Hipótesis CC
 
 Un índice RAG que no se apaga no es “alta disponibilidad”: es una factura. El pin de snapshot es el equivalente a “esta versión está en S3”.
@@ -136,6 +144,8 @@ Un índice RAG que no se apaga no es “alta disponibilidad”: es una factura. 
 ### Ejercicio
 
 Listá tres recursos que apagarías el viernes a la noche en un lab (nombres de tipo: notebook, endpoint, bucket de logs). No hace falta IDs reales.
+
+> **Respuesta razonada:** la instancia/notebook del lab (terminar), el endpoint de inferencia (dejar de servir) y el bucket o job de logs/transformación por lotes que no corre el fin de semana. El bucket con los datos de train **no** se apaga: el depósito sigue aunque el taller se incendie.
 
 ---
 
@@ -165,6 +175,8 @@ Maximizar accuracy con 1% de positivos. El modelo que dice “nunca fraude” ac
 
 En el 2×2 de arriba, ¿qué umbral elegís si un FN vale 10 veces un FP? No hace falta número exacto: el *sentido*.
 
+> **Respuesta razonada:** el sentido es **bajar el umbral**: cazar más fraudes aunque suban los FP, porque cada FN cuesta 10× un FP. Con los números del capítulo: umbral alto = 6 FN + 1 FP (≈61 unidades); umbral bajo = 1 FN + 20 FP (≈30 unidades).
+
 ### Hipótesis SAIJ
 
 FN: no recuperás el fallo que el abogado necesitaba. FP: le mostrás un sumario como si fuera la sentencia. El umbral de un ranker es la misma familia de decisión.
@@ -172,6 +184,8 @@ FN: no recuperás el fallo que el abogado necesitaba. FP: le mostrás un sumario
 ### Ejercicio
 
 Dibujá una matriz 2×2 con números redondos y marcá el umbral que preferís para un filtro de spam vs un filtro de cáncer (inventado). ¿Por qué no es el mismo?
+
+> **Respuesta razonada:** en spam, un FP (mail legítimo a la papelera) es molesto pero barato → umbral más alto; un FN (spam que pasa) es tolerable. En cáncer, un FN es carísimo (no detectar la enfermedad) → umbral más bajo, aceptando más FP. El capítulo: el corte es política según costo de FN vs FP, no “más ML”.
 
 ---
 
@@ -199,6 +213,8 @@ Mandar cada frame a Rekognition “porque es ML”. Chatbot transaccional de alt
 
 Lex primero o Bedrock primero para “reservar un turno a las 15”. Una frase.
 
+> **Respuesta razonada:** **Lex primero**: es el servicio de diálogo transaccional (turnos/reservas, con Lambda); un LLM de 70B para un flujo cerrado es caro y frágil. El capítulo: chatbot transaccional de alto volumen no arranca por un LLM de 70B.
+
 ### Hipótesis SAIJ
 
 OCR de un PDF de fallo no es “el fuero”. Es un paso de ingesta, como Rekognition es un paso de etiquetas.
@@ -206,6 +222,8 @@ OCR de un PDF de fallo no es “el fuero”. Es un paso de ingesta, como Rekogni
 ### Ejercicio
 
 Escribí un flujo de tres cajas: objeto entra a S3 → ¿qué se dispara? → ¿dónde se guarda la etiqueta? Sin nombres de cuenta.
+
+> **Respuesta razonada:** objeto en S3 → evento dispara **Lambda** → Lambda llama a la API de visión (p. ej. Rekognition) → la etiqueta se guarda como metadata del objeto o en una base. El capítulo: Lambda disparada por S3; el OCR es un paso de ingesta, no “el fuero”.
 
 ---
 
@@ -241,6 +259,8 @@ RAG en Bedrock: set de preguntas reales y job de evaluación **antes** de casart
 
 Un banco argentino, dato no puede salir. ¿Converse + perfil US Cross-Region? Sí/no y por qué.
 
+> **Respuesta razonada:** **no**: el perfil Global/Cross-Region no es residencia de datos; el pedido puede procesarse en otra región (es capacidad, no “la región más barata”). Para que el dato no salga se usan regiones concretas + SCP/IAM, no el perfil Global.
+
 ### Hipótesis SAIJ / CC
 
 Tier **gratis** de Gemini (optativa 3) usa contenido para mejorar productos. Bedrock no, en la política citada. Elegir API es elegir **contrato de datos**, no solo precio. El fallo con nombres y el padrón del consorcio no van a un tier que reentrena.
@@ -248,6 +268,8 @@ Tier **gratis** de Gemini (optativa 3) usa contenido para mejorar productos. Bed
 ### Ejercicio
 
 Tabla de tres filas: Bedrock, Comprehend, un chatbot de consumo. Columna: “¿pueden usar mi texto para entrenar?”. Completala con sí/no/depende **sin** inventar un cuarto servicio.
+
+> **Respuesta razonada:** Bedrock → **no** (política citada: no usa tus prompts para entrenar ni se los muestra al proveedor). Comprehend → **sí/puede** (puede guardar contenido para mejorar sus modelos). Chatbot de consumo → **depende** (muchos tiers gratis usan el contenido para mejorar productos; es el contraste de la Hipótesis SAIJ/CC).
 
 ---
 
@@ -264,6 +286,8 @@ No mezcles entregas. Guardrail de Bedrock ≠ contrato de fundamentación de Ver
 ### Checkpoint 6
 
 ¿Dónde se aprueba *esta* materia? Una palabra.
+
+> **Respuesta razonada:** **Canvas** (los quizzes de la plataforma). Ni los labs, ni el Consorcio, ni SAIJ.
 
 ### Transferencia (decisión pendiente)
 

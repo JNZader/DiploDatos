@@ -64,6 +64,8 @@ Los números de FinNova y Vertex son **ilustraciones de curso**, no mediciones d
 
 Antes de avanzar, escribí un caso de uso en **tres números**: (a) qué pasa si se filtra un dato, (b) cuántos milisegundos podés esperar al primer token, (c) de qué orden son los tokens por pedido. Si no podés, no elijas modelo.
 
+> **Respuesta razonada:** el punto es nombrar los tres, no “el mejor modelo”: (a) filtración = multa, pérdida de confianza o nada si es público; (b) TTFT objetivo (p. ej. &lt; 800 ms); (c) orden de magnitud de tokens por pedido (cientos o miles). Sin esos tres números no hay criterio de elección.
+
 ---
 
 ## 1. De la frase al próximo token
@@ -104,6 +106,8 @@ Tratar Q, K, V como tres “significados” misteriosos, o creer que la atenció
 
 Si tokenizás por espacios, ¿qué se rompe en `microcréditos` y en un código `9867#24`?
 
+> **Respuesta razonada:** cada fragmento queda como un token entero y el modelo no ve subunidades compartidas ni estructura interna: `microcréditos` no se relaciona con `crédito` y el código `9867#24` es un token opaco. El capítulo: nombres propios raros se parten (Fin+Nova) y “tres palabras de negocio no son tres tokens”.
+
 ### Hipótesis SAIJ
 
 El campo `materia` y el `texto` no son el mismo objeto: uno es etiqueta de catálogo, el otro es relato. Atender “como si fueran la misma palabra” es el error de tomar el sumario por el fallo.
@@ -111,6 +115,8 @@ El campo `materia` y el `texto` no son el mismo objeto: uno es etiqueta de catá
 ### Ejercicio
 
 Contá a mano, sin modelo, una partición BPE *plausible* de `CÁMARA CIVIL Y COMERCIAL`. ¿Cuántos tokens *mínimo* si cada palabra frecuente es un token y `Y` también? El número exacto depende del vocabulario: el ejercicio es notar que **no** son cinco palabras de abogado.
+
+> **Respuesta razonada:** lo que importa es que “5 palabras” no implica 5 tokens: `CÁMARA` y `COMERCIAL` pueden partirse en más de un fragmento (p. ej. CÁM+ARA, COMER+CIAL) y `Y` es un token propio. Mínimo plausible: entre 4 y 6 tokens según el vocabulario; el error sería contar `CÁMARA CIVIL Y COMERCIAL` como 5 tokens por “5 palabras”.
 
 ---
 
@@ -134,7 +140,7 @@ VRAM de **pesos** (regla de curso, el 1.2 cubre buffers):
 \mathrm{VRAM_{pesos}(GB)} \approx N_{\mathrm{B}} \times \frac{b}{8} \times 1{,}2
 \]
 
-**Ejemplo inventado.** Modelo de 8 mil millones de parámetros, FP16 (\(b=16\)): \(8 \times 2 \times 1{,}2 = 19{,}2\) GB. En una T4 de 16 GB **no entra**. El mismo 8B a ~4 bit: \(8 \times 0{,}5 \times 1{,}2 = 4{,}8\) GB.
+**Ejemplo inventado.** Modelo de 8 mil millones de parámetros, FP16 ($b=16$): \(8 \times 2 \times 1{,}2 = 19{,}2\) GB. En una T4 de 16 GB **no entra**. El mismo 8B a ~4 bit: \(8 \times 0{,}5 \times 1{,}2 = 4{,}8\) GB.
 
 **Cifra chequeada.** El margen 1.2 **no** incluye un contexto largo. En un 3B, decenas de miles de tokens de KV en FP16 son ~GB extra. El OOM aparece con usuarios concurrentes, no en el `print` del lab.
 
@@ -148,6 +154,8 @@ Logits \(z_i\), temperatura \(T\): se usa \(z_i / T\) y softmax. \(T \to 0\) es 
 
 Un FAQ necesita TTFT &lt; 800 ms. ¿Qué palanca tocás primero: T, tamaño de prompt, o GPU más “FLOPS”? Justificá con prefill vs decode.
 
+> **Respuesta razonada:** el TTFT es tiempo de **prefill** → limitado por cómputo (TFLOPS). La palanca directa es reducir el prompt (menos tokens que procesar en paralelo) y, si hace falta, más TFLOPS. La temperatura afecta el **decode** (muestreo), no el prefill.
+
 ### Hipótesis SAIJ
 
 Un ranking que “contesta rápido” midiendo solo TPOT puede estar mintiendo el tiempo que el usuario espera: el cuello de un fallo largo es el **prefill** del cuerpo.
@@ -155,6 +163,8 @@ Un ranking que “contesta rápido” midiendo solo TPOT puede estar mintiendo e
 ### Ejercicio
 
 Con la fórmula de pesos, ¿entra un 3B FP16 en 16 GB? ¿Y un 3B a 4 bit? No uses calculadora de marketing; usá la regla.
+
+> **Respuesta razonada:** 3B FP16: \(3 \times 2 \times 1{,}2 = 7{,}2\) GB → entra. 3B a 4 bit: \(3 \times 0{,}5 \times 1{,}2 = 1{,}8\) GB → entra. El margen 1,2 **no** incluye KV cache ni contexto largo: el OOM aparece con usuarios concurrentes.
 
 ---
 
@@ -191,6 +201,8 @@ Llamar “open source” a Llama. Meter A y B en el mismo endpoint “para simpl
 
 Dictamen A vs B **sin marca de modelo**. Dos renglones.
 
+> **Respuesta razonada:** A (confidencial, bajo volumen, falla cara = filtración) → que no salga de casa: local/capex o API con contrato de datos. B (público, alto volumen, falla cara = factura) → opex por token con latencia corta. No es el mismo modelo ni el mismo endpoint.
+
 ### Hipótesis SAIJ / CC
 
 Fallo con nombres ≈ A. FAQ de horarios de un organismo, si el corpus está depurado, ≈ B. Una nota interna indexada como si fuera ley es mezclar A y B.
@@ -198,6 +210,8 @@ Fallo con nombres ≈ A. FAQ de horarios de un organismo, si el corpus está dep
 ### Ejercicio
 
 El lab usa un 3B. ¿Podés entregar el TP? Sí. ¿Podés poner ese peso en un producto del consorcio? No, por la licencia. Escribí esa distinción en una frase.
+
+> **Respuesta razonada:** el 3B del lab es licencia **Qwen Research (no comercial)**: sirve para aprender y entregar el TP, pero no para un producto del consorcio; para producto habría que usar 1.5B/7B (Apache 2.0) u otra vía con licencia compatible.
 
 ---
 
@@ -228,6 +242,8 @@ Catorce reglas en un solo system. CoT en una tarea de extraer un código. Few-sh
 
 Reescribí en cinco líneas un prompt de “¿este párrafo es SU, FA o NV?” con taxonomía cerrada y un few-shot con placeholder.
 
+> **Respuesta razonada:** rol (analista de mesa), taxonomía cerrada `{SU, FA, NV}` con definición por clase, un ejemplo por clase con `{TEXTO}` como placeholder, y formato de salida (JSON con claves fijas). El few-shot nunca lleva saldos ni datos reales.
+
 ### Hipótesis SAIJ
 
 Esa taxonomía es la de la mentoría. Un few-shot sesgado a CIVIL te fabrica CIVIL.
@@ -235,6 +251,8 @@ Esa taxonomía es la de la mentoría. Un few-shot sesgado a CIVIL te fabrica CIV
 ### Ejercicio
 
 Listá tres casos de prueba **antes** de escribir el prompt. Uno debe ser hostil (el usuario pide la sentencia en verso).
+
+> **Respuesta razonada:** un caso típico por clase, un caso frontera (ambigüedad real entre clases) y uno hostil (formato o instrucción inesperada: “en verso”). Los casos se escriben antes (TDD) y el hostil debe caer en `fuera_de_tema` o abstención, no inventar `urgente`.
 
 ---
 
@@ -272,6 +290,8 @@ Chunk por `##` al azar (el mismo documento en train y test). Contestar siempre e
 
 En el incidente Vertex, ¿qué control corta el falso positivo: ingesta, hit@K, contrato, o CRAG? Elegí **uno** y decí qué dejan afuera los otros.
 
+> **Respuesta razonada:** **CRAG** corta el relleno: un evaluador puntúa los chunks y puede decidir “no tengo información” (abstención). Los otros dejan huecos: la ingesta no tenía/recuperó el texto nuevo; hit@K mide recuperación pero no impide que el modelo rellene; el contrato exige citar pero no detecta la ausencia de evidencia.
+
 ### Hipótesis CC
 
 Nota tipo FAQ vs artículo de ley: el ranking léxico premia la nota. Filtro de tipo de fuente y contrato de citas son el CRAG de este corpus. Medirlo no es este TP.
@@ -283,6 +303,8 @@ Nota tipo FAQ vs artículo de ley: el ranking léxico premia la nota. Filtro de 
 ### Ejercicio
 
 Diseñá tres preguntas gold con `citation_key` inventado (`POLIZA#12`). No escribas código. Escribí qué pasaje *tiene* que salir.
+
+> **Respuesta razonada:** tres preguntas con su pasaje esperado, p. ej.: “¿la póliza 2024 cubre inundación rural?” → cláusula o endoso; “¿qué documento modificó la cobertura?” → la circular del mes pasado; “¿cuál es el tope?” → pasaje con montos. Cada una con `citation_key` y el texto que debe recuperarse para poder verificar hit@K.
 
 ---
 
@@ -312,6 +334,8 @@ Una sola tool que lee y escribe. Juez a T=0.7. Agente sin presupuesto.
 
 Un agente lee un PDF del usuario y puede mandar mail. ¿Qué pieza de la trifecta le sacás?
 
+> **Respuesta razonada:** el **canal de salida** (el mail): con datos privados + contenido no confiable (el PDF), el canal de salida es lo que convierte la inyección en daño. Se saca el canal o no se lee el PDF con esa tool.
+
 ### Hipótesis SAIJ / CC
 
 El “regrado” de afirmaciones es un juez de fidelidad, no un cross-encoder. La abstención del RAG es la tool que *no* existe si siempre contestás.
@@ -319,6 +343,8 @@ El “regrado” de afirmaciones es un juez de fidelidad, no un cross-encoder. L
 ### Ejercicio
 
 Escribí la rúbrica de un juez en cuatro viñetas. Prohibido “calidad” o “útil”.
+
+> **Respuesta razonada:** con T=0 y salida estructurada: `sostenida` (la respuesta se apoya en el pasaje citado), `parcial` (apoya una parte y contradice otra), `contradicha` (el pasaje desmiente la afirmación), `no_evidenciada` (no hay pasaje que la sostenga → abstención).
 
 ---
 
@@ -335,6 +361,8 @@ El 3B sirve para **aprender**. **Cifra chequeada:** no para un producto. Infra d
 
 Si el notebook no tiene outputs, ¿está entregado? No.
 
+> **Respuesta razonada:** la evidencia es celdas **ejecutadas** con outputs: esquema validado (no solo pedido), consultas + pruebas de fidelidad + reflexión. Sin outputs no hay evidencia de ejecución.
+
 ---
 
 ## 8. Escalera y cierre
@@ -348,6 +376,8 @@ Fine-tune porque “queda más inteligente”. Multiagente porque un paper lo mo
 ### Checkpoint 8
 
 Nombrá un problema que se resuelve **solo** con prompt. Si no se te ocurre ninguno, estás saltando la escalera.
+
+> **Respuesta razonada:** ejemplos del capítulo: clasificar con taxonomía cerrada, extraer un código con salida estructurada, resumir con formato fijo. Si nada se resuelve con prompt, es señal de que se quiere saltar la escalera.
 
 ### Transferencia (decisión pendiente)
 

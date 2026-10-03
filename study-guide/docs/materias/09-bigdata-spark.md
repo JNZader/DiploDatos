@@ -42,6 +42,12 @@ Si el dataset **sí** entra en tu notebook de siempre, ¿sigue haciendo falta Sp
 
 Detalle de comandos: en el árbol de DiploDatos, `Programacion Distribuida sobre Grandes Volumenes de Datos/01_material_oficial/00_programa.md`.
 
+### Error frecuente
+
+**Mover datos de más:** copiar el dataset a cada nodo, arrastrar columnas que no se usan o provocar un shuffle innecesario. La idea rectora es inversa: mover el código hacia los datos y agregar lo mínimo. Si el plan hace que cada tarea lea más de lo necesario, el problema no es el cluster, es la consulta.
+
+**Usar Zeppelin como entrega de otra optativa:** los ejercicios viven **dentro** del notebook (`note.zpln`), y esa entrega es de *esta* materia. No es el práctico del Consorcio ni un reemplazo de los labs de LLMs.
+
 ## 3. Bibliografía de aula
 
 *Learning Spark* (2015), *High-Performance Spark* (2017), *Machine Learning with Spark* 2.ª ed. (2017), *Advanced Analytics with Spark* (2015). No están en el repo (copyright).

@@ -1648,6 +1648,16 @@ Verificar:
 
 **Criterio de salida:** ningún grupo de identidad cruza particiones; los casos dudosos siguen visibles.
 
+> **Checkpoint 17**
+>
+> Sin mirar la sección, nombrá los dos criterios de salida que evitan que la evaluación mienta: uno sobre grupos de identidad y otro sobre el ajuste de transformaciones.
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Fase F: **ningún grupo de identidad cruza particiones** y los casos dudosos siguen visibles (si un sumario–fallo cae a caballo entre train y test, el modelo puede memorizar la versión parecida y la estimación se infla). Fase H: el **split se aplica antes de ajustar** imputadores, vocabulario, TF-IDF, categorías y umbrales; el test no guio decisiones.
+> </details>
+
 ### 17.8 Fase G — Seleccionar features
 
 Construir registro:
@@ -1752,7 +1762,7 @@ Cada bloque del TP2 puede cerrar con:
 
 Eso convierte un notebook de celdas en un argumento.
 
-> **Checkpoint 17**
+> **Checkpoint 18**
 >
 > Elegí una fila de la matriz y explicá qué evidencia te haría cambiar de una acción a otra. Si ninguna evidencia podría cambiar tu decisión, probablemente no es una decisión basada en datos.
 
