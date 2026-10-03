@@ -42,10 +42,10 @@
     },
     {
       "boundary": "# Materia 5 — Aprendizaje No Supervisado",
-      "bytes": 95710,
+      "bytes": 95701,
       "end_line": 10674,
       "path": "materias/05-aprendizaje-no-supervisado.md",
-      "sha256": "ca67f2439d8907686f021f2fafad58ce4247178f54b1c892ea9429805d705ce7",
+      "sha256": "2dcb66586ec5aa6fcd214b5e3e61a9acfa3993eda95333477a83555c3fc61331",
       "start_line": 8695
     },
     {
@@ -75,11 +75,11 @@
   ],
   "reconstruction_match": true,
   "source": {
-    "bytes": 611512,
+    "bytes": 611503,
     "filename": "GUIA_ESTUDIO_DIPLO_MENTORIA_SAIJ.md",
     "headings": 1225,
     "lines": 12750,
-    "sha256": "2f9cd7d1e66a4613758c88b8875f4669b612a914e523858ff50c25ee22d4f650",
-    "words": 89946
+    "sha256": "286407cdd0dc2cf0a3b05eee7e671af6787e50cd602afc64fdd27dbd627f85c7",
+    "words": 89945
   }
 }

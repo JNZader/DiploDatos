@@ -10205,7 +10205,7 @@ Corrección: se evalúa recuperación primero para localizar fallas y evitar que
 
 ---
 
-## 19. Checkpoint integrador antes de los ejercicios
+## 19. Integración antes de los ejercicios
 
 Podés avanzar si explicás, sin código:
 
