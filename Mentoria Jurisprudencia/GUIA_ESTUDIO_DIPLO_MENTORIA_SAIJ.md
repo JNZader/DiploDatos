@@ -4916,6 +4916,16 @@ Por eso, antes de fijar $y$, Javier debe responder:
 
 **Error frecuente.** Optimizar recall del “positivo” creyendo que es “crédito otorgado”.
 
+> **Checkpoint 1**
+>
+> ¿Alcanza con decir “predecir fuero con texto” para formular la tarea SAIJ?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> No. La formulación exige responder las siete preguntas mínimas: unidad, entrada $X$, features, target $y$, salida operacional, escenario de uso y criterio de éxito. Sin ellas quedan escondidas decisiones incompatibles, como si el target admite una clase única o varias, quién revisa los casos ambiguos o qué futuro estima el test. “Maximizar accuracy” tampoco es un criterio completo: no dice cuánto importa cada clase ni qué futuro representa el test.
+> </details>
+
 ---
 
 ## 3. Familias de aprendizaje y tipos de salida
@@ -4959,7 +4969,7 @@ No se decide por el tipo visual de la columna solamente. Un número que codifica
 
 Un documento SAIJ con varias ramas posibles no debería forzarse a multiclase solo porque un algoritmo espera un vector unidimensional. Primero se decide qué salida representa el uso.
 
-> **Checkpoint 1**
+> **Checkpoint 2**
 >
 > Si un documento puede pertenecer simultáneamente a CIVIL y COMERCIAL, ¿es multiclase?
 >
@@ -5129,6 +5139,16 @@ Si el uso real recibe expedientes nuevos en años futuros, una evaluación aleat
 
 > **Error frecuente:** estratificar y creer que ya se evitó toda fuga. La estratificación cuida proporciones de $y$; no impide que duplicados crucen particiones.
 
+> **Checkpoint 3**
+>
+> Durante el desarrollo se evalúa en test, se detecta un problema, se ajusta el modelo y se vuelve a evaluar en el mismo test. ¿Qué pasó con ese test?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Test dejó de ser una estimación final: cada mirada cambió una decisión, y el capítulo es explícito: si una mirada a test cambia la decisión, test pasó a ser validación y hace falta otro conjunto final. Además, la partición debe imitar un futuro: la pregunta no es “cuál split es correcto”, sino qué escenario futuro intenta imitar, sea aleatorio, estratificado, grupal o temporal.
+> </details>
+
 ---
 
 ## 6. Baselines: el control científico del experimento
@@ -5214,7 +5234,7 @@ La intuición del equilibrio no dice que debamos calcular una descomposición ex
 
 “Más complejo” no significa “más inteligente”. Un modelo de alta capacidad puede ser peor si hay pocos datos, etiquetas ruidosas o drift. Tampoco una brecha pequeña garantiza utilidad: train y validación pueden ser igualmente pobres.
 
-> **Checkpoint 2**
+> **Checkpoint 4**
 >
 > Un modelo tiene 99% en train y 61% en validación; otro 73% y 70%.
 >
@@ -5412,6 +5432,16 @@ En fuero multiclase, cada clase puede tratarse temporalmente como “esa clase v
 
 La matriz no explica la causa. Indica dónde mirar.
 
+> **Checkpoint 5**
+>
+> En 100 casos inventados hay 95 negativos y 5 positivos, y el modelo predice siempre negativo. ¿Por qué no alcanza con reportar accuracy y qué métrica expone el problema?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Accuracy es $95/100=0{,}95$ y parece excelente, pero el sistema no detecta ningún positivo: recall positivo $=0/(0+5)=0$. La sección muestra que hacen falta métricas por clase y la baseline: la regla mayoritaria también lograría accuracy 0,95, así que el total no distingue al modelo de un control trivial.
+> </details>
+
 ---
 
 ## 10. Promedios macro, micro, weighted y balanced accuracy
@@ -5484,6 +5514,16 @@ $$
 Es, en este uso, equivalente al recall macro. Sirve para que cada clase tenga el mismo peso, pero no reemplaza precision ni revela qué clases se confunden.
 
 > **Error frecuente:** decir que weighted “corrige” el desbalance. Weighted refleja el soporte; por eso puede ocultar una clase rara. Macro cambia el peso de la pregunta.
+
+> **Checkpoint 6**
+>
+> Recalls de A, B y C: 0,90; 0,60 y 0,30, con soportes 80, 15 y 5. ¿Por qué macro y weighted difieren tanto y cuál “corrige” el desbalance?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Macro pesa cada clase por igual: $(0{,}90+0{,}60+0{,}30)/3=0{,}60$. Weighted pondera por soporte: $0{,}80(0{,}90)+0{,}15(0{,}60)+0{,}05(0{,}30)=0{,}825$, alto porque A domina. Ninguno corrige el desbalance: weighted lo refleja y puede ocultar una clase rara; macro cambia el peso de la pregunta.
+> </details>
 
 ---
 
@@ -5576,6 +5616,16 @@ CV reduce dependencia de una única partición dentro del esquema elegido. No co
 
 Cinco folds producen F1 macro: 0,71; 0,69; 0,42; 0,70; 0,68. El promedio es 0,64, pero el fold de 0,42 exige investigación. Tal vez contiene un grupo, período o clase distinta. Reportar solo 0,64 borra la evidencia más útil.
 
+> **Checkpoint 7**
+>
+> Los cinco folds de F1 macro fueron 0,71; 0,69; 0,42; 0,70; 0,68. ¿Qué conviene reportar y qué no puede arreglar la validación cruzada?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> El promedio es 0,64, pero reportar solo el promedio borra la evidencia más útil: el fold de 0,42 exige investigar si contiene un grupo, período o clase distinta. CV reduce la dependencia de una única partición, pero no corrige target mal definido, duplicados, fuga previa a la división, drift no representado ni una métrica mal elegida: no convierte un esquema equivocado en uno válido.
+> </details>
+
 ---
 
 ## 13. Pipelines de preprocesamiento y fuga de información
@@ -5625,6 +5675,16 @@ En validación cruzada, cada fold debe repetir el ajuste usando solo su porción
 Un campo que codifica organismo, materia o una ruta de carga podría revelar fuero sin usar contenido. No debe eliminarse automáticamente: primero se documenta su disponibilidad y si representa una señal legítima para el uso. Si se prohíbe por ser atajo, queda registrado.
 
 **Decisión de Javier — pendiente:** definir lista de features autorizadas y dudosas, con motivo y momento de disponibilidad.
+
+> **Checkpoint 8**
+>
+> Se construye el vocabulario y se calculan los pesos IDF con todo el dataset y recién después se separa train de validación. ¿Qué fuga es y cuál es la regla de oro?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Es preprocessing leakage: una transformación usó estadísticas de validación o test. La regla de oro: toda transformación que aprende algo de los datos se ajusta solo con train y luego se aplica sin reajuste a validación o test. En validación cruzada, cada fold debe repetir el ajuste usando solo su porción de entrenamiento, no un vocabulario global construido antes de rotar folds.
+> </details>
 
 ---
 
@@ -5750,6 +5810,16 @@ La alta dimensión no significa que cada documento sea “complejo” en todas l
 ### 14.9 Hallazgos del equipo como roadmap
 
 **Pendiente de reproducción:** el notebook del equipo compara campos textuales, limpia marcas, examina longitudes, vocabulario, stopwords, n-gramas y TF-IDF por categorías. Estas observaciones orientan las preguntas de representación, pero sus cantidades, umbrales y conclusiones no se presentan aquí como resultados de Javier.
+
+> **Checkpoint 9**
+>
+> Pasar de unigramas a bigramas recupera contexto local, pero ¿conviene incluir todos los n-gramas sin límite?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> No. Los n-gramas recuperan contexto local y expresiones compuestas, pero amplían mucho el vocabulario y hacen más rara cada feature; incluir todos sin límite aumenta memoria, ruido y riesgo de memorizar fórmulas específicas. En el vector disperso, cada documento activa pocas posiciones de un vocabulario enorme; subir el rango de n-gramas eleva dimensiones y costo, y convertir sin necesidad a formato denso puede agotar memoria.
+> </details>
 
 ---
 
@@ -5880,6 +5950,16 @@ Naive Bayes puede servir como baseline de texto, no como veredicto final. Si pre
 
 > **Error frecuente:** interpretar “Naive” como modelo inútil. El nombre describe el supuesto de independencia, no su valor experimental. Su simplicidad lo vuelve un control muy informativo.
 
+> **Checkpoint 10**
+>
+> Un término nunca apareció en train para una clase. ¿Por qué eso es un problema al predecir y qué hace el suavizado aditivo?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Su probabilidad estimada sería cero y, al multiplicar, todo el score de la clase se vuelve cero. El suavizado aditivo evita que una ausencia observada implique imposibilidad absoluta: en el ejemplo del capítulo, con $N_{t,c}=0$, $N_c=20$, $V=5$ y $\alpha=1$, queda $1/25=0{,}04$: no inventa evidencia fuerte, reserva una probabilidad pequeña.
+> </details>
+
 ---
 
 ## 16. Manejo multiclase: nativo, uno contra el resto y uno contra uno
@@ -5907,6 +5987,16 @@ Con $K=4$: $4\cdot3/2=6$ clasificadores. Cada uno ve solo dos clases y luego se 
 ### 16.4 No profundizar antes de formular
 
 La elección entre nativo, OvR u OvO llega después de definir si SAIJ es multiclase o multietiqueta, qué modelos se comparan y qué costo tiene cada estrategia. No resuelve la ambigüedad del target.
+
+> **Checkpoint 11**
+>
+> ¿Cuándo se decide entre un modelo multiclase nativo, uno contra el resto (OvR) y uno contra uno (OvO)?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Después de formular el problema: definir si SAIJ es multiclase o multietiqueta, qué modelos se comparan y qué costo tiene cada estrategia. OvR entrena $K$ clasificadores binarios y elige el score mayor; OvO entrena uno por par, $K(K-1)/2$, y combina votos, con costo que crece cuadráticamente con $K$. La elección no resuelve la ambigüedad del target.
+> </details>
 
 ---
 
@@ -6045,6 +6135,16 @@ Ordenar celdas fuera de la diagonal por cantidad y por tasa relativa. Leer ejemp
 ### 19.7 Error analysis no es buscar anécdotas favorables
 
 La muestra debe seguir un protocolo: por ejemplo, revisar una cantidad fija de errores de cada clase y algunos aciertos. Solo mirar errores llamativos puede producir explicaciones sesgadas.
+
+> **Checkpoint 12**
+>
+> Después de una F1 macro agregada, ¿dónde conviene mirar y con qué protocolo?
+>
+> <details>
+> <summary>Respuesta razonada</summary>
+>
+> Por clase: precision, recall, soporte y clases nunca predichas. Por pares de confusión fuera de la diagonal: si la distinción existe en el texto, si el target es coherente o si hay categorías compuestas. Por subgrupos según el uso: longitud, tiempo, geografía o tipo de documento. La muestra sigue un protocolo fijo —cantidad fija de errores por clase y algunos aciertos—, no anécdotas favorables.
+> </details>
 
 ---
 
