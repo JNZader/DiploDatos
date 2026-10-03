@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EXPECTED_SHA256 = "d5b4fade8b6cef753f58404f148c7299ac011414d8dc4ced7389ea0a452b140e"
+EXPECTED_SHA256 = "1b4cab7ec94ff46946df3ae6ea96537e0bc69c62c5338d9bdd34a94de8c74603"
 EXPECTED_WORDS = 89_007
 EXPECTED_LINES = 12_650
 EXPECTED_HEADINGS = 1_225

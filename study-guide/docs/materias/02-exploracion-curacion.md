@@ -1819,7 +1819,7 @@ Si todavía no se reprodujo:
 
 Una asociación temporal no demuestra una causa. Digitalización, reformas, cobertura y prácticas de carga pueden generar patrones. Si se menciona una explicación histórica, rotulala como hipótesis y buscá evidencia independiente antes de afirmarla. Esta guía no agrega esa evidencia.
 
-> **Checkpoint 18**
+> **Checkpoint 19**
 >
 > Reescribí “la pandemia causó la caída de documentos” de dos maneras: una como hipótesis pendiente y otra como conclusión que exigiría evidencia adicional. Explicá por qué la primera es honesta.
 

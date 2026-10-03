@@ -13,7 +13,7 @@
       "bytes": 95961,
       "end_line": 2482,
       "path": "materias/01-analisis-visualizacion.md",
-      "sha256": "7adc399bdf0a575a977aafbb64bf821542b7319cb3d1d507cae66fad24810c07",
+      "sha256": "14d0f11b698b7e8357af6666a70cff061bf0a5c6d099a44f0012b2073b618dfb",
       "start_line": 46
     },
     {
@@ -21,7 +21,7 @@
       "bytes": 95397,
       "end_line": 4644,
       "path": "materias/02-exploracion-curacion.md",
-      "sha256": "89f38db42a33a2d94c2632d295d9a7e423e764b97f7785ddb60387272c0e0459",
+      "sha256": "e559b12b16d3f4376fc8db3d7b734d71855b65d450cd0e36ee73915f21f49609",
       "start_line": 2483
     },
     {
@@ -79,7 +79,7 @@
     "filename": "GUIA_ESTUDIO_DIPLO_MENTORIA_SAIJ.md",
     "headings": 1225,
     "lines": 12650,
-    "sha256": "d5b4fade8b6cef753f58404f148c7299ac011414d8dc4ced7389ea0a452b140e",
+    "sha256": "1b4cab7ec94ff46946df3ae6ea96537e0bc69c62c5338d9bdd34a94de8c74603",
     "words": 89007
   }
 }

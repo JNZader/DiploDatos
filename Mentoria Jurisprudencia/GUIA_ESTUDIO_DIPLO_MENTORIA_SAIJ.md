@@ -1843,7 +1843,7 @@ Ejemplos:
 - [ ] No presenta resultado del grupo como propio.
 - [ ] Indica qué se debería verificar o decidir.
 
-### 15.5 Test de hipótesis (cursada 2026, no es el TP1)
+### 15.8 Test de hipótesis (cursada 2026, no es el TP1)
 
 **Contexto de clase.** La clase 4 trae contraste de hipótesis (también: prueba, dócima). Ejemplos del slide: “el clasificador A es mejor que B”, “es mejor que un mínimo”, “hay brecha salarial”. El PDF de 71 páginas **ya está** en el árbol de AVD (el download de hoy es el mismo texto).
 
@@ -4301,7 +4301,7 @@ Si todavía no se reprodujo:
 
 Una asociación temporal no demuestra una causa. Digitalización, reformas, cobertura y prácticas de carga pueden generar patrones. Si se menciona una explicación histórica, rotulala como hipótesis y buscá evidencia independiente antes de afirmarla. Esta guía no agrega esa evidencia.
 
-> **Checkpoint 18**
+> **Checkpoint 19**
 >
 > Reescribí “la pandemia causó la caída de documentos” de dos maneras: una como hipótesis pendiente y otra como conclusión que exigiría evidencia adicional. Explicá por qué la primera es honesta.
 

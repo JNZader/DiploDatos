@@ -96,7 +96,7 @@ Afinidad de atención (una cabeza, una posición):
 \mathrm{softmax}\left(\frac{Q K^{\top}}{\sqrt{d}}\right) V
 \]
 
-\(d\) es la dimensión de Q/K. La raíz evita que el producto punto explote y deje al softmax en un único 1. **Interpretación:** cada posición reparte un 100% de “mirada” entre las demás, incluido sí misma y los delimitadores `<BOS>` / `<EOS>`.
+\(d\) es la dimensión de Q/K. La raíz evita que el producto punto explote y deje al softmax en un único 1. **Interpretación:** cada posición reparte un 100% de “mirada” entre las demás, incluida sí misma y los delimitadores `<BOS>` / `<EOS>`.
 
 ### Error frecuente
 
