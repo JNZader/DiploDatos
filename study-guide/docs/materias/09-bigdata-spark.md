@@ -29,9 +29,22 @@ Si el dataset **sí** entra en tu notebook de siempre, ¿sigue haciendo falta Sp
 
 ## 1. El problema que le da origen
 
-**Teoría general.** CPU y disco local son baratos comparados con **mandar bytes por la red**. MapReduce: llevar la función a donde están los datos, agregar (shuffle) lo mínimo. Spark: el mismo recorte, pero con datos en memoria y un plan (DAG) que se puede reusar.
+**Teoría general.** CPU y disco local son baratos comparados con **mandar bytes por la red**. MapReduce: llevar la función a donde están los datos, agregar (shuffle) lo mínimo. Spark: el mismo recorte, pero con datos en memoria y un plan (DAG) que se puede reusar. El primer paper es HotCloud **2010**, no 2009; los RDD, NSDI 2012.
 
-**Contexto de aula.** Se sube de RDD (explícito) a DataFrame/SQL (más alto). Todo desde Zeppelin, Python.
+**Contexto de aula.** RDD → DataFrame/SQL → MLlib → GraphFrames. Zeppelin + PySpark. Datasets: vuelos, Last.fm, antropometría, retuits. Entrega: notebooks con los `...` completados.
+
+**Chequeos (no transcripto).**
+
+- Si **entra en una máquina**, DuckDB/Polars (o sklearn) ganan a Spark en `local[*]` por un rato. El docente lo dice: si entra, no hace falta el clúster. Medí Parquet en RAM, no el CSV inflado.
+- Spark **no** cachea solo: `cache()`/`persist()` es tuyo. Recalcular RDD en cada acción es diseño, no un bug.
+- `HashingTF`: `numFeatures` potencia de 2; 1000 buckets colisionan.
+- `PolynomialExpansion` **es** Transformer (no `fit`). Grado 4 con 2 vars → 14 columnas, no 12.
+- `StringIndexer` sí es Estimator.
+- GraphFrames sigue **aparte** de Spark; GraphX no tiene futuro claro.
+- Ethernet no se quedó en “50 GB/s”. 787 “500 GB por vuelo” es cifra de prensa, no de Boeing.
+- PySpark 3.5 + Python ≥3.12: instalá `setuptools` (`distutils` se fue).
+
+**Error frecuente.** Levantar Spark para 100k filas “porque es big data”.
 
 ## 2. Cómo se cursa (no es teoría de Spark todavía)
 
